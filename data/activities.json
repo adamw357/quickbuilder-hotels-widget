@@ -1,0 +1,1649 @@
+[
+  {
+    "name": "Amsterdam",
+    "id": "XN525",
+    "full_name": "Amsterdam, Netherlands",
+    "country": "Netherlands",
+    "state": "",
+    "lat": 52.376856714,
+    "long": 4.9053955078
+  },
+  {
+    "name": "Anaheim & Buena Park",
+    "id": "XN797",
+    "full_name": "Anaheim & Buena Park, California, USA",
+    "country": "USA",
+    "state": "California",
+    "lat": 33.859013,
+    "long": -117.9778750001
+  },
+  {
+    "name": "Arraial do Cabo",
+    "id": "XN31321",
+    "full_name": "Arraial do Cabo, Southeast Brazil, Brazil",
+    "country": "Brazil",
+    "state": "Southeast Brazil",
+    "lat": -22.96574,
+    "long": -42.02799
+  },
+  {
+    "name": "Aruba",
+    "id": "XN28",
+    "full_name": "Aruba",
+    "country": "Aruba",
+    "state": "",
+    "lat": 12.52111,
+    "long": -69.968338
+  },
+  {
+    "name": "Aspen",
+    "id": "XN26395",
+    "full_name": "Aspen, Colorado, USA",
+    "country": "USA",
+    "state": "Colorado",
+    "lat": 39.191098,
+    "long": -106.817539
+  },
+  {
+    "name": "Athens",
+    "id": "XN496",
+    "full_name": "Athens, Greece",
+    "country": "Greece",
+    "state": "",
+    "lat": 37.9439267525,
+    "long": 23.695192337
+  },
+  {
+    "name": "Atlanta",
+    "id": "XN784",
+    "full_name": "Atlanta, Georgia, USA",
+    "country": "USA",
+    "state": "Georgia",
+    "lat": 33.7489954,
+    "long": -84.3879824
+  },
+  {
+    "name": "Austin",
+    "id": "XN5021",
+    "full_name": "Austin, Texas, USA",
+    "country": "USA",
+    "state": "Texas",
+    "lat": 30.267153,
+    "long": -97.7430608
+  },
+  {
+    "name": "Bali",
+    "id": "XN98",
+    "full_name": "Bali, Indonesia",
+    "country": "Indonesia",
+    "state": "Bali",
+    "lat": -8.4095178,
+    "long": 115.188916
+  },
+  {
+    "name": "Bangkok",
+    "id": "XN343",
+    "full_name": "Bangkok, Thailand",
+    "country": "Thailand",
+    "state": "",
+    "lat": 13.7234186,
+    "long": 100.4762319
+  },
+  {
+    "name": "Barbados",
+    "id": "XN30",
+    "full_name": "Barbados",
+    "country": "Barbados",
+    "state": "",
+    "lat": 13.193887,
+    "long": -59.543198
+  },
+  {
+    "name": "Barcelona",
+    "id": "XN562",
+    "full_name": "Barcelona, Catalonia, Spain",
+    "country": "Spain",
+    "state": "Catalonia",
+    "lat": 41.387917,
+    "long": 2.1699187
+  },
+  {
+    "name": "Berlin",
+    "id": "XN488",
+    "full_name": "Berlin, Germany",
+    "country": "Germany",
+    "state": "",
+    "lat": 52.5234051,
+    "long": 13.4113999
+  },
+  {
+    "name": "Balicasag Island",
+    "id": "XN51643",
+    "full_name": "Bohol, Philippines",
+    "country": "Philippines",
+    "state": "Bohol",
+    "lat": 9.51837,
+    "long": 123.68243
+  },
+  {
+    "name": "Boston",
+    "id": "XN678",
+    "full_name": "Boston, Massachusetts, USA",
+    "country": "USA",
+    "state": "Massachusetts",
+    "lat": 42.3656470028,
+    "long": -71.0527038574
+  },
+  {
+    "name": "Cabo San Lucas",
+    "id": "XN50859",
+    "full_name": "Cabo San Lucas, Baja California Sur, Mexico",
+    "country": "Mexico",
+    "state": "Baja California Sur",
+    "lat": 22.8923509454,
+    "long": -109.9162612547
+  },
+  {
+    "name": "Los Gigantes",
+    "id": "XN51063",
+    "full_name": "Canary Islands, Spain",
+    "country": "Spain",
+    "state": "Canary Islands",
+    "lat": 28.240883,
+    "long": -16.836769
+  },
+  {
+    "name": "Cancun",
+    "id": "XN631",
+    "full_name": "Cancun, Riviera Maya & the Yucatan, Mexico",
+    "country": "Mexico",
+    "state": "Riviera Maya & the Yucatan",
+    "lat": 21.158964,
+    "long": -86.845937
+  },
+  {
+    "name": "Cape Canaveral",
+    "id": "XN22936",
+    "full_name": "Cape Canaveral, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 28.39222,
+    "long": -80.60771
+  },
+  {
+    "name": "Cape Coast",
+    "id": "XN50502",
+    "full_name": "Cape Coast, Ghana",
+    "country": "Ghana",
+    "state": "",
+    "lat": -38.370731,
+    "long": 141.401505
+  },
+  {
+    "name": "Cape Cod",
+    "id": "XN26302",
+    "full_name": "Cape Cod, Massachusetts, USA",
+    "country": "USA",
+    "state": "Massachusetts",
+    "lat": 41.699096,
+    "long": -70.320911
+  },
+  {
+    "name": "Cape May",
+    "id": "XN33066",
+    "full_name": "Cape May, New Jersey, USA",
+    "country": "USA",
+    "state": "New Jersey",
+    "lat": 38.93537,
+    "long": -74.90662
+  },
+  {
+    "name": "Cape Town",
+    "id": "XN318",
+    "full_name": "Cape Town, Western Cape, South Africa",
+    "country": "South Africa",
+    "state": "Western Cape",
+    "lat": -33.9237762,
+    "long": 18.4233455
+  },
+  {
+    "name": "Cape Tribulation",
+    "id": "XN32538",
+    "full_name": "Cape Tribulation, Queensland, Australia",
+    "country": "Australia",
+    "state": "Queensland",
+    "lat": -16.087433,
+    "long": 145.454803
+  },
+  {
+    "name": "Cape Verde",
+    "id": "XN4461",
+    "full_name": "Cape Verde",
+    "country": "Cape Verde",
+    "state": "",
+    "lat": 16.5388,
+    "long": 23.0418
+  },
+  {
+    "name": "Cartagena",
+    "id": "XN4498",
+    "full_name": "Cartagena, Caribbean Coast, Colombia",
+    "country": "Colombia",
+    "state": "Caribbean Coast",
+    "lat": 10.3873369,
+    "long": -75.5196631
+  },
+  {
+    "name": "Cartagena",
+    "id": "XN4276",
+    "full_name": "Cartagena, Region of Murcia, Spain",
+    "country": "Spain",
+    "state": "Region of Murcia",
+    "lat": 37.625683,
+    "long": -0.996584
+  },
+  {
+    "name": "Charleston",
+    "id": "XN4384",
+    "full_name": "Charleston, South Carolina, USA",
+    "country": "USA",
+    "state": "South Carolina",
+    "lat": 32.7765656,
+    "long": -79.9309216
+  },
+  {
+    "name": "Chicago",
+    "id": "XN673",
+    "full_name": "Chicago, Illinois, USA",
+    "country": "USA",
+    "state": "Illinois",
+    "lat": 41.8781136,
+    "long": -87.6297982
+  },
+  {
+    "name": "Las Condes",
+    "id": "XN51463",
+    "full_name": "Chile",
+    "country": "Chile",
+    "state": "",
+    "lat": -33.344296,
+    "long": -70.636597
+  },
+  {
+    "name": "Costa Adeje",
+    "id": "XN51000",
+    "full_name": "Costa Adeje, Canary Islands, Spain",
+    "country": "Spain",
+    "state": "Canary Islands",
+    "lat": 28.46824,
+    "long": -16.25462
+  },
+  {
+    "name": "Costa Blanca",
+    "id": "XN769",
+    "full_name": "Costa Blanca, Spain",
+    "country": "Spain",
+    "state": "Costa Blanca",
+    "lat": 38.096927,
+    "long": -0.862495
+  },
+  {
+    "name": "Costa Brava",
+    "id": "XN742",
+    "full_name": "Costa Brava, Spain",
+    "country": "Spain",
+    "state": "Costa Brava",
+    "lat": 41.7795048659,
+    "long": 3.0212402344
+  },
+  {
+    "name": "Costa Maya",
+    "id": "XN4345",
+    "full_name": "Costa Maya, Riviera Maya & the Yucatan, Mexico",
+    "country": "Mexico",
+    "state": "Riviera Maya & the Yucatan",
+    "lat": 18.71788,
+    "long": -87.712753
+  },
+  {
+    "name": "Costa Rica",
+    "id": "XN747",
+    "full_name": "Costa Rica",
+    "country": "Costa Rica",
+    "state": "",
+    "lat": 9.748917,
+    "long": -83.753428
+  },
+  {
+    "name": "Costa del Sol",
+    "id": "XN28471",
+    "full_name": "Costa del Sol, Spain",
+    "country": "Spain",
+    "state": "Costa del Sol",
+    "lat": 36.52481,
+    "long": -5.03905
+  },
+  {
+    "name": "Cozumel",
+    "id": "XN632",
+    "full_name": "Cozumel, Riviera Maya & the Yucatan, Mexico",
+    "country": "Mexico",
+    "state": "Riviera Maya & the Yucatan",
+    "lat": 20.4310062,
+    "long": -86.9080654
+  },
+  {
+    "name": "Bali",
+    "id": "XN50944",
+    "full_name": "Crete, Greece",
+    "country": "Greece",
+    "state": "Crete",
+    "lat": 35.41424,
+    "long": 24.78331
+  },
+  {
+    "name": "Dallas",
+    "id": "XN918",
+    "full_name": "Dallas, Texas, USA",
+    "country": "USA",
+    "state": "Texas",
+    "lat": 32.802955,
+    "long": -96.769923
+  },
+  {
+    "name": "Denver",
+    "id": "XN4837",
+    "full_name": "Denver, Colorado, USA",
+    "country": "USA",
+    "state": "Colorado",
+    "lat": 39.737567,
+    "long": -104.9847179
+  },
+  {
+    "name": "Destin",
+    "id": "XN25549",
+    "full_name": "Destin, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 30.393534,
+    "long": -86.495783
+  },
+  {
+    "name": "Dubai",
+    "id": "XN828",
+    "full_name": "Dubai, United Arab Emirates",
+    "country": "United Arab Emirates",
+    "state": "",
+    "lat": 25.2644444,
+    "long": 55.3116667
+  },
+  {
+    "name": "Dublin",
+    "id": "XN503",
+    "full_name": "Dublin, Ireland",
+    "country": "Ireland",
+    "state": "",
+    "lat": 53.3481944965,
+    "long": -6.2237548828
+  },
+  {
+    "name": "East London",
+    "id": "XN4476",
+    "full_name": "East London, South Africa",
+    "country": "South Africa",
+    "state": "",
+    "lat": -32.97,
+    "long": 27.87
+  },
+  {
+    "name": "Eastern Cape",
+    "id": "XN51404",
+    "full_name": "Eastern Cape, South Africa",
+    "country": "South Africa",
+    "state": "Eastern Cape",
+    "lat": -32.19228,
+    "long": 26.501313
+  },
+  {
+    "name": "Fort Collins",
+    "id": "XN22741",
+    "full_name": "Fort Collins, Colorado, USA",
+    "country": "USA",
+    "state": "Colorado",
+    "lat": 40.584934,
+    "long": -105.081998
+  },
+  {
+    "name": "Fort Lauderdale",
+    "id": "XN660",
+    "full_name": "Fort Lauderdale, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 26.1224594401,
+    "long": -80.1282691956
+  },
+  {
+    "name": "Fort Myers",
+    "id": "XN5196",
+    "full_name": "Fort Myers, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 26.6403,
+    "long": -81.8725
+  },
+  {
+    "name": "Fort William",
+    "id": "XN22391",
+    "full_name": "Fort William, The Scottish Highlands, Scotland",
+    "country": "Scotland",
+    "state": "The Scottish Highlands",
+    "lat": 56.819864,
+    "long": -5.103285
+  },
+  {
+    "name": "Fort Worth",
+    "id": "XN33749",
+    "full_name": "Fort Worth, Texas, USA",
+    "country": "USA",
+    "state": "Texas",
+    "lat": 32.755182,
+    "long": -97.326263
+  },
+  {
+    "name": "Fort-de-France",
+    "id": "XN50911",
+    "full_name": "Fort-de-France, Martinique",
+    "country": "Martinique",
+    "state": "",
+    "lat": 14.60892,
+    "long": -61.07334
+  },
+  {
+    "name": "Fortaleza",
+    "id": "XN830",
+    "full_name": "Fortaleza, Northeast Brazil, Brazil",
+    "country": "Brazil",
+    "state": "Northeast Brazil",
+    "lat": -3.7183943,
+    "long": -38.5433948
+  },
+  {
+    "name": "French Riviera",
+    "id": "XN179",
+    "full_name": "French Riviera, France",
+    "country": "France",
+    "state": "French Riviera",
+    "lat": 43.495573,
+    "long": 6.26575
+  },
+  {
+    "name": "Hong Kong SAR",
+    "id": "XN35959",
+    "full_name": "Hong Kong SAR, China",
+    "country": "China",
+    "state": "Hong Kong SAR",
+    "lat": 22.396428,
+    "long": 114.109497
+  },
+  {
+    "name": "Honolulu",
+    "id": "XN59070",
+    "full_name": "Honolulu, Hawaii, USA",
+    "country": "USA",
+    "state": "Hawaii",
+    "lat": 21.306944,
+    "long": -157.858337
+  },
+  {
+    "name": "Hopewell Cape",
+    "id": "XN51622",
+    "full_name": "Hopewell Cape, New Brunswick, Canada",
+    "country": "Canada",
+    "state": "New Brunswick",
+    "lat": 45.847111,
+    "long": -64.575302
+  },
+  {
+    "name": "Houston",
+    "id": "XN5186",
+    "full_name": "Houston, Texas, USA",
+    "country": "USA",
+    "state": "Texas",
+    "lat": 29.762778,
+    "long": -95.383056
+  },
+  {
+    "name": "Inle Lake",
+    "id": "XN30026",
+    "full_name": "Inle Lake, Myanmar",
+    "country": "Myanmar",
+    "state": "Inle Lake",
+    "lat": 20.58629,
+    "long": 96.91018
+  },
+  {
+    "name": "Isle of Palms",
+    "id": "XN50789",
+    "full_name": "Isle of Palms, South Carolina, USA",
+    "country": "USA",
+    "state": "South Carolina",
+    "lat": 32.78842,
+    "long": -79.78775
+  },
+  {
+    "name": "Jamaica",
+    "id": "XN34",
+    "full_name": "Jamaica",
+    "country": "Jamaica",
+    "state": "",
+    "lat": 18.109581,
+    "long": -77.297508
+  },
+  {
+    "name": "Key Largo",
+    "id": "XN23475",
+    "full_name": "Key Largo, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 25.086515,
+    "long": -80.44728
+  },
+  {
+    "name": "Key West",
+    "id": "XN661",
+    "full_name": "Key West, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 24.5557025,
+    "long": -81.7825914
+  },
+  {
+    "name": "La Fortuna",
+    "id": "XN821",
+    "full_name": "La Fortuna, Central Valley, Costa Rica",
+    "country": "Costa Rica",
+    "state": "Central Valley",
+    "lat": 10.4699398,
+    "long": -84.657898
+  },
+  {
+    "name": "La Palma",
+    "id": "XN4487",
+    "full_name": "La Palma, Canary Islands, Spain",
+    "country": "Spain",
+    "state": "Canary Islands",
+    "lat": 28.6666,
+    "long": -17.8666
+  },
+  {
+    "name": "La Rioja Province",
+    "id": "XN51388",
+    "full_name": "La Rioja Province, Argentina",
+    "country": "Argentina",
+    "state": "La Rioja Province",
+    "lat": -29.427881,
+    "long": -67.149268
+  },
+  {
+    "name": "La Rioja",
+    "id": "XN26298",
+    "full_name": "La Rioja, Spain",
+    "country": "Spain",
+    "state": "La Rioja",
+    "lat": 42.2761895,
+    "long": -3.5275885
+  },
+  {
+    "name": "Lake Balaton",
+    "id": "XN23185",
+    "full_name": "Lake Balaton, Hungary",
+    "country": "Hungary",
+    "state": "Lake Balaton",
+    "lat": 46.83027,
+    "long": 17.73404
+  },
+  {
+    "name": "Lake Bracciano",
+    "id": "XN29095",
+    "full_name": "Lake Bracciano, Lazio, Italy",
+    "country": "Italy",
+    "state": "Lazio",
+    "lat": 42.11953,
+    "long": 12.24335
+  },
+  {
+    "name": "Lake Como",
+    "id": "XN26113",
+    "full_name": "Lake Como, Lombardy, Italy",
+    "country": "Italy",
+    "state": "Lombardy",
+    "lat": 45.983853,
+    "long": 9.261319
+  },
+  {
+    "name": "Lake District",
+    "id": "XN21483",
+    "full_name": "Lake District, Argentina",
+    "country": "Argentina",
+    "state": "Lake District",
+    "lat": -40.58249,
+    "long": -71.685715
+  },
+  {
+    "name": "Lake District",
+    "id": "XN822",
+    "full_name": "Lake District, England",
+    "country": "England",
+    "state": "Lake District",
+    "lat": 54.5,
+    "long": -3.1666667
+  },
+  {
+    "name": "Lake Geneva",
+    "id": "XN22174",
+    "full_name": "Lake Geneva, Switzerland",
+    "country": "Switzerland",
+    "state": "Lake Geneva",
+    "lat": 46.47166,
+    "long": 6.440593
+  },
+  {
+    "name": "Lake George",
+    "id": "XN23787",
+    "full_name": "Lake George, New York, USA",
+    "country": "USA",
+    "state": "New York",
+    "lat": 43.426181,
+    "long": -73.712341
+  },
+  {
+    "name": "Lake Havasu",
+    "id": "XN50753",
+    "full_name": "Lake Havasu, Arizona, USA",
+    "country": "USA",
+    "state": "Arizona",
+    "lat": 34.49614,
+    "long": -114.348953
+  },
+  {
+    "name": "Lake Tahoe",
+    "id": "XN816",
+    "full_name": "Lake Tahoe, California, USA",
+    "country": "USA",
+    "state": "California",
+    "lat": 39.1272558,
+    "long": -120.0202964
+  },
+  {
+    "name": "Las Terrenas",
+    "id": "XN24290",
+    "full_name": "Las Terrenas, Dominican Republic",
+    "country": "Dominican Republic",
+    "state": "",
+    "lat": 19.299599,
+    "long": -69.556049
+  },
+  {
+    "name": "Las Vegas",
+    "id": "XN684",
+    "full_name": "Las Vegas, Nevada, USA",
+    "country": "USA",
+    "state": "Nevada",
+    "lat": 36.114646,
+    "long": -115.172816
+  },
+  {
+    "name": "Lisbon",
+    "id": "XN538",
+    "full_name": "Lisbon, Portugal",
+    "country": "Portugal",
+    "state": "",
+    "lat": 38.7252,
+    "long": -9.15
+  },
+  {
+    "name": "London",
+    "id": "XN737",
+    "full_name": "London, England",
+    "country": "England",
+    "state": "",
+    "lat": 51.5072,
+    "long": -0.1275
+  },
+  {
+    "name": "London",
+    "id": "XN50648",
+    "full_name": "London, Ontario, Canada",
+    "country": "Canada",
+    "state": "Ontario",
+    "lat": 42.984268,
+    "long": -81.247528
+  },
+  {
+    "name": "Londonderry",
+    "id": "XN4207",
+    "full_name": "Londonderry, Northern Ireland",
+    "country": "Northern Ireland",
+    "state": "",
+    "lat": 54.997292,
+    "long": -7.305339
+  },
+  {
+    "name": "Los Angeles",
+    "id": "XN645",
+    "full_name": "Los Angeles, California, USA",
+    "country": "USA",
+    "state": "California",
+    "lat": 33.99119577,
+    "long": -118.42918396
+  },
+  {
+    "name": "Los Cabos",
+    "id": "XN627",
+    "full_name": "Los Cabos, Baja California Sur, Mexico",
+    "country": "Mexico",
+    "state": "Baja California Sur",
+    "lat": 22.8905327,
+    "long": -109.9167371
+  },
+  {
+    "name": "Madrid",
+    "id": "XN566",
+    "full_name": "Madrid, Spain",
+    "country": "Spain",
+    "state": "",
+    "lat": 40.4166909,
+    "long": -3.7003454
+  },
+  {
+    "name": "Mae Hong Son",
+    "id": "XN51553",
+    "full_name": "Mae Hong Son, Northern Thailand, Thailand",
+    "country": "Thailand",
+    "state": "Northern Thailand",
+    "lat": 19.305955,
+    "long": 97.959857
+  },
+  {
+    "name": "Maldives",
+    "id": "XN4672",
+    "full_name": "Maldives",
+    "country": "Maldives",
+    "state": "",
+    "lat": 3.2028,
+    "long": 73.2207
+  },
+  {
+    "name": "Marrakech",
+    "id": "XN5408",
+    "full_name": "Marrakech, Central Morocco, Morocco",
+    "country": "Morocco",
+    "state": "Central Morocco",
+    "lat": 31.633333,
+    "long": -8
+  },
+  {
+    "name": "Maui",
+    "id": "XN671",
+    "full_name": "Maui, Hawaii, USA",
+    "country": "USA",
+    "state": "Hawaii",
+    "lat": 20.8931357834,
+    "long": -156.4655685425
+  },
+  {
+    "name": "Miami",
+    "id": "XN662",
+    "full_name": "Miami, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 25.7836623106,
+    "long": -80.1908397675
+  },
+  {
+    "name": "Milton Keynes",
+    "id": "XN50656",
+    "full_name": "Milton Keynes, South East England, England",
+    "country": "England",
+    "state": "South East England",
+    "lat": 52.040623,
+    "long": -0.759417
+  },
+  {
+    "name": "Montego Bay",
+    "id": "XN432",
+    "full_name": "Montego Bay, Jamaica",
+    "country": "Jamaica",
+    "state": "",
+    "lat": 18.46936,
+    "long": -77.921387
+  },
+  {
+    "name": "Myrtle Beach",
+    "id": "XN5217",
+    "full_name": "Myrtle Beach, South Carolina, USA",
+    "country": "USA",
+    "state": "South Carolina",
+    "lat": 33.6889,
+    "long": -78.8869
+  },
+  {
+    "name": "Nashville",
+    "id": "XN799",
+    "full_name": "Nashville, Tennessee, USA",
+    "country": "USA",
+    "state": "Tennessee",
+    "lat": 36.1658899,
+    "long": -86.7844432
+  },
+  {
+    "name": "Nassau",
+    "id": "XN420",
+    "full_name": "Nassau, New Providence Island, Bahamas",
+    "country": "Bahamas",
+    "state": "New Providence Island",
+    "lat": 25.0776696965,
+    "long": -77.3380851746
+  },
+  {
+    "name": "New Brunswick",
+    "id": "XN22870",
+    "full_name": "New Brunswick, Canada",
+    "country": "Canada",
+    "state": "New Brunswick",
+    "lat": 46.56532,
+    "long": -66.46192
+  },
+  {
+    "name": "New Caledonia",
+    "id": "XN4776",
+    "full_name": "New Caledonia",
+    "country": "New Caledonia",
+    "state": "",
+    "lat": -20.9043,
+    "long": 165.618
+  },
+  {
+    "name": "New Hampshire",
+    "id": "XN22223",
+    "full_name": "New Hampshire, USA",
+    "country": "USA",
+    "state": "New Hampshire",
+    "lat": 43.19385,
+    "long": -71.5724
+  },
+  {
+    "name": "New Haven",
+    "id": "XN23481",
+    "full_name": "New Haven, Connecticut, USA",
+    "country": "USA",
+    "state": "Connecticut",
+    "lat": 41.308274,
+    "long": -72.927884
+  },
+  {
+    "name": "New Jersey",
+    "id": "XN22324",
+    "full_name": "New Jersey, USA",
+    "country": "USA",
+    "state": "New Jersey",
+    "lat": 40.0676363,
+    "long": -75.8454513
+  },
+  {
+    "name": "New London",
+    "id": "XN23486",
+    "full_name": "New London, Connecticut, USA",
+    "country": "USA",
+    "state": "Connecticut",
+    "lat": 41.3556,
+    "long": -72.0998
+  },
+  {
+    "name": "New Mexico",
+    "id": "XN22224",
+    "full_name": "New Mexico, USA",
+    "country": "USA",
+    "state": "New Mexico",
+    "lat": 34.4815,
+    "long": -106.0598
+  },
+  {
+    "name": "New Orleans",
+    "id": "XN675",
+    "full_name": "New Orleans, Louisiana, USA",
+    "country": "USA",
+    "state": "Louisiana",
+    "lat": 29.9351142253,
+    "long": -90.0638151169
+  },
+  {
+    "name": "New York City",
+    "id": "XN687",
+    "full_name": "New York City, New York, USA",
+    "country": "USA",
+    "state": "New York",
+    "lat": 40.7163629124,
+    "long": -74.0132188797
+  },
+  {
+    "name": "New York",
+    "id": "XN5560",
+    "full_name": "New York, USA",
+    "country": "USA",
+    "state": "New York",
+    "lat": 43.166316,
+    "long": -77.429529
+  },
+  {
+    "name": "New Zealand",
+    "id": "XN24",
+    "full_name": "New Zealand",
+    "country": "New Zealand",
+    "state": "",
+    "lat": -40.900557,
+    "long": 174.885971
+  },
+  {
+    "name": "Ocho Rios",
+    "id": "XN434",
+    "full_name": "Ocho Rios, Jamaica",
+    "country": "Jamaica",
+    "state": "",
+    "lat": 18.4076319856,
+    "long": -77.0749282837
+  },
+  {
+    "name": "Orlando",
+    "id": "XN663",
+    "full_name": "Orlando, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 28.5383355,
+    "long": -81.3792365
+  },
+  {
+    "name": "Palm - Eagle Beach",
+    "id": "XN50199",
+    "full_name": "Palm - Eagle Beach, Aruba",
+    "country": "Aruba",
+    "state": "",
+    "lat": 12.5513,
+    "long": -70.0565
+  },
+  {
+    "name": "Palm Cove",
+    "id": "XN788",
+    "full_name": "Palm Cove, Queensland, Australia",
+    "country": "Australia",
+    "state": "Queensland",
+    "lat": -16.747083,
+    "long": 145.670998
+  },
+  {
+    "name": "Palm Springs",
+    "id": "XN648",
+    "full_name": "Palm Springs, California, USA",
+    "country": "USA",
+    "state": "California",
+    "lat": 33.8302961,
+    "long": -116.5452921
+  },
+  {
+    "name": "Palma de Mallorca",
+    "id": "XN60462",
+    "full_name": "Palma de Mallorca, Balearic Islands, Spain",
+    "country": "Spain",
+    "state": "Balearic Islands",
+    "lat": 39.6091199711274,
+    "long": 2.64065706643924
+  },
+  {
+    "name": "Palmas",
+    "id": "XN50221",
+    "full_name": "Palmas, Central Brazil, Brazil",
+    "country": "Brazil",
+    "state": "Central Brazil",
+    "lat": -10.18451,
+    "long": -48.33466
+  },
+  {
+    "name": "Paris",
+    "id": "XN479",
+    "full_name": "Paris, Île-de-France, France",
+    "country": "France",
+    "state": "Île-de-France",
+    "lat": 48.8566667,
+    "long": 2.3509871
+  },
+  {
+    "name": "Los Glaciares National Park",
+    "id": "XN51225",
+    "full_name": "Patagonia, Chile",
+    "country": "Chile",
+    "state": "Patagonia",
+    "lat": -38.457881,
+    "long": -72.414871
+  },
+  {
+    "name": "Phoenix",
+    "id": "XN639",
+    "full_name": "Phoenix, Arizona, USA",
+    "country": "USA",
+    "state": "Arizona",
+    "lat": 33.4483771,
+    "long": -112.0740373
+  },
+  {
+    "name": "Phuket",
+    "id": "XN349",
+    "full_name": "Phuket, Southern Thailand and Andaman Coast, Thailand",
+    "country": "Thailand",
+    "state": "Southern Thailand and Andaman Coast",
+    "lat": 7.9843109,
+    "long": 98.3307468
+  },
+  {
+    "name": "Playa Flamingo",
+    "id": "XN24471",
+    "full_name": "Playa Flamingo, Guanacaste and Northwest, Costa Rica",
+    "country": "Costa Rica",
+    "state": "Guanacaste and Northwest",
+    "lat": 10.4314,
+    "long": -85.784265
+  },
+  {
+    "name": "Playa Hermosa",
+    "id": "XN24946",
+    "full_name": "Playa Hermosa, Guanacaste and Northwest, Costa Rica",
+    "country": "Costa Rica",
+    "state": "Guanacaste and Northwest",
+    "lat": 10.570298,
+    "long": -85.675284
+  },
+  {
+    "name": "Playa del Carmen",
+    "id": "XN5501",
+    "full_name": "Playa del Carmen, Riviera Maya & the Yucatan, Mexico",
+    "country": "Mexico",
+    "state": "Riviera Maya & the Yucatan",
+    "lat": 20.6295585978,
+    "long": -87.0738850994
+  },
+  {
+    "name": "Prague",
+    "id": "XN462",
+    "full_name": "Prague, Czech Republic",
+    "country": "Czech Republic",
+    "state": "",
+    "lat": 50.0878114,
+    "long": 14.4204598
+  },
+  {
+    "name": "Puerto Ayora",
+    "id": "XN50235",
+    "full_name": "Puerto Ayora, Ecuador",
+    "country": "Ecuador",
+    "state": "",
+    "lat": -0.7433,
+    "long": -90.3157
+  },
+  {
+    "name": "Puerto Escondido",
+    "id": "XN23875",
+    "full_name": "Puerto Escondido, Oaxaca, Mexico",
+    "country": "Mexico",
+    "state": "Oaxaca",
+    "lat": 15.871418,
+    "long": -97.075966
+  },
+  {
+    "name": "Puerto Galera",
+    "id": "XN50927",
+    "full_name": "Puerto Galera, Philippines",
+    "country": "Philippines",
+    "state": "",
+    "lat": 13.5006,
+    "long": 120.9548
+  },
+  {
+    "name": "Puerto Iguazu",
+    "id": "XN971",
+    "full_name": "Puerto Iguazu, Argentina",
+    "country": "Argentina",
+    "state": "",
+    "lat": -25.5971635,
+    "long": -54.578599
+  },
+  {
+    "name": "Puerto Madryn",
+    "id": "XN4414",
+    "full_name": "Puerto Madryn, Patagonia, Argentina",
+    "country": "Argentina",
+    "state": "Patagonia",
+    "lat": -42.769452,
+    "long": -65.033005
+  },
+  {
+    "name": "Puerto Princesa",
+    "id": "XN25948",
+    "full_name": "Puerto Princesa, Palawan, Philippines",
+    "country": "Philippines",
+    "state": "Palawan",
+    "lat": 9.953175,
+    "long": 118.781289
+  },
+  {
+    "name": "Puerto Quetzal",
+    "id": "XN5176",
+    "full_name": "Puerto Quetzal, Pacific Highlands, Guatemala",
+    "country": "Guatemala",
+    "state": "Pacific Highlands",
+    "lat": 13.9330376,
+    "long": -90.7942045
+  },
+  {
+    "name": "Puerto Rico",
+    "id": "XN36",
+    "full_name": "Puerto Rico",
+    "country": "Puerto Rico",
+    "state": "",
+    "lat": 18.220833,
+    "long": -66.590149
+  },
+  {
+    "name": "Puerto Vallarta",
+    "id": "XN630",
+    "full_name": "Puerto Vallarta, Jalisco, Mexico",
+    "country": "Mexico",
+    "state": "Jalisco",
+    "lat": 20.6237072161,
+    "long": -105.2309560776
+  },
+  {
+    "name": "Puerto Varas",
+    "id": "XN24025",
+    "full_name": "Puerto Varas, Patagonia, Chile",
+    "country": "Chile",
+    "state": "Patagonia",
+    "lat": -41.3167,
+    "long": -72.9833
+  },
+  {
+    "name": "Punta Arenas",
+    "id": "XN4416",
+    "full_name": "Punta Arenas, Patagonia, Chile",
+    "country": "Chile",
+    "state": "Patagonia",
+    "lat": -53.154478,
+    "long": -70.916476
+  },
+  {
+    "name": "Punta Cana",
+    "id": "XN794",
+    "full_name": "Punta Cana, Dominican Republic",
+    "country": "Dominican Republic",
+    "state": "",
+    "lat": 18.5333333,
+    "long": -68.3666667
+  },
+  {
+    "name": "Punta Gorda",
+    "id": "XN24112",
+    "full_name": "Punta Gorda, Belize",
+    "country": "Belize",
+    "state": "",
+    "lat": 16.098866,
+    "long": -88.809153
+  },
+  {
+    "name": "Punta Sam",
+    "id": "XN50863",
+    "full_name": "Punta Sam, Riviera Maya & the Yucatan, Mexico",
+    "country": "Mexico",
+    "state": "Riviera Maya & the Yucatan",
+    "lat": 21.2363988048,
+    "long": -86.8038252093
+  },
+  {
+    "name": "Punta del Este",
+    "id": "XN4906",
+    "full_name": "Punta del Este, Uruguay",
+    "country": "Uruguay",
+    "state": "",
+    "lat": -34.9666667,
+    "long": -54.95
+  },
+  {
+    "name": "Puntarenas",
+    "id": "XN4506",
+    "full_name": "Puntarenas, Central Pacific, Costa Rica",
+    "country": "Costa Rica",
+    "state": "Central Pacific",
+    "lat": 9.97784,
+    "long": -84.82942
+  },
+  {
+    "name": "Rio Lagartos",
+    "id": "XN50527",
+    "full_name": "Rio Lagartos, Riviera Maya & the Yucatan, Mexico",
+    "country": "Mexico",
+    "state": "Riviera Maya & the Yucatan",
+    "lat": 21.59782,
+    "long": -88.15787
+  },
+  {
+    "name": "Rio de Janeiro",
+    "id": "XN712",
+    "full_name": "Rio de Janeiro, Southeast Brazil, Brazil",
+    "country": "Brazil",
+    "state": "Southeast Brazil",
+    "lat": -22.9035393,
+    "long": -43.2095869
+  },
+  {
+    "name": "Riobamba",
+    "id": "XN52103",
+    "full_name": "Riobamba, Chimborazo Province, Ecuador",
+    "country": "Ecuador",
+    "state": "Chimborazo Province",
+    "lat": -1.67083,
+    "long": -78.64861
+  },
+  {
+    "name": "Riohacha",
+    "id": "XN50229",
+    "full_name": "Riohacha, Caribbean Coast, Colombia",
+    "country": "Colombia",
+    "state": "Caribbean Coast",
+    "lat": 11.5384,
+    "long": -72.9168
+  },
+  {
+    "name": "Riviera Maya & the Yucatan",
+    "id": "XN770",
+    "full_name": "Riviera Maya & the Yucatan, Mexico",
+    "country": "Mexico",
+    "state": "Riviera Maya & the Yucatan",
+    "lat": 20.627623,
+    "long": -87.07828
+  },
+  {
+    "name": "Rome",
+    "id": "XN511",
+    "full_name": "Rome, Italy",
+    "country": "Italy",
+    "state": "",
+    "lat": 41.8954656,
+    "long": 12.4823243
+  },
+  {
+    "name": "Saint Joseph Parish",
+    "id": "XN50218",
+    "full_name": "Saint Joseph Parish, Barbados",
+    "country": "Barbados",
+    "state": "",
+    "lat": 13.2005,
+    "long": -59.5393
+  },
+  {
+    "name": "San Antonio de los Cobres",
+    "id": "XN50970",
+    "full_name": "San Antonio de los Cobres, Northwest Argentina, Argentina",
+    "country": "Argentina",
+    "state": "Northwest Argentina",
+    "lat": -24.21804,
+    "long": -66.31877
+  },
+  {
+    "name": "San Cristobal",
+    "id": "XN50236",
+    "full_name": "San Cristobal, Ecuador",
+    "country": "Ecuador",
+    "state": "",
+    "lat": -0.8675,
+    "long": -89.4364
+  },
+  {
+    "name": "San Cristóbal de las Casas",
+    "id": "XN23477",
+    "full_name": "San Cristóbal de las Casas, Chiapas, Mexico",
+    "country": "Mexico",
+    "state": "Chiapas",
+    "lat": 16.73609,
+    "long": -92.637122
+  },
+  {
+    "name": "San Diego",
+    "id": "XN736",
+    "full_name": "San Diego, California, USA",
+    "country": "USA",
+    "state": "California",
+    "lat": 32.711766573,
+    "long": -117.164812088
+  },
+  {
+    "name": "San Francisco",
+    "id": "XN651",
+    "full_name": "San Francisco, California, USA",
+    "country": "USA",
+    "state": "California",
+    "lat": 37.7947962975,
+    "long": -122.4000549316
+  },
+  {
+    "name": "San Francisco",
+    "id": "XN51252",
+    "full_name": "San Francisco, Pacific Coast, Mexico",
+    "country": "Mexico",
+    "state": "Pacific Coast",
+    "lat": 20.30233,
+    "long": -101.05782
+  },
+  {
+    "name": "San Gil",
+    "id": "XN50399",
+    "full_name": "San Gil, Colombia",
+    "country": "Colombia",
+    "state": "",
+    "lat": 6.5548,
+    "long": -73.1341
+  },
+  {
+    "name": "San Gimignano",
+    "id": "XN29096",
+    "full_name": "San Gimignano, Tuscany, Italy",
+    "country": "Italy",
+    "state": "Tuscany",
+    "lat": 43.46763,
+    "long": 11.04349
+  },
+  {
+    "name": "San Jose del Cabo",
+    "id": "XN50860",
+    "full_name": "San Jose del Cabo, Baja California Sur, Mexico",
+    "country": "Mexico",
+    "state": "Baja California Sur",
+    "lat": 23.0686140743,
+    "long": -109.7024298083
+  },
+  {
+    "name": "San Jose",
+    "id": "XN793",
+    "full_name": "San Jose, Central Valley, Costa Rica",
+    "country": "Costa Rica",
+    "state": "Central Valley",
+    "lat": 9.9333333,
+    "long": -84.0833333
+  },
+  {
+    "name": "San Juan Islands",
+    "id": "XN30630",
+    "full_name": "San Juan Islands, Washington, USA",
+    "country": "USA",
+    "state": "Washington",
+    "lat": 48.55137,
+    "long": -123.07811
+  },
+  {
+    "name": "San Juan del Sur",
+    "id": "XN23011",
+    "full_name": "San Juan del Sur, Nicaragua",
+    "country": "Nicaragua",
+    "state": "",
+    "lat": 11.263938,
+    "long": -85.86271
+  },
+  {
+    "name": "San Juan",
+    "id": "XN50300",
+    "full_name": "San Juan, Argentina",
+    "country": "Argentina",
+    "state": "",
+    "lat": -31.5351,
+    "long": -68.5386
+  },
+  {
+    "name": "San Juan",
+    "id": "XN903",
+    "full_name": "San Juan, Puerto Rico",
+    "country": "Puerto Rico",
+    "state": "San Juan",
+    "lat": 18.4663338,
+    "long": -66.1057217
+  },
+  {
+    "name": "San Marino",
+    "id": "XN21911",
+    "full_name": "San Marino",
+    "country": "San Marino",
+    "state": "",
+    "lat": 43.9424,
+    "long": 12.4578
+  },
+  {
+    "name": "San Martin de los Andes",
+    "id": "XN21484",
+    "full_name": "San Martin de los Andes, Lake District, Argentina",
+    "country": "Argentina",
+    "state": "Lake District",
+    "lat": -40.15509,
+    "long": -71.354195
+  },
+  {
+    "name": "Santorini",
+    "id": "XN959",
+    "full_name": "Santorini, Cyclades Islands, Greece",
+    "country": "Greece",
+    "state": "Cyclades Islands",
+    "lat": 36.3931562,
+    "long": 25.4615092
+  },
+  {
+    "name": "Savannah",
+    "id": "XN5166",
+    "full_name": "Savannah, Georgia, USA",
+    "country": "USA",
+    "state": "Georgia",
+    "lat": 32.083541,
+    "long": -81.099834
+  },
+  {
+    "name": "Scottsdale",
+    "id": "XN38685",
+    "full_name": "Scottsdale, Arizona, USA",
+    "country": "USA",
+    "state": "Arizona",
+    "lat": 33.6738933,
+    "long": -112.1393414
+  },
+  {
+    "name": "Seattle",
+    "id": "XN704",
+    "full_name": "Seattle, Washington, USA",
+    "country": "USA",
+    "state": "Washington",
+    "lat": 47.6039061034,
+    "long": -122.3373126984
+  },
+  {
+    "name": "Singapore",
+    "id": "XN18",
+    "full_name": "Singapore",
+    "country": "Singapore",
+    "state": "",
+    "lat": 1.352083,
+    "long": 103.819836
+  },
+  {
+    "name": "Singapore",
+    "id": "XN60449",
+    "full_name": "Singapore, Singapore",
+    "country": "Singapore",
+    "state": "",
+    "lat": 1.39384070411002,
+    "long": 103.862451845808
+  },
+  {
+    "name": "Sydney",
+    "id": "XN4413",
+    "full_name": "Sydney, Canada",
+    "country": "Canada",
+    "state": "",
+    "lat": 46.0661,
+    "long": -60.18
+  },
+  {
+    "name": "Sydney",
+    "id": "XN357",
+    "full_name": "Sydney, New South Wales, Australia",
+    "country": "Australia",
+    "state": "New South Wales",
+    "lat": -33.8671390001,
+    "long": 151.207114
+  },
+  {
+    "name": "Tampa",
+    "id": "XN666",
+    "full_name": "Tampa, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 27.9424741768,
+    "long": -82.4541950226
+  },
+  {
+    "name": "Tokyo Prefecture",
+    "id": "XN50157",
+    "full_name": "Tokyo Prefecture, Japan",
+    "country": "Japan",
+    "state": "Tokyo Prefecture",
+    "lat": 35.5040518,
+    "long": 138.6484296
+  },
+  {
+    "name": "Tokyo",
+    "id": "XN334",
+    "full_name": "Tokyo, Kanto, Japan",
+    "country": "Japan",
+    "state": "Kanto",
+    "lat": 35.6894875,
+    "long": 139.6917064
+  },
+  {
+    "name": "Toronto",
+    "id": "XN623",
+    "full_name": "Toronto, Ontario, Canada",
+    "country": "Canada",
+    "state": "Ontario",
+    "lat": 43.6525,
+    "long": -79.3816667
+  },
+  {
+    "name": "Tulum",
+    "id": "XN23012",
+    "full_name": "Tulum, Riviera Maya & the Yucatan, Mexico",
+    "country": "Mexico",
+    "state": "Riviera Maya & the Yucatan",
+    "lat": 20.21142,
+    "long": -87.46535
+  },
+  {
+    "name": "Turkish Riviera",
+    "id": "XN22557",
+    "full_name": "Turkish Riviera, Turkey",
+    "country": "Turkey",
+    "state": "Turkish Riviera",
+    "lat": 36.774092,
+    "long": 30.544739
+  },
+  {
+    "name": "Turks and Caicos",
+    "id": "XN963",
+    "full_name": "Turks and Caicos",
+    "country": "Turks and Caicos",
+    "state": "",
+    "lat": 21.694025,
+    "long": -71.797928
+  },
+  {
+    "name": "Palm Jumeirah",
+    "id": "XN51421",
+    "full_name": "United Arab Emirates",
+    "country": "United Arab Emirates",
+    "state": "",
+    "lat": 25.128878,
+    "long": 55.119466
+  },
+  {
+    "name": "Vancouver Island",
+    "id": "XN30423",
+    "full_name": "Vancouver Island, British Columbia, Canada",
+    "country": "Canada",
+    "state": "British Columbia",
+    "lat": 49.65064,
+    "long": -125.44939
+  },
+  {
+    "name": "Vancouver",
+    "id": "XN616",
+    "full_name": "Vancouver, British Columbia, Canada",
+    "country": "Canada",
+    "state": "British Columbia",
+    "lat": 49.2874029705,
+    "long": -123.0845546722
+  },
+  {
+    "name": "Venice",
+    "id": "XN522",
+    "full_name": "Venice, Veneto, Italy",
+    "country": "Italy",
+    "state": "Veneto",
+    "lat": 45.4323405192,
+    "long": 12.3067903519
+  },
+  {
+    "name": "Vienna",
+    "id": "XN454",
+    "full_name": "Vienna, Austria",
+    "country": "Austria",
+    "state": "",
+    "lat": 48.2092062,
+    "long": 16.3727778
+  },
+  {
+    "name": "Vieux Fort",
+    "id": "XN50469",
+    "full_name": "Vieux Fort, St Lucia",
+    "country": "St Lucia",
+    "state": "",
+    "lat": 13.72986,
+    "long": -60.951618
+  },
+  {
+    "name": "West Palm Beach",
+    "id": "XN24204",
+    "full_name": "West Palm Beach, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 26.715342,
+    "long": -80.053375
+  },
+  {
+    "name": "Western Anatolia",
+    "id": "XN27336",
+    "full_name": "Western Anatolia, Turkey",
+    "country": "Turkey",
+    "state": "Western Anatolia",
+    "lat": 36.89689,
+    "long": 30.71332
+  },
+  {
+    "name": "Western Cape",
+    "id": "XN23346",
+    "full_name": "Western Cape, South Africa",
+    "country": "South Africa",
+    "state": "Western Cape",
+    "lat": -33.227792,
+    "long": 21.856859
+  }
+]

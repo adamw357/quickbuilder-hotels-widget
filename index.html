@@ -69,9 +69,9 @@ if(QB.primary) document.documentElement.style.setProperty('--primary', QB.primar
 var TABS = [
   {key:'hotels',     label:'Hotels',     ready:true},
   {key:'flights',    label:'Flights',    ready:true},
-  {key:'resorts',    label:'Resorts',    ready:false},
-  {key:'cars',       label:'Cars',       ready:false},
-  {key:'activities', label:'Activities', ready:false}
+  {key:'resorts',    label:'Resorts',    ready:true},
+  {key:'cars',       label:'Cars',       ready:true},
+  {key:'activities', label:'Activities', ready:true}
 ];
 // autocomplete config per product
 var AC = {
@@ -80,6 +80,7 @@ var AC = {
     starts:function(d){return [d.name];},
     hay:function(d){return (d.name+' '+d.full_name).toLowerCase();},
     main:function(d){return d.name;}, sub:function(d){return d.full_name;},
+    pick:function(d){return d.full_name;},
     rank:function(d){return d.rank==null?1:d.rank;}
   },
   flights: {
@@ -87,7 +88,32 @@ var AC = {
     starts:function(d){return [d.code, d.city];},
     hay:function(d){return (d.code+' '+d.city+' '+d.name).toLowerCase();},
     main:function(d){return d.code+' · '+d.city;}, sub:function(d){return d.name+', '+d.country;},
+    pick:function(d){return d.code+' - '+d.city;},
     rank:function(d){return d.rank==null?999:d.rank;}
+  },
+  resorts: {
+    file:'data/resorts.json',
+    starts:function(d){return [d.name];},
+    hay:function(d){return (d.name+' '+d.full_name).toLowerCase();},
+    main:function(d){return d.name;}, sub:function(d){return d.full_name;},
+    pick:function(d){return d.full_name;},
+    rank:function(d){return 1;}
+  },
+  cars: {
+    file:'data/cars.json',
+    starts:function(d){return [d.name, d.city_name, d.iata_code];},
+    hay:function(d){return (d.name+' '+d.city_name+' '+d.iata_code).toLowerCase();},
+    main:function(d){return d.name;}, sub:function(d){return (d.city_name||d.state||'')+(d.country_name?', '+d.country_name:'');},
+    pick:function(d){return d.name;},
+    rank:function(d){return d.type==='airport'?0:1;}  // car rentals: airports first
+  },
+  activities: {
+    file:'data/activities.json',
+    starts:function(d){return [d.name];},
+    hay:function(d){return (d.name+' '+d.full_name).toLowerCase();},
+    main:function(d){return d.name;}, sub:function(d){return d.full_name;},
+    pick:function(d){return d.full_name;},
+    rank:function(d){return 1;}
   }
 };
 
@@ -132,13 +158,13 @@ function wireAutocomplete(input, box, key){
     loadData(key).then(function(){ matches=search(input.value); render(); });
   });
   box.addEventListener('mousedown', function(e){ var it=e.target.closest('.ac-item'); if(!it) return;
-    var d=matches[+it.getAttribute('data-i')]; input._sel=d; input.value=cfg.main(d).replace(' · ',' - ')+ (key==='hotels'?'':''); if(key==='hotels') input.value=d.full_name; box.classList.remove('open');
+    var d=matches[+it.getAttribute('data-i')]; input._sel=d; input.value=cfg.pick(d); box.classList.remove('open');
   });
   input.addEventListener('keydown', function(e){
     if(!box.classList.contains('open')||!matches.length) return;
     if(e.key==='ArrowDown'){activeIdx=Math.min(activeIdx+1,matches.length-1);render();e.preventDefault();}
     else if(e.key==='ArrowUp'){activeIdx=Math.max(activeIdx-1,0);render();e.preventDefault();}
-    else if(e.key==='Enter'&&activeIdx>-1){var d=matches[activeIdx];input._sel=d;input.value=(key==='hotels'?d.full_name:d.code+' - '+d.city);box.classList.remove('open');e.preventDefault();}
+    else if(e.key==='Enter'&&activeIdx>-1){var d=matches[activeIdx];input._sel=d;input.value=cfg.pick(d);box.classList.remove('open');e.preventDefault();}
     else if(e.key==='Escape'){box.classList.remove('open');}
   });
   document.addEventListener('click', function(e){ if(!box.parentNode.contains(e.target)) box.classList.remove('open'); });
@@ -177,6 +203,39 @@ function flightsUrl(f){
   var p=new URLSearchParams(); p.append('correlationId',uuid()); p.append('query',JSON.stringify(q));
   return QB.platformUrl.replace(/\/+$/,'')+'/booknow/flights/v2/search?'+p.toString();
 }
+function resortsUrl(f){
+  var s=f.dest._sel || {name:f.dest.value,full_name:f.dest.value,state:"",city:"",country:"",region:"",type:"city",lat:0,lon:0};
+  var p=new URLSearchParams(); p.append('correlationId',uuid());
+  if(f.cin.value) p.append('startDate',f.cin.value);
+  if(f.cout.value) p.append('endDate',f.cout.value);
+  p.append('location',JSON.stringify({name:s.name,full_name:s.full_name||s.name,state:s.state||"",city:s.city||"",country:s.country||"",region:s.region||"",type:(s.type||"city"),location:{lat:s.lat||0,lon:s.lon||0}}));
+  return QB.platformUrl.replace(/\/+$/,'')+'/booknow/resort/search?'+p.toString();
+}
+function twelveHr(t){ if(!t) return '10:00 AM'; var a=t.split(':'),h=parseInt(a[0],10),m=a[1],ap=h>=12?'PM':'AM'; h=h%12||12; return h+':'+m+' '+ap; }
+function carsUrl(f){
+  var s=f.pick._sel || {id:"",name:f.pick.value,city_name:"",country_name:"",iata_code:"",type:"location",coordinates:{},region_id:""};
+  var p=new URLSearchParams(); p.append('correlationId',uuid());
+  p.append('country','US'); p.append('currency','USD'); p.append('driverAge','25'); p.append('driverCountry','US');
+  p.append('dropOffOption','Same as pick-up'); p.append('dropOffLocation',''); p.append('dropOffLocationData','');
+  var pu=f.pickup.value.split('T'), dp=f.drop.value.split('T');
+  p.append('startDate',pu[0]||''); p.append('endDate',dp[0]||'');
+  p.append('pickupTime',twelveHr(pu[1])); p.append('dropoffTime',twelveHr(dp[1]));
+  p.append('location',JSON.stringify({id:s.id||"",name:s.name,city_name:s.city_name||"",country_name:s.country_name||"",iata_code:s.iata_code||"",type:s.type||"location",coordinates:s.coordinates||{},region_id:s.region_id||""}));
+  p.append('pickupCode',s.iata_code||""); p.append('pickupType',s.type==='airport'?'iata':'geo');
+  return QB.platformUrl.replace(/\/+$/,'')+'/booknow/cars/v2/search?'+p.toString();
+}
+function activitiesUrl(f){
+  var s=f.dest._sel || {name:f.dest.value,id:"",lat:0,long:0};
+  var start=f.date.value, end=start?isoDateFrom(start,1):'';
+  var p=new URLSearchParams(); p.append('correlationId',uuid());
+  if(start) p.append('startDate',start); if(end) p.append('endDate',end);
+  p.append('isOTA','true');
+  p.append('location',JSON.stringify({name:s.name,id:s.id||"",location:{lat:s.lat||0,long:s.long||0}}));
+  p.append('occupancy',JSON.stringify([{adults:parseInt(f.guests.value)||2,childs:0,childages:[]}]));
+  p.append('preference',JSON.stringify([]));
+  return QB.platformUrl.replace(/\/+$/,'')+'/booknow/activity/v2/search?'+p.toString();
+}
+function isoDateFrom(d, addDays){ var t=new Date(d+'T00:00:00'); t.setDate(t.getDate()+addDays); return t.toISOString().slice(0,10); }
 
 /* ================= panels ================= */
 function hotelsPanel(){
@@ -225,7 +284,56 @@ function flightsPanel(){
     go(flightsUrl({from:from,to:to,dep:wrap.querySelector('#f-dep'),ret:ret,pax:wrap.querySelector('#f-pax'),body:wrap}));
   });
 }
-function soonPanel(label){ qbBody.innerHTML='<div class="soon"><strong>'+label+'</strong> coming soon — hotels &amp; flights are live now.</div>'; }
+function resortsPanel(){
+  var wrap=el('<div><div class="qb-title">Find a Resort</div>'
+   +'<div class="qb-row hotels">'
+   +'<div class="fld"><label>Destination</label><input id="r-dest" autocomplete="off" placeholder="Beach, island, city…"><div class="ac" id="r-ac"></div></div>'
+   +'<div class="fld"><label>Check-in</label><input id="r-in" type="date"></div>'
+   +'<div class="fld"><label>Check-out</label><input id="r-out" type="date"></div>'
+   +'<div class="fld"><label>Guests</label><input id="r-guests" type="number" min="1" value="2"></div>'
+   +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="r-go">Search Resorts</button></div>'
+   +'</div></div>');
+  qbBody.innerHTML=''; qbBody.appendChild(wrap);
+  var dest=wrap.querySelector('#r-dest'); wireAutocomplete(dest, wrap.querySelector('#r-ac'),'resorts');
+  wrap.querySelector('#r-in').value=isoDate(14); wrap.querySelector('#r-out').value=isoDate(17); loadData('resorts');
+  wrap.querySelector('#r-go').addEventListener('click',function(){
+    if(!dest.value.trim()){dest.focus();return;}
+    go(resortsUrl({dest:dest,cin:wrap.querySelector('#r-in'),cout:wrap.querySelector('#r-out'),guests:wrap.querySelector('#r-guests')}));
+  });
+}
+function carsPanel(){
+  var wrap=el('<div><div class="qb-title">Rent a Car</div>'
+   +'<div class="qb-row flights">'
+   +'<div class="fld"><label>Pick-up location</label><input id="c-pick" autocomplete="off" placeholder="Airport or city"><div class="ac" id="c-ac"></div></div>'
+   +'<div class="fld"><label>Pick-up</label><input id="c-pud" type="datetime-local"></div>'
+   +'<div class="fld"><label>Drop-off</label><input id="c-dod" type="datetime-local"></div>'
+   +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="c-go">Search Cars</button></div>'
+   +'</div><div class="qb-foot" style="text-align:left;padding:8px 2px 0">Drop-off same as pick-up.</div></div>');
+  qbBody.innerHTML=''; qbBody.appendChild(wrap);
+  var pick=wrap.querySelector('#c-pick'); wireAutocomplete(pick, wrap.querySelector('#c-ac'),'cars');
+  wrap.querySelector('#c-pud').value=isoDate(14)+'T10:00'; wrap.querySelector('#c-dod').value=isoDate(17)+'T10:00'; loadData('cars');
+  wrap.querySelector('#c-go').addEventListener('click',function(){
+    if(!pick.value.trim()){pick.focus();return;}
+    go(carsUrl({pick:pick,pickup:wrap.querySelector('#c-pud'),drop:wrap.querySelector('#c-dod')}));
+  });
+}
+function activitiesPanel(){
+  var wrap=el('<div><div class="qb-title">Things to Do</div>'
+   +'<div class="qb-row hotels">'
+   +'<div class="fld"><label>Destination</label><input id="a-dest" autocomplete="off" placeholder="Where are you going?"><div class="ac" id="a-ac"></div></div>'
+   +'<div class="fld"><label>Date</label><input id="a-date" type="date"></div>'
+   +'<div class="fld"><label>Guests</label><input id="a-guests" type="number" min="1" value="2"></div>'
+   +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="a-go">Search Activities</button></div>'
+   +'</div></div>');
+  qbBody.innerHTML=''; qbBody.appendChild(wrap);
+  var dest=wrap.querySelector('#a-dest'); wireAutocomplete(dest, wrap.querySelector('#a-ac'),'activities');
+  wrap.querySelector('#a-date').value=isoDate(14); loadData('activities');
+  wrap.querySelector('#a-go').addEventListener('click',function(){
+    if(!dest.value.trim()){dest.focus();return;}
+    go(activitiesUrl({dest:dest,date:wrap.querySelector('#a-date'),guests:wrap.querySelector('#a-guests')}));
+  });
+}
+function soonPanel(label){ qbBody.innerHTML='<div class="soon"><strong>'+label+'</strong> coming soon.</div>'; }
 
 /* ================= tabs / boot ================= */
 var qbTabs=document.getElementById('qb-tabs'), qbBody=document.getElementById('qb-body');
@@ -233,6 +341,9 @@ function selectTab(key){
   [].forEach.call(qbTabs.children,function(b){ b.classList.toggle('active', b.dataset.k===key); });
   if(key==='hotels') hotelsPanel();
   else if(key==='flights') flightsPanel();
+  else if(key==='resorts') resortsPanel();
+  else if(key==='cars') carsPanel();
+  else if(key==='activities') activitiesPanel();
   else soonPanel((TABS.filter(function(t){return t.key===key;})[0]||{}).label||key);
 }
 TABS.forEach(function(t){
