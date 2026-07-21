@@ -1,5 +1,16 @@
 [
   {
+    "name": "Abu",
+    "full_name": "Abu, Rajasthan, India",
+    "state": "",
+    "city": "Abu",
+    "country": "India",
+    "region": "SU5EWA==",
+    "type": "city",
+    "lat": 24.463911,
+    "lon": 72.77309
+  },
+  {
     "name": "Anaheim",
     "full_name": "Anaheim, California, United States",
     "state": "",
@@ -11,6 +22,61 @@
     "lon": -117.904
   },
   {
+    "name": "Antigua Guatemala",
+    "full_name": "Antigua Guatemala, Antigua Guatemala, Guatemala",
+    "state": "",
+    "city": "Antigua Guatemala",
+    "country": "Guatemala",
+    "region": "Q1NBTQ==",
+    "type": "city",
+    "lat": 14.55778,
+    "lon": -90.7322
+  },
+  {
+    "name": "Antigua Guatemala",
+    "full_name": "Antigua Guatemala, Guatemala",
+    "state": "Antigua Guatemala",
+    "city": "",
+    "country": "Guatemala",
+    "region": "Q1NBTQ==",
+    "type": "state",
+    "lat": 14.55778,
+    "lon": -90.7322
+  },
+  {
+    "name": "Antigua and Barbuda",
+    "full_name": "Antigua and Barbuda",
+    "state": "",
+    "city": "",
+    "country": "Antigua and Barbuda",
+    "region": "Q1JCWA==",
+    "type": "country",
+    "lat": 17.096867,
+    "lon": -61.68271
+  },
+  {
+    "name": "Antigua",
+    "full_name": "Antigua, Antigua, Canary Islands",
+    "state": "",
+    "city": "Antigua",
+    "country": "Canary Islands",
+    "region": "RlVFUg==",
+    "type": "city",
+    "lat": 28.39938,
+    "lon": -13.86866
+  },
+  {
+    "name": "Antigua",
+    "full_name": "Antigua, Canary Islands",
+    "state": "Antigua",
+    "city": "",
+    "country": "Canary Islands",
+    "region": "RlVFUg==",
+    "type": "state",
+    "lat": 28.39938,
+    "lon": -13.86866
+  },
+  {
     "name": "Aruba",
     "full_name": "Aruba",
     "state": "",
@@ -20,6 +86,17 @@
     "type": "country",
     "lat": 12.536317,
     "lon": -70.05696
+  },
+  {
+    "name": "Asheville",
+    "full_name": "Asheville, North Carolina, United States",
+    "state": "",
+    "city": "Asheville",
+    "country": "United States",
+    "region": "U01LWA==",
+    "type": "city",
+    "lat": 35.5993,
+    "lon": -82.5511
   },
   {
     "name": "Aspen",
@@ -64,6 +141,28 @@
     "type": "city",
     "lat": 33.9062,
     "lon": -84.4301
+  },
+  {
+    "name": "Auckland",
+    "full_name": "Auckland, Auckland, New Zealand",
+    "state": "",
+    "city": "Auckland",
+    "country": "New Zealand",
+    "region": "TlpOSQ==",
+    "type": "city",
+    "lat": -36.9761,
+    "lon": 174.785
+  },
+  {
+    "name": "Auckland",
+    "full_name": "Auckland, New Zealand",
+    "state": "Auckland",
+    "city": "",
+    "country": "New Zealand",
+    "region": "TlpOSQ==",
+    "type": "state",
+    "lat": -36.9761,
+    "lon": 174.785
   },
   {
     "name": "Austin",
@@ -121,6 +220,17 @@
     "lon": 28.207321
   },
   {
+    "name": "Banff",
+    "full_name": "Banff, Alberta, Canada",
+    "state": "",
+    "city": "Banff",
+    "country": "Canada",
+    "region": "V0NBTg==",
+    "type": "city",
+    "lat": 51.199802,
+    "lon": -115.53604
+  },
+  {
     "name": "Bangkok",
     "full_name": "Bangkok, Bangkok, Thailand",
     "state": "",
@@ -176,6 +286,50 @@
     "lon": 2.1086202
   },
   {
+    "name": "Belize",
+    "full_name": "Belize",
+    "state": "",
+    "city": "",
+    "country": "Belize",
+    "region": "Q1JCWA==",
+    "type": "country",
+    "lat": 17.19292,
+    "lon": -88.65284
+  },
+  {
+    "name": "Bermuda",
+    "full_name": "Bermuda",
+    "state": "",
+    "city": "",
+    "country": "Bermuda",
+    "region": "QkFITTpDUkJY",
+    "type": "country",
+    "lat": 32.2823,
+    "lon": -64.784
+  },
+  {
+    "name": "Boracay Island",
+    "full_name": "Boracay Island, Boracay Island, Philippines",
+    "state": "",
+    "city": "Boracay Island",
+    "country": "Philippines",
+    "region": "U0VBWA==",
+    "type": "city",
+    "lat": 11.966,
+    "lon": 121.92846
+  },
+  {
+    "name": "Boracay Island",
+    "full_name": "Boracay Island, Philippines",
+    "state": "Boracay Island",
+    "city": "",
+    "country": "Philippines",
+    "region": "U0VBWA==",
+    "type": "state",
+    "lat": 11.966,
+    "lon": 121.92846
+  },
+  {
     "name": "Boston",
     "full_name": "Boston, Massachusetts, United States",
     "state": "",
@@ -185,6 +339,83 @@
     "type": "city",
     "lat": 42.3512,
     "lon": -71.0696
+  },
+  {
+    "name": "Branson",
+    "full_name": "Branson, Missouri, United States",
+    "state": "",
+    "city": "Branson",
+    "country": "United States",
+    "region": "T1pBUg==",
+    "type": "city",
+    "lat": 36.6345,
+    "lon": -93.2813
+  },
+  {
+    "name": "Brussels",
+    "full_name": "Brussels, Belgium",
+    "state": "Brussels",
+    "city": "",
+    "country": "Belgium",
+    "region": "R0VSTQ==",
+    "type": "state",
+    "lat": 50.38378,
+    "lon": 4.331993
+  },
+  {
+    "name": "Brussels",
+    "full_name": "Brussels, Brussels, Belgium",
+    "state": "",
+    "city": "Brussels",
+    "country": "Belgium",
+    "region": "R0VSTQ==",
+    "type": "city",
+    "lat": 50.38378,
+    "lon": 4.331993
+  },
+  {
+    "name": "Budapest",
+    "full_name": "Budapest, Budapest, Hungary",
+    "state": "",
+    "city": "Budapest",
+    "country": "Hungary",
+    "region": "SFVORw==",
+    "type": "city",
+    "lat": 47.50047,
+    "lon": 19.06227
+  },
+  {
+    "name": "Budapest",
+    "full_name": "Budapest, Hungary",
+    "state": "Budapest",
+    "city": "",
+    "country": "Hungary",
+    "region": "SFVORw==",
+    "type": "state",
+    "lat": 47.50047,
+    "lon": 19.06227
+  },
+  {
+    "name": "Buenos Aires",
+    "full_name": "Buenos Aires, Argentina",
+    "state": "Buenos Aires",
+    "city": "",
+    "country": "Argentina",
+    "region": "U0FJTg==",
+    "type": "state",
+    "lat": -34.59528,
+    "lon": -58.379986
+  },
+  {
+    "name": "Buenos Aires",
+    "full_name": "Buenos Aires, Buenos Aires, Argentina",
+    "state": "",
+    "city": "Buenos Aires",
+    "country": "Argentina",
+    "region": "U0FJTg==",
+    "type": "city",
+    "lat": -34.59528,
+    "lon": -58.379986
   },
   {
     "name": "CABO SAN LUCAS",
@@ -462,6 +693,39 @@
     "lon": -86.8777
   },
   {
+    "name": "Crete",
+    "full_name": "Crete, Crete, Greece",
+    "state": "",
+    "city": "Crete",
+    "country": "Greece",
+    "region": "R1JFQw==",
+    "type": "city",
+    "lat": 35.29909,
+    "lon": 25.35165
+  },
+  {
+    "name": "Crete",
+    "full_name": "Crete, Greece",
+    "state": "Crete",
+    "city": "",
+    "country": "Greece",
+    "region": "R1JFQw==",
+    "type": "state",
+    "lat": 35.29909,
+    "lon": 25.35165
+  },
+  {
+    "name": "Curacao",
+    "full_name": "Curacao",
+    "state": "",
+    "city": "",
+    "country": "Curacao",
+    "region": "Q1JCWA==",
+    "type": "country",
+    "lat": 12.089731,
+    "lon": -68.902954
+  },
+  {
     "name": "Dallas",
     "full_name": "Dallas, Texas, United States",
     "state": "",
@@ -539,6 +803,28 @@
     "lon": -6.14719
   },
   {
+    "name": "Edinburgh",
+    "full_name": "Edinburgh, Edinburgh, Scotland",
+    "state": "",
+    "city": "Edinburgh",
+    "country": "Scotland",
+    "region": "U0NPVA==",
+    "type": "city",
+    "lat": 55.95075,
+    "lon": -3.21828
+  },
+  {
+    "name": "Edinburgh",
+    "full_name": "Edinburgh, Scotland",
+    "state": "Edinburgh",
+    "city": "",
+    "country": "Scotland",
+    "region": "U0NPVA==",
+    "type": "state",
+    "lat": 55.95075,
+    "lon": -3.21828
+  },
+  {
     "name": "FORTALEZA",
     "full_name": "FORTALEZA, Brazil",
     "state": "FORTALEZA",
@@ -548,6 +834,17 @@
     "type": "state",
     "lat": 0.5,
     "lon": 0.5
+  },
+  {
+    "name": "Fiji Islands",
+    "full_name": "Fiji Islands",
+    "state": "",
+    "city": "",
+    "country": "Fiji Islands",
+    "region": "U09QSQ==",
+    "type": "country",
+    "lat": -17.584093,
+    "lon": 178.6715
   },
   {
     "name": "Fort Lauderdale",
@@ -627,6 +924,83 @@
     "lon": 153.0337
   },
   {
+    "name": "Galveston",
+    "full_name": "Galveston, Texas, United States",
+    "state": "",
+    "city": "Galveston",
+    "country": "United States",
+    "region": "VFhDTw==",
+    "type": "city",
+    "lat": 29.272795,
+    "lon": -94.81661
+  },
+  {
+    "name": "Gatlinburg",
+    "full_name": "Gatlinburg, Tennessee, United States",
+    "state": "",
+    "city": "Gatlinburg",
+    "country": "United States",
+    "region": "U01LWA==",
+    "type": "city",
+    "lat": 35.705143,
+    "lon": -83.51675
+  },
+  {
+    "name": "Goa",
+    "full_name": "Goa, Goa, India",
+    "state": "",
+    "city": "Goa",
+    "country": "India",
+    "region": "SU5EWA==",
+    "type": "city",
+    "lat": 15.498889,
+    "lon": 73.82631
+  },
+  {
+    "name": "Goa",
+    "full_name": "Goa, India",
+    "state": "Goa",
+    "city": "",
+    "country": "India",
+    "region": "SU5EWA==",
+    "type": "state",
+    "lat": 15.498889,
+    "lon": 73.82631
+  },
+  {
+    "name": "Hilton Head",
+    "full_name": "Hilton Head, South Carolina, United States",
+    "state": "",
+    "city": "Hilton Head",
+    "country": "United States",
+    "region": "SEhEWA==",
+    "type": "city",
+    "lat": 32.1442,
+    "lon": -80.7579
+  },
+  {
+    "name": "Hoilola",
+    "full_name": "Hoilola, Finland",
+    "state": "Hoilola",
+    "city": "",
+    "country": "Finland",
+    "region": "RklOTA==",
+    "type": "state",
+    "lat": 62.3463,
+    "lon": 30.8738
+  },
+  {
+    "name": "Hoilola",
+    "full_name": "Hoilola, Hoilola, Finland",
+    "state": "",
+    "city": "Hoilola",
+    "country": "Finland",
+    "region": "RklOTA==",
+    "type": "city",
+    "lat": 62.3463,
+    "lon": 30.8738
+  },
+  {
     "name": "Hong Kong",
     "full_name": "Hong Kong",
     "state": "",
@@ -660,6 +1034,83 @@
     "lon": -95.363
   },
   {
+    "name": "IBIZA",
+    "full_name": "IBIZA, Spain",
+    "state": "IBIZA",
+    "city": "",
+    "country": "Spain",
+    "region": "U1BJUw==",
+    "type": "state",
+    "lat": 38.97866,
+    "lon": 1.529653
+  },
+  {
+    "name": "Ibiza",
+    "full_name": "Ibiza, IBIZA, Spain",
+    "state": "",
+    "city": "Ibiza",
+    "country": "Spain",
+    "region": "U1BJUw==",
+    "type": "city",
+    "lat": 38.97866,
+    "lon": 1.529653
+  },
+  {
+    "name": "Istanbul",
+    "full_name": "Istanbul, Istanbul, Turkey",
+    "state": "",
+    "city": "Istanbul",
+    "country": "Turkey",
+    "region": "VFJLWQ==",
+    "type": "city",
+    "lat": 41.036957,
+    "lon": 28.990171
+  },
+  {
+    "name": "Istanbul",
+    "full_name": "Istanbul, Turkey",
+    "state": "Istanbul",
+    "city": "",
+    "country": "Turkey",
+    "region": "VFJLWQ==",
+    "type": "state",
+    "lat": 41.036957,
+    "lon": 28.990171
+  },
+  {
+    "name": "Jackson Hole",
+    "full_name": "Jackson Hole, Wyoming, United States",
+    "state": "",
+    "city": "Jackson Hole",
+    "country": "United States",
+    "region": "WUVMTw==",
+    "type": "city",
+    "lat": 43.4783,
+    "lon": -110.7492
+  },
+  {
+    "name": "Jackson",
+    "full_name": "Jackson, New Hampshire, United States",
+    "state": "",
+    "city": "Jackson",
+    "country": "United States",
+    "region": "TkVORw==",
+    "type": "city",
+    "lat": 44.1564,
+    "lon": -71.1854
+  },
+  {
+    "name": "Jacksonville",
+    "full_name": "Jacksonville, Florida, United States",
+    "state": "",
+    "city": "Jacksonville",
+    "country": "United States",
+    "region": "RkxORQ==",
+    "type": "city",
+    "lat": 30.2954,
+    "lon": -81.3907
+  },
+  {
     "name": "Jamaica",
     "full_name": "Jamaica",
     "state": "",
@@ -669,6 +1120,28 @@
     "type": "country",
     "lat": 18.466661,
     "lon": -77.916664
+  },
+  {
+    "name": "KYOTO",
+    "full_name": "KYOTO, Japan",
+    "state": "KYOTO",
+    "city": "",
+    "country": "Japan",
+    "region": "SU5UTA==",
+    "type": "state",
+    "lat": 34.998592,
+    "lon": 135.77078
+  },
+  {
+    "name": "KYOTO",
+    "full_name": "KYOTO, KYOTO, Japan",
+    "state": "",
+    "city": "KYOTO",
+    "country": "Japan",
+    "region": "SU5UTA==",
+    "type": "city",
+    "lat": 34.998592,
+    "lon": 135.77078
   },
   {
     "name": "Key West",
@@ -700,6 +1173,72 @@
     "country": "United States",
     "region": "RkxPWA==",
     "type": "city",
+    "lat": 0.5,
+    "lon": 0.5
+  },
+  {
+    "name": "Kotor",
+    "full_name": "Kotor, Kotor, Montenegro",
+    "state": "",
+    "city": "Kotor",
+    "country": "Montenegro",
+    "region": "R0VSTQ==",
+    "type": "city",
+    "lat": 42.4047,
+    "lon": 18.7233
+  },
+  {
+    "name": "Kotor",
+    "full_name": "Kotor, Montenegro",
+    "state": "Kotor",
+    "city": "",
+    "country": "Montenegro",
+    "region": "R0VSTQ==",
+    "type": "state",
+    "lat": 42.4047,
+    "lon": 18.7233
+  },
+  {
+    "name": "Kuala Lumpur",
+    "full_name": "Kuala Lumpur, Kuala Lumpur, Malaysia",
+    "state": "",
+    "city": "Kuala Lumpur",
+    "country": "Malaysia",
+    "region": "U0VBWA==",
+    "type": "city",
+    "lat": 3.1432145,
+    "lon": 101.70726
+  },
+  {
+    "name": "Kuala Lumpur",
+    "full_name": "Kuala Lumpur, Malaysia",
+    "state": "Kuala Lumpur",
+    "city": "",
+    "country": "Malaysia",
+    "region": "U0VBWA==",
+    "type": "state",
+    "lat": 3.1432145,
+    "lon": 101.70726
+  },
+  {
+    "name": "LIMA",
+    "full_name": "LIMA, LIMA, TBD",
+    "state": "",
+    "city": "LIMA",
+    "country": "TBD",
+    "region": "U0FJTg==",
+    "type": "city",
+    "lat": 0.5,
+    "lon": 0.5
+  },
+  {
+    "name": "LIMA",
+    "full_name": "LIMA, TBD",
+    "state": "LIMA",
+    "city": "",
+    "country": "TBD",
+    "region": "U0FJTg==",
+    "type": "state",
     "lat": 0.5,
     "lon": 0.5
   },
@@ -1045,6 +1584,50 @@
     "lon": 0.5
   },
   {
+    "name": "MEXICO - INLAND",
+    "full_name": "MEXICO - INLAND, Mexico",
+    "state": "MEXICO - INLAND",
+    "city": "",
+    "country": "Mexico",
+    "region": "Q0FOWDpCQUpB",
+    "type": "state",
+    "lat": 30.20531,
+    "lon": -114.92824
+  },
+  {
+    "name": "MEXICO CITY",
+    "full_name": "MEXICO CITY, Mexico",
+    "state": "MEXICO CITY",
+    "city": "",
+    "country": "Mexico",
+    "region": "TUVYWA==",
+    "type": "state",
+    "lat": 19.4211,
+    "lon": -99.15667
+  },
+  {
+    "name": "Malaga",
+    "full_name": "Malaga, Malaga, Spain",
+    "state": "",
+    "city": "Malaga",
+    "country": "Spain",
+    "region": "U1BNQg==",
+    "type": "city",
+    "lat": 36.457905,
+    "lon": -5.052693
+  },
+  {
+    "name": "Malaga",
+    "full_name": "Malaga, Spain",
+    "state": "Malaga",
+    "city": "",
+    "country": "Spain",
+    "region": "U1BNRzpTUE1C",
+    "type": "state",
+    "lat": 36.5092,
+    "lon": -4.6472
+  },
+  {
     "name": "Maldives",
     "full_name": "Maldives",
     "state": "",
@@ -1076,6 +1659,61 @@
     "type": "state",
     "lat": 31.6831,
     "lon": -7.9654
+  },
+  {
+    "name": "Melbourne",
+    "full_name": "Melbourne, Australia",
+    "state": "Melbourne",
+    "city": "",
+    "country": "Australia",
+    "region": "VkNTQQ==",
+    "type": "state",
+    "lat": -37.81346,
+    "lon": 144.96904
+  },
+  {
+    "name": "Melbourne",
+    "full_name": "Melbourne, Melbourne, Australia",
+    "state": "",
+    "city": "Melbourne",
+    "country": "Australia",
+    "region": "VkNTQQ==",
+    "type": "city",
+    "lat": -37.81346,
+    "lon": 144.96904
+  },
+  {
+    "name": "Mexicali",
+    "full_name": "Mexicali, MEXICO - INLAND, Mexico",
+    "state": "",
+    "city": "Mexicali",
+    "country": "Mexico",
+    "region": "QkFKQQ==",
+    "type": "city",
+    "lat": 32.800476,
+    "lon": -115.41924
+  },
+  {
+    "name": "Mexico",
+    "full_name": "Mexico",
+    "state": "",
+    "city": "",
+    "country": "Mexico",
+    "region": "SFVBVDpNQU5aOklYVEE6UFZUQTpBQ0FQOk1FWFg6Q0FOWDpNQVpUOkJBSkE=",
+    "type": "country",
+    "lat": 23.0645,
+    "lon": -109.7259
+  },
+  {
+    "name": "Mexico",
+    "full_name": "Mexico, MEXICO CITY, Mexico",
+    "state": "",
+    "city": "Mexico",
+    "country": "Mexico",
+    "region": "TUVYWA==",
+    "type": "city",
+    "lat": 0.5,
+    "lon": 0.5
   },
   {
     "name": "Miami",
@@ -1142,6 +1780,28 @@
     "type": "city",
     "lat": 33.737865,
     "lon": -78.823166
+  },
+  {
+    "name": "Napa",
+    "full_name": "Napa, California, United States",
+    "state": "",
+    "city": "Napa",
+    "country": "United States",
+    "region": "U0FORg==",
+    "type": "city",
+    "lat": 38.2465,
+    "lon": -122.272
+  },
+  {
+    "name": "Naples",
+    "full_name": "Naples, Florida, United States",
+    "state": "",
+    "city": "Naples",
+    "country": "United States",
+    "region": "RkxTVw==",
+    "type": "city",
+    "lat": 26.1422,
+    "lon": -81.7905
   },
   {
     "name": "Nashville",
@@ -1441,6 +2101,39 @@
     "lon": -79.1626
   },
   {
+    "name": "Nice",
+    "full_name": "Nice, California, United States",
+    "state": "",
+    "city": "Nice",
+    "country": "United States",
+    "region": "U0FORg==",
+    "type": "city",
+    "lat": 39.120827,
+    "lon": -122.83779
+  },
+  {
+    "name": "Nice",
+    "full_name": "Nice, France",
+    "state": "Nice",
+    "city": "",
+    "country": "France",
+    "region": "RlJBTg==",
+    "type": "state",
+    "lat": 43.697044,
+    "lon": 7.26566
+  },
+  {
+    "name": "Nice",
+    "full_name": "Nice, Nice, France",
+    "state": "",
+    "city": "Nice",
+    "country": "France",
+    "region": "RlJBTg==",
+    "type": "city",
+    "lat": 43.697044,
+    "lon": 7.26566
+  },
+  {
     "name": "Orlando",
     "full_name": "Orlando, Florida, United States",
     "state": "",
@@ -1450,6 +2143,39 @@
     "type": "city",
     "lat": 28.374138,
     "lon": -81.49735
+  },
+  {
+    "name": "Osaka",
+    "full_name": "Osaka, Japan",
+    "state": "Osaka",
+    "city": "",
+    "country": "Japan",
+    "region": "SU5UTA==",
+    "type": "state",
+    "lat": 34.6963,
+    "lon": 135.4959
+  },
+  {
+    "name": "Osaka",
+    "full_name": "Osaka, Osaka, Japan",
+    "state": "",
+    "city": "Osaka",
+    "country": "Japan",
+    "region": "SU5UTA==",
+    "type": "city",
+    "lat": 34.6963,
+    "lon": 135.4959
+  },
+  {
+    "name": "PORTO SEGURO",
+    "full_name": "PORTO SEGURO, Bahia, Brazil",
+    "state": "",
+    "city": "PORTO SEGURO",
+    "country": "Brazil",
+    "region": "Qk5PUg==",
+    "type": "city",
+    "lat": -16.395454,
+    "lon": -39.041916
   },
   {
     "name": "PUERTO PEÑASCO",
@@ -1573,6 +2299,61 @@
     "lon": -72.2276
   },
   {
+    "name": "Panama",
+    "full_name": "Panama",
+    "state": "",
+    "city": "",
+    "country": "Panama",
+    "region": "Q1NBTQ==",
+    "type": "country",
+    "lat": 8.9788,
+    "lon": -79.518
+  },
+  {
+    "name": "Panama City Beach",
+    "full_name": "Panama City Beach, Florida, United States",
+    "state": "",
+    "city": "Panama City Beach",
+    "country": "United States",
+    "region": "RkxQWA==",
+    "type": "city",
+    "lat": 30.18469,
+    "lon": -85.818726
+  },
+  {
+    "name": "Panama City",
+    "full_name": "Panama City, Florida, United States",
+    "state": "",
+    "city": "Panama City",
+    "country": "United States",
+    "region": "RkxQWA==",
+    "type": "city",
+    "lat": 30.20617,
+    "lon": -85.85849
+  },
+  {
+    "name": "Panama",
+    "full_name": "Panama, Panama",
+    "state": "Panama",
+    "city": "",
+    "country": "Panama",
+    "region": "Q1NBTQ==",
+    "type": "state",
+    "lat": 8.8983,
+    "lon": -79.5816
+  },
+  {
+    "name": "Panama",
+    "full_name": "Panama, Panama, Panama",
+    "state": "",
+    "city": "Panama",
+    "country": "Panama",
+    "region": "Q1NBTQ==",
+    "type": "city",
+    "lat": 8.8983,
+    "lon": -79.5816
+  },
+  {
     "name": "Paris",
     "full_name": "Paris, France",
     "state": "Paris",
@@ -1593,6 +2374,61 @@
     "type": "city",
     "lat": 48.827858,
     "lon": 2.379615
+  },
+  {
+    "name": "Park City",
+    "full_name": "Park City, Kentucky, United States",
+    "state": "",
+    "city": "Park City",
+    "country": "United States",
+    "region": "TklOVA==",
+    "type": "city",
+    "lat": 37.117,
+    "lon": -86.062
+  },
+  {
+    "name": "Park City",
+    "full_name": "Park City, Utah, United States",
+    "state": "",
+    "city": "Park City",
+    "country": "United States",
+    "region": "VVRBSA==",
+    "type": "city",
+    "lat": 40.650932,
+    "lon": -111.50489
+  },
+  {
+    "name": "Park Rapids",
+    "full_name": "Park Rapids, Minnesota, United States",
+    "state": "",
+    "city": "Park Rapids",
+    "country": "United States",
+    "region": "R1JMSw==",
+    "type": "city",
+    "lat": 47.0014,
+    "lon": -95.0676
+  },
+  {
+    "name": "Parksville",
+    "full_name": "Parksville, British Columbia, Canada",
+    "state": "",
+    "city": "Parksville",
+    "country": "Canada",
+    "region": "V0NBTg==",
+    "type": "city",
+    "lat": 49.3091,
+    "lon": -124.2628
+  },
+  {
+    "name": "Philadelphia",
+    "full_name": "Philadelphia, Pennsylvania, United States",
+    "state": "",
+    "city": "Philadelphia",
+    "country": "United States",
+    "region": "UEVOTg==",
+    "type": "city",
+    "lat": 39.9513,
+    "lon": -75.1685
   },
   {
     "name": "Phoenix",
@@ -1703,6 +2539,105 @@
     "type": "city",
     "lat": 27.77076,
     "lon": -15.53916
+  },
+  {
+    "name": "Portland",
+    "full_name": "Portland, Oregon, United States",
+    "state": "",
+    "city": "Portland",
+    "country": "United States",
+    "region": "TldTVA==",
+    "type": "city",
+    "lat": 45.5208,
+    "lon": -122.6712
+  },
+  {
+    "name": "Porto Belo",
+    "full_name": "Porto Belo, Santa Catarina, Brazil",
+    "state": "",
+    "city": "Porto Belo",
+    "country": "Brazil",
+    "region": "QkxJVA==",
+    "type": "city",
+    "lat": -27.14245,
+    "lon": -48.60876
+  },
+  {
+    "name": "Porto Heli/Argolida",
+    "full_name": "Porto Heli/Argolida, Greece",
+    "state": "Porto Heli/Argolida",
+    "city": "",
+    "country": "Greece",
+    "region": "R1JFQw==",
+    "type": "state",
+    "lat": 37.402,
+    "lon": 23.155
+  },
+  {
+    "name": "Porto Heli/Argolida",
+    "full_name": "Porto Heli/Argolida, Porto Heli/Argolida, Greece",
+    "state": "",
+    "city": "Porto Heli/Argolida",
+    "country": "Greece",
+    "region": "R1JFQw==",
+    "type": "city",
+    "lat": 37.402,
+    "lon": 23.155
+  },
+  {
+    "name": "Porto Seguro",
+    "full_name": "Porto Seguro, Brazil",
+    "state": "Porto Seguro",
+    "city": "",
+    "country": "Brazil",
+    "region": "Qk5PUg==",
+    "type": "state",
+    "lat": -16.323439,
+    "lon": -39.025856
+  },
+  {
+    "name": "Porto",
+    "full_name": "Porto, Porto, Portugal",
+    "state": "",
+    "city": "Porto",
+    "country": "Portugal",
+    "region": "UE9SVA==",
+    "type": "city",
+    "lat": 41.14387,
+    "lon": -8.613573
+  },
+  {
+    "name": "Porto",
+    "full_name": "Porto, Portugal",
+    "state": "Porto",
+    "city": "",
+    "country": "Portugal",
+    "region": "UE9SVA==",
+    "type": "state",
+    "lat": 41.14387,
+    "lon": -8.613573
+  },
+  {
+    "name": "Portofino",
+    "full_name": "Portofino, ITALY COASTAL, Italy",
+    "state": "",
+    "city": "Portofino",
+    "country": "Italy",
+    "region": "SVRBTA==",
+    "type": "city",
+    "lat": 44.31,
+    "lon": 9.2
+  },
+  {
+    "name": "Pré-St. Didier",
+    "full_name": "Pré-St. Didier, ITALY LAKES AND MOUNTAINS, Italy",
+    "state": "",
+    "city": "Pré-St. Didier",
+    "country": "Italy",
+    "region": "QUxQSQ==",
+    "type": "city",
+    "lat": 45.76,
+    "lon": 6.98
   },
   {
     "name": "Puerto Montt",
@@ -1980,6 +2915,39 @@
     "lon": -105.426994
   },
   {
+    "name": "Quebec",
+    "full_name": "Quebec, Canada",
+    "state": "Quebec",
+    "city": "",
+    "country": "Canada",
+    "region": "RUNBTg==",
+    "type": "state",
+    "lat": 47.0546,
+    "lon": -70.8938
+  },
+  {
+    "name": "Queenstown",
+    "full_name": "Queenstown, New Zealand",
+    "state": "Queenstown",
+    "city": "",
+    "country": "New Zealand",
+    "region": "TlpTSQ==",
+    "type": "state",
+    "lat": -45.029453,
+    "lon": 168.68686
+  },
+  {
+    "name": "Queenstown",
+    "full_name": "Queenstown, Queenstown, New Zealand",
+    "state": "",
+    "city": "Queenstown",
+    "country": "New Zealand",
+    "region": "TlpTSQ==",
+    "type": "city",
+    "lat": -45.029453,
+    "lon": 168.68686
+  },
+  {
     "name": "RIO QUENTE",
     "full_name": "RIO QUENTE, Goiás, Brazil",
     "state": "",
@@ -2198,6 +3166,28 @@
     "type": "state",
     "lat": 0.5,
     "lon": 0.5
+  },
+  {
+    "name": "San Antonio de Areco",
+    "full_name": "San Antonio de Areco, Argentina",
+    "state": "San Antonio de Areco",
+    "city": "",
+    "country": "Argentina",
+    "region": "U0FJTg==",
+    "type": "state",
+    "lat": -34.18704,
+    "lon": -59.29181
+  },
+  {
+    "name": "San Antonio de Areco",
+    "full_name": "San Antonio de Areco, San Antonio de Areco, Argentina",
+    "state": "",
+    "city": "San Antonio de Areco",
+    "country": "Argentina",
+    "region": "U0FJTg==",
+    "type": "city",
+    "lat": -34.18704,
+    "lon": -59.29181
   },
   {
     "name": "San Antonio",
@@ -2607,6 +3597,17 @@
     "lon": 109.3926
   },
   {
+    "name": "Sarasota",
+    "full_name": "Sarasota, Florida, United States",
+    "state": "",
+    "city": "Sarasota",
+    "country": "United States",
+    "region": "RkxOVw==",
+    "type": "city",
+    "lat": 27.308357,
+    "lon": -82.57266
+  },
+  {
     "name": "Savannah",
     "full_name": "Savannah, Georgia, United States",
     "state": "",
@@ -2638,6 +3639,72 @@
     "type": "city",
     "lat": 47.6052,
     "lon": -122.336
+  },
+  {
+    "name": "Sedona",
+    "full_name": "Sedona, Arizona, United States",
+    "state": "",
+    "city": "Sedona",
+    "country": "United States",
+    "region": "QVJJWg==",
+    "type": "city",
+    "lat": 34.8609,
+    "lon": -111.8147
+  },
+  {
+    "name": "Seoul",
+    "full_name": "Seoul, Seoul, South Korea",
+    "state": "",
+    "city": "Seoul",
+    "country": "South Korea",
+    "region": "TkVBWA==",
+    "type": "city",
+    "lat": 37.48751,
+    "lon": 127.04053
+  },
+  {
+    "name": "Seoul",
+    "full_name": "Seoul, South Korea",
+    "state": "Seoul",
+    "city": "",
+    "country": "South Korea",
+    "region": "TkVBWA==",
+    "type": "state",
+    "lat": 37.48751,
+    "lon": 127.04053
+  },
+  {
+    "name": "Seychelles",
+    "full_name": "Seychelles",
+    "state": "",
+    "city": "",
+    "country": "Seychelles",
+    "region": "QUZSSQ==",
+    "type": "country",
+    "lat": -4.641359,
+    "lon": 55.476707
+  },
+  {
+    "name": "Siem Reap",
+    "full_name": "Siem Reap, Cambodia",
+    "state": "Siem Reap",
+    "city": "",
+    "country": "Cambodia",
+    "region": "U0VBWA==",
+    "type": "state",
+    "lat": 13.359373,
+    "lon": 103.856155
+  },
+  {
+    "name": "Siem Reap",
+    "full_name": "Siem Reap, Siem Reap, Cambodia",
+    "state": "",
+    "city": "Siem Reap",
+    "country": "Cambodia",
+    "region": "U0VBWA==",
+    "type": "city",
+    "lat": 13.359373,
+    "lon": 103.856155
   },
   {
     "name": "Singapore",
@@ -2673,6 +3740,391 @@
     "lon": 103.86038
   },
   {
+    "name": "St Ann",
+    "full_name": "St Ann, Jamaica",
+    "state": "St Ann",
+    "city": "",
+    "country": "Jamaica",
+    "region": "Q1JCWA==",
+    "type": "state",
+    "lat": 18.5,
+    "lon": -77.3
+  },
+  {
+    "name": "St Ann",
+    "full_name": "St Ann, St Ann, Jamaica",
+    "state": "",
+    "city": "St Ann",
+    "country": "Jamaica",
+    "region": "Q1JCWA==",
+    "type": "city",
+    "lat": 18.5,
+    "lon": -77.3
+  },
+  {
+    "name": "St George",
+    "full_name": "St George, Utah, United States",
+    "state": "",
+    "city": "St George",
+    "country": "United States",
+    "region": "VVRBSA==",
+    "type": "city",
+    "lat": 37.089306,
+    "lon": -113.62634
+  },
+  {
+    "name": "St Ives",
+    "full_name": "St Ives, British Columbia, Canada",
+    "state": "",
+    "city": "St Ives",
+    "country": "Canada",
+    "region": "V0NBTg==",
+    "type": "city",
+    "lat": 50.97945,
+    "lon": -119.10383
+  },
+  {
+    "name": "St Ives",
+    "full_name": "St Ives, England",
+    "state": "St Ives",
+    "city": "",
+    "country": "England",
+    "region": "RU5HUw==",
+    "type": "state",
+    "lat": 50.20459,
+    "lon": -5.47809
+  },
+  {
+    "name": "St Ives",
+    "full_name": "St Ives, St Ives, England",
+    "state": "",
+    "city": "St Ives",
+    "country": "England",
+    "region": "RU5HUw==",
+    "type": "city",
+    "lat": 50.20459,
+    "lon": -5.47809
+  },
+  {
+    "name": "St Julians",
+    "full_name": "St Julians, Malta",
+    "state": "St Julians",
+    "city": "",
+    "country": "Malta",
+    "region": "TUFMVA==",
+    "type": "state",
+    "lat": 35.921715,
+    "lon": 14.490566
+  },
+  {
+    "name": "St Julians",
+    "full_name": "St Julians, St Julians, Malta",
+    "state": "",
+    "city": "St Julians",
+    "country": "Malta",
+    "region": "TUFMVA==",
+    "type": "city",
+    "lat": 35.921715,
+    "lon": 14.490566
+  },
+  {
+    "name": "St Kilda",
+    "full_name": "St Kilda, Victoria, Australia",
+    "state": "",
+    "city": "St Kilda",
+    "country": "Australia",
+    "region": "VkNTQQ==",
+    "type": "city",
+    "lat": -37.858757,
+    "lon": 144.97937
+  },
+  {
+    "name": "St Kitts & Nevis",
+    "full_name": "St Kitts & Nevis",
+    "state": "",
+    "city": "",
+    "country": "St Kitts & Nevis",
+    "region": "Q1JCWA==",
+    "type": "country",
+    "lat": 17.17338,
+    "lon": -62.62537
+  },
+  {
+    "name": "St Lucia",
+    "full_name": "St Lucia, South Africa",
+    "state": "St Lucia",
+    "city": "",
+    "country": "South Africa",
+    "region": "U0FGUg==",
+    "type": "state",
+    "lat": -28.37222,
+    "lon": 32.41778
+  },
+  {
+    "name": "St Lucia",
+    "full_name": "St Lucia, St Lucia, South Africa",
+    "state": "",
+    "city": "St Lucia",
+    "country": "South Africa",
+    "region": "U0FGUg==",
+    "type": "city",
+    "lat": -28.37222,
+    "lon": 32.41778
+  },
+  {
+    "name": "St Malo",
+    "full_name": "St Malo, France",
+    "state": "St Malo",
+    "city": "",
+    "country": "France",
+    "region": "RlJBTg==",
+    "type": "state",
+    "lat": 48.63801,
+    "lon": -1.98243
+  },
+  {
+    "name": "St Malo",
+    "full_name": "St Malo, St Malo, France",
+    "state": "",
+    "city": "St Malo",
+    "country": "France",
+    "region": "RlJBTg==",
+    "type": "city",
+    "lat": 48.63801,
+    "lon": -1.98243
+  },
+  {
+    "name": "St Pete Beach",
+    "full_name": "St Pete Beach, Florida, United States",
+    "state": "",
+    "city": "St Pete Beach",
+    "country": "United States",
+    "region": "RkxOVw==",
+    "type": "city",
+    "lat": 27.717175,
+    "lon": -82.739
+  },
+  {
+    "name": "St Thomas",
+    "full_name": "St Thomas, United States Virgin Islands, United States",
+    "state": "",
+    "city": "St Thomas",
+    "country": "United States",
+    "region": "Q1JCWA==",
+    "type": "city",
+    "lat": 18.366652,
+    "lon": -64.949974
+  },
+  {
+    "name": "St-Hippolyte",
+    "full_name": "St-Hippolyte, Quebec, Canada",
+    "state": "",
+    "city": "St-Hippolyte",
+    "country": "Canada",
+    "region": "RUNBTg==",
+    "type": "city",
+    "lat": 45.92596,
+    "lon": -74.04002
+  },
+  {
+    "name": "St. Augustine",
+    "full_name": "St. Augustine, Florida, United States",
+    "state": "",
+    "city": "St. Augustine",
+    "country": "United States",
+    "region": "RkxORQ==",
+    "type": "city",
+    "lat": 29.836601,
+    "lon": -81.26604
+  },
+  {
+    "name": "St. George",
+    "full_name": "St. George, Bermuda",
+    "state": "St. George",
+    "city": "",
+    "country": "Bermuda",
+    "region": "QkFITQ==",
+    "type": "state",
+    "lat": 32.3783,
+    "lon": -64.6922
+  },
+  {
+    "name": "St. George",
+    "full_name": "St. George, St. George, Bermuda",
+    "state": "",
+    "city": "St. George",
+    "country": "Bermuda",
+    "region": "QkFITQ==",
+    "type": "city",
+    "lat": 32.3783,
+    "lon": -64.6922
+  },
+  {
+    "name": "St. Georgen ob Murau",
+    "full_name": "St. Georgen ob Murau, Austria",
+    "state": "St. Georgen ob Murau",
+    "city": "",
+    "country": "Austria",
+    "region": "QUxQQQ==",
+    "type": "state",
+    "lat": 47.09956,
+    "lon": 14.08604
+  },
+  {
+    "name": "St. Georgen ob Murau",
+    "full_name": "St. Georgen ob Murau, St. Georgen ob Murau, Austria",
+    "state": "",
+    "city": "St. Georgen ob Murau",
+    "country": "Austria",
+    "region": "QUxQQQ==",
+    "type": "city",
+    "lat": 47.09956,
+    "lon": 14.08604
+  },
+  {
+    "name": "Staffordshire",
+    "full_name": "Staffordshire, England",
+    "state": "Staffordshire",
+    "city": "",
+    "country": "England",
+    "region": "RU5HTg==",
+    "type": "state",
+    "lat": 52.74702,
+    "lon": -1.753481
+  },
+  {
+    "name": "Staffordshire",
+    "full_name": "Staffordshire, Staffordshire, England",
+    "state": "",
+    "city": "Staffordshire",
+    "country": "England",
+    "region": "RU5HTg==",
+    "type": "city",
+    "lat": 52.74702,
+    "lon": -1.753481
+  },
+  {
+    "name": "Stanwood",
+    "full_name": "Stanwood, Michigan, United States",
+    "state": "",
+    "city": "Stanwood",
+    "country": "United States",
+    "region": "R1JMSw==",
+    "type": "city",
+    "lat": 43.610928,
+    "lon": -85.30929
+  },
+  {
+    "name": "Stateline",
+    "full_name": "Stateline, Nevada, United States",
+    "state": "",
+    "city": "Stateline",
+    "country": "United States",
+    "region": "VEFITw==",
+    "type": "city",
+    "lat": 38.9728,
+    "lon": -119.88752
+  },
+  {
+    "name": "Steamboat Springs",
+    "full_name": "Steamboat Springs, Colorado, United States",
+    "state": "",
+    "city": "Steamboat Springs",
+    "country": "United States",
+    "region": "Q09MTg==",
+    "type": "city",
+    "lat": 40.4661,
+    "lon": -106.8751
+  },
+  {
+    "name": "Stirling",
+    "full_name": "Stirling, Scotland",
+    "state": "Stirling",
+    "city": "",
+    "country": "Scotland",
+    "region": "U0NPVA==",
+    "type": "state",
+    "lat": 56.182148,
+    "lon": -4.2850037
+  },
+  {
+    "name": "Stirling",
+    "full_name": "Stirling, Stirling, Scotland",
+    "state": "",
+    "city": "Stirling",
+    "country": "Scotland",
+    "region": "U0NPVA==",
+    "type": "city",
+    "lat": 56.182148,
+    "lon": -4.2850037
+  },
+  {
+    "name": "Storlien",
+    "full_name": "Storlien, Storlien, Sweden",
+    "state": "",
+    "city": "Storlien",
+    "country": "Sweden",
+    "region": "U0NBTg==",
+    "type": "city",
+    "lat": 63.320557,
+    "lon": 12.086667
+  },
+  {
+    "name": "Storlien",
+    "full_name": "Storlien, Sweden",
+    "state": "Storlien",
+    "city": "",
+    "country": "Sweden",
+    "region": "U0NBTg==",
+    "type": "state",
+    "lat": 63.320557,
+    "lon": 12.086667
+  },
+  {
+    "name": "Stowe",
+    "full_name": "Stowe, Vermont, United States",
+    "state": "",
+    "city": "Stowe",
+    "country": "United States",
+    "region": "TkVORw==",
+    "type": "city",
+    "lat": 44.47685,
+    "lon": -72.70774
+  },
+  {
+    "name": "Strand",
+    "full_name": "Strand, South Africa",
+    "state": "Strand",
+    "city": "",
+    "country": "South Africa",
+    "region": "U0FGUg==",
+    "type": "state",
+    "lat": -34.10042,
+    "lon": 18.82564
+  },
+  {
+    "name": "Strand",
+    "full_name": "Strand, Strand, South Africa",
+    "state": "",
+    "city": "Strand",
+    "country": "South Africa",
+    "region": "U0FGUg==",
+    "type": "city",
+    "lat": -34.10042,
+    "lon": 18.82564
+  },
+  {
+    "name": "Stuart",
+    "full_name": "Stuart, Florida, United States",
+    "state": "",
+    "city": "Stuart",
+    "country": "United States",
+    "region": "RkxTRQ==",
+    "type": "city",
+    "lat": 27.21065,
+    "lon": -80.182205
+  },
+  {
     "name": "Sydney",
     "full_name": "Sydney, New South Wales, Australia",
     "state": "",
@@ -2693,6 +4145,17 @@
     "type": "city",
     "lat": 28.074575,
     "lon": -82.51196
+  },
+  {
+    "name": "Telchac Puerto",
+    "full_name": "Telchac Puerto, MEXICO - INLAND, Mexico",
+    "state": "",
+    "city": "Telchac Puerto",
+    "country": "Mexico",
+    "region": "Q0FOWA==",
+    "type": "city",
+    "lat": 21.337975,
+    "lon": -89.31591
   },
   {
     "name": "Tokyo",
@@ -2750,6 +4213,17 @@
     "lon": 12.38
   },
   {
+    "name": "Vail",
+    "full_name": "Vail, Colorado, United States",
+    "state": "",
+    "city": "Vail",
+    "country": "United States",
+    "region": "Q09MTg==",
+    "type": "city",
+    "lat": 39.64036,
+    "lon": -106.37252
+  },
+  {
     "name": "Vancouver",
     "full_name": "Vancouver, British Columbia, Canada",
     "state": "",
@@ -2759,5 +4233,60 @@
     "type": "city",
     "lat": 49.278294,
     "lon": -123.11635
+  },
+  {
+    "name": "Washington",
+    "full_name": "Washington, District of Columbia, United States",
+    "state": "",
+    "city": "Washington",
+    "country": "United States",
+    "region": "TklOVA==",
+    "type": "city",
+    "lat": 38.906933,
+    "lon": -77.049416
+  },
+  {
+    "name": "Washington",
+    "full_name": "Washington, Georgia, United States",
+    "state": "",
+    "city": "Washington",
+    "country": "United States",
+    "region": "U0lOVA==",
+    "type": "city",
+    "lat": 34.1384,
+    "lon": -82.7396
+  },
+  {
+    "name": "Washington",
+    "full_name": "Washington, United States",
+    "state": "Washington",
+    "city": "",
+    "country": "United States",
+    "region": "TldTVA==",
+    "type": "state",
+    "lat": 46.3458,
+    "lon": -124.052
+  },
+  {
+    "name": "Washington",
+    "full_name": "Washington, Utah, United States",
+    "state": "",
+    "city": "Washington",
+    "country": "United States",
+    "region": "VVRBSA==",
+    "type": "city",
+    "lat": 37.12536,
+    "lon": -113.5007
+  },
+  {
+    "name": "Whistler",
+    "full_name": "Whistler, British Columbia, Canada",
+    "state": "",
+    "city": "Whistler",
+    "country": "Canada",
+    "region": "V0NBTg==",
+    "type": "city",
+    "lat": 50.13034,
+    "lon": -122.9739
   }
 ]

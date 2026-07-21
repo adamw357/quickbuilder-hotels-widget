@@ -1,5 +1,50 @@
 [
   {
+    "name": "Abu Dhabi",
+    "id": "XN4474",
+    "full_name": "Abu Dhabi, United Arab Emirates",
+    "country": "United Arab Emirates",
+    "state": "",
+    "lat": 24.466667,
+    "long": 54.366667
+  },
+  {
+    "name": "Abu Simbel",
+    "id": "XN50204",
+    "full_name": "Abu Simbel, Egypt",
+    "country": "Egypt",
+    "state": "",
+    "lat": 22.346,
+    "long": 31.6156
+  },
+  {
+    "name": "Abuja",
+    "id": "XN50443",
+    "full_name": "Abuja, Nigeria",
+    "country": "Nigeria",
+    "state": "",
+    "lat": 9.076479,
+    "long": 7.398574
+  },
+  {
+    "name": "Amalfi Coast",
+    "id": "XN946",
+    "full_name": "Amalfi Coast, Italy",
+    "country": "Italy",
+    "state": "Amalfi Coast",
+    "lat": 40.633333,
+    "long": 14.601766
+  },
+  {
+    "name": "Amalfi",
+    "id": "XN33601",
+    "full_name": "Amalfi, Amalfi Coast, Italy",
+    "country": "Italy",
+    "state": "Amalfi Coast",
+    "lat": 40.633984,
+    "long": 14.602795
+  },
+  {
     "name": "Amsterdam",
     "id": "XN525",
     "full_name": "Amsterdam, Netherlands",
@@ -18,6 +63,33 @@
     "long": -117.9778750001
   },
   {
+    "name": "Antigua and Barbuda",
+    "id": "XN27",
+    "full_name": "Antigua and Barbuda",
+    "country": "Antigua and Barbuda",
+    "state": "",
+    "lat": 17.060816,
+    "long": -61.796428
+  },
+  {
+    "name": "Antigua",
+    "id": "XN22046",
+    "full_name": "Antigua, Antigua and Barbuda",
+    "country": "Antigua and Barbuda",
+    "state": "Antigua",
+    "lat": 17.074656,
+    "long": -61.817521
+  },
+  {
+    "name": "Antigua",
+    "id": "XN4599",
+    "full_name": "Antigua, Central Highlands, Guatemala",
+    "country": "Guatemala",
+    "state": "Central Highlands",
+    "lat": 14.553405,
+    "long": -90.735255
+  },
+  {
     "name": "Arraial do Cabo",
     "id": "XN31321",
     "full_name": "Arraial do Cabo, Southeast Brazil, Brazil",
@@ -34,6 +106,15 @@
     "state": "",
     "lat": 12.52111,
     "long": -69.968338
+  },
+  {
+    "name": "Asheville",
+    "id": "XN22561",
+    "full_name": "Asheville, North Carolina, USA",
+    "country": "USA",
+    "state": "North Carolina",
+    "lat": 35.59506,
+    "long": -82.55149
   },
   {
     "name": "Aspen",
@@ -63,6 +144,15 @@
     "long": -84.3879824
   },
   {
+    "name": "Auckland",
+    "id": "XN391",
+    "full_name": "Auckland, North Island, New Zealand",
+    "country": "New Zealand",
+    "state": "North Island",
+    "lat": -36.847385,
+    "long": 174.765735
+  },
+  {
     "name": "Austin",
     "id": "XN5021",
     "full_name": "Austin, Texas, USA",
@@ -72,6 +162,15 @@
     "long": -97.7430608
   },
   {
+    "name": "Ayia Napa",
+    "id": "XN31182",
+    "full_name": "Ayia Napa, Famagusta District, Cyprus",
+    "country": "Cyprus",
+    "state": "Famagusta District",
+    "lat": 34.99228,
+    "long": 34.01401
+  },
+  {
     "name": "Bali",
     "id": "XN98",
     "full_name": "Bali, Indonesia",
@@ -79,6 +178,15 @@
     "state": "Bali",
     "lat": -8.4095178,
     "long": 115.188916
+  },
+  {
+    "name": "Banff",
+    "id": "XN611",
+    "full_name": "Banff, Alberta, Canada",
+    "country": "Canada",
+    "state": "Alberta",
+    "lat": 51.1780556,
+    "long": -115.5719444
   },
   {
     "name": "Bangkok",
@@ -108,6 +216,24 @@
     "long": 2.1699187
   },
   {
+    "name": "Belize",
+    "id": "XN746",
+    "full_name": "Belize",
+    "country": "Belize",
+    "state": "",
+    "lat": 17.189877,
+    "long": -88.49765
+  },
+  {
+    "name": "Belize City",
+    "id": "XN5094",
+    "full_name": "Belize City, Belize",
+    "country": "Belize",
+    "state": "",
+    "lat": 17.497713,
+    "long": -88.186654
+  },
+  {
     "name": "Berlin",
     "id": "XN488",
     "full_name": "Berlin, Germany",
@@ -115,6 +241,15 @@
     "state": "",
     "lat": 52.5234051,
     "long": 13.4113999
+  },
+  {
+    "name": "Bermuda",
+    "id": "XN966",
+    "full_name": "Bermuda",
+    "country": "Bermuda",
+    "state": "",
+    "lat": 32.321384,
+    "long": -64.75737
   },
   {
     "name": "Balicasag Island",
@@ -126,6 +261,24 @@
     "long": 123.68243
   },
   {
+    "name": "Bora Bora",
+    "id": "XN5180",
+    "full_name": "Bora Bora, French Polynesia",
+    "country": "French Polynesia",
+    "state": "Bora Bora",
+    "lat": -16.5004126,
+    "long": -151.7414904
+  },
+  {
+    "name": "Boracay",
+    "id": "XN4821",
+    "full_name": "Boracay, Visayas, Philippines",
+    "country": "Philippines",
+    "state": "Visayas",
+    "lat": 11.969281,
+    "long": 121.8922095
+  },
+  {
     "name": "Boston",
     "id": "XN678",
     "full_name": "Boston, Massachusetts, USA",
@@ -135,6 +288,60 @@
     "long": -71.0527038574
   },
   {
+    "name": "Branson",
+    "id": "XN5235",
+    "full_name": "Branson, Missouri, USA",
+    "country": "USA",
+    "state": "Missouri",
+    "lat": 36.64367,
+    "long": -93.21851
+  },
+  {
+    "name": "Bruges",
+    "id": "XN4836",
+    "full_name": "Bruges, Flanders, Belgium",
+    "country": "Belgium",
+    "state": "Flanders",
+    "lat": 51.2108365,
+    "long": 3.2248692
+  },
+  {
+    "name": "Brussels",
+    "id": "XN458",
+    "full_name": "Brussels, Belgium",
+    "country": "Belgium",
+    "state": "",
+    "lat": 50.8462807,
+    "long": 4.3547273
+  },
+  {
+    "name": "Budapest",
+    "id": "XN499",
+    "full_name": "Budapest, Hungary",
+    "country": "Hungary",
+    "state": "",
+    "lat": 47.4984056,
+    "long": 19.0407578
+  },
+  {
+    "name": "Buenos Aires Province",
+    "id": "XN51386",
+    "full_name": "Buenos Aires Province, Argentina",
+    "country": "Argentina",
+    "state": "Buenos Aires Province",
+    "lat": -36.488662,
+    "long": -60.283523
+  },
+  {
+    "name": "Buenos Aires",
+    "id": "XN901",
+    "full_name": "Buenos Aires, The Pampas, Argentina",
+    "country": "Argentina",
+    "state": "The Pampas",
+    "lat": -34.6084175,
+    "long": -58.3731613
+  },
+  {
     "name": "Cabo San Lucas",
     "id": "XN50859",
     "full_name": "Cabo San Lucas, Baja California Sur, Mexico",
@@ -142,6 +349,15 @@
     "state": "Baja California Sur",
     "lat": 22.8923509454,
     "long": -109.9162612547
+  },
+  {
+    "name": "Cairo",
+    "id": "XN782",
+    "full_name": "Cairo, Egypt",
+    "country": "Egypt",
+    "state": "",
+    "lat": 30.064742,
+    "long": 31.249509
   },
   {
     "name": "Los Gigantes",
@@ -243,6 +459,15 @@
     "long": -0.996584
   },
   {
+    "name": "Central Mexico",
+    "id": "XN5424",
+    "full_name": "Central Mexico, Mexico",
+    "country": "Mexico",
+    "state": "Central Mexico",
+    "lat": 19.4270499,
+    "long": -99.1275711
+  },
+  {
     "name": "Charleston",
     "id": "XN4384",
     "full_name": "Charleston, South Carolina, USA",
@@ -268,6 +493,15 @@
     "state": "",
     "lat": -33.344296,
     "long": -70.636597
+  },
+  {
+    "name": "Copenhagen",
+    "id": "XN463",
+    "full_name": "Copenhagen, Denmark",
+    "country": "Denmark",
+    "state": "",
+    "lat": 55.686004333,
+    "long": 12.6007175446
   },
   {
     "name": "Costa Adeje",
@@ -342,6 +576,33 @@
     "long": 24.78331
   },
   {
+    "name": "Crete",
+    "id": "XN960",
+    "full_name": "Crete, Greece",
+    "country": "Greece",
+    "state": "Crete",
+    "lat": 35.240117,
+    "long": 24.8092691
+  },
+  {
+    "name": "Curacao",
+    "id": "XN725",
+    "full_name": "Curacao",
+    "country": "Curacao",
+    "state": "",
+    "lat": 12.1224221,
+    "long": -68.8824233
+  },
+  {
+    "name": "Cusco",
+    "id": "XN937",
+    "full_name": "Cusco, Peru",
+    "country": "Peru",
+    "state": "",
+    "lat": -13.5183333,
+    "long": -71.9780556
+  },
+  {
     "name": "Dallas",
     "id": "XN918",
     "full_name": "Dallas, Texas, USA",
@@ -369,6 +630,24 @@
     "long": -86.495783
   },
   {
+    "name": "Doha",
+    "id": "XN4453",
+    "full_name": "Doha, Qatar",
+    "country": "Qatar",
+    "state": "",
+    "lat": 25.28545,
+    "long": 51.53104
+  },
+  {
+    "name": "Dong Hoi",
+    "id": "XN50565",
+    "full_name": "Dong Hoi, Vietnam",
+    "country": "Vietnam",
+    "state": "",
+    "lat": 17.466841,
+    "long": 106.623169
+  },
+  {
     "name": "Dubai",
     "id": "XN828",
     "full_name": "Dubai, United Arab Emirates",
@@ -387,6 +666,15 @@
     "long": -6.2237548828
   },
   {
+    "name": "Dubrovnik",
+    "id": "XN904",
+    "full_name": "Dubrovnik, Dalmatia, Croatia",
+    "country": "Croatia",
+    "state": "Dalmatia",
+    "lat": 42.6590223479,
+    "long": 18.083024025
+  },
+  {
     "name": "East London",
     "id": "XN4476",
     "full_name": "East London, South Africa",
@@ -403,6 +691,51 @@
     "state": "Eastern Cape",
     "lat": -32.19228,
     "long": 26.501313
+  },
+  {
+    "name": "Edinburgh",
+    "id": "XN739",
+    "full_name": "Edinburgh, Scotland",
+    "country": "Scotland",
+    "state": "",
+    "lat": 55.9661128902,
+    "long": -3.1880950928
+  },
+  {
+    "name": "Estes Park",
+    "id": "XN32992",
+    "full_name": "Estes Park, Colorado, USA",
+    "country": "USA",
+    "state": "Colorado",
+    "lat": 40.377216,
+    "long": -105.520812
+  },
+  {
+    "name": "Everglades National Park",
+    "id": "XN5286",
+    "full_name": "Everglades National Park, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 25.28662,
+    "long": -80.89865
+  },
+  {
+    "name": "Fiji",
+    "id": "XN23",
+    "full_name": "Fiji",
+    "country": "Fiji",
+    "state": "",
+    "lat": -17.713371,
+    "long": 178.065032
+  },
+  {
+    "name": "Florence",
+    "id": "XN519",
+    "full_name": "Florence, Tuscany, Italy",
+    "country": "Italy",
+    "state": "Tuscany",
+    "lat": 43.768582,
+    "long": 11.255669
   },
   {
     "name": "Fort Collins",
@@ -477,6 +810,51 @@
     "long": 6.26575
   },
   {
+    "name": "Galveston",
+    "id": "XN4385",
+    "full_name": "Galveston, Texas, USA",
+    "country": "USA",
+    "state": "Texas",
+    "lat": 29.30135,
+    "long": -94.7977
+  },
+  {
+    "name": "Gatlinburg",
+    "id": "XN24151",
+    "full_name": "Gatlinburg, Tennessee, USA",
+    "country": "USA",
+    "state": "Tennessee",
+    "lat": 35.714164,
+    "long": -83.509306
+  },
+  {
+    "name": "Goa",
+    "id": "XN4594",
+    "full_name": "Goa, India",
+    "country": "India",
+    "state": "",
+    "lat": 15.2993265,
+    "long": 74.123996
+  },
+  {
+    "name": "Hilton Head Island",
+    "id": "XN31480",
+    "full_name": "Hilton Head Island, South Carolina, USA",
+    "country": "USA",
+    "state": "South Carolina",
+    "lat": 32.20166,
+    "long": -80.84256
+  },
+  {
+    "name": "Hoi An",
+    "id": "XN5229",
+    "full_name": "Hoi An, Central Vietnam, Vietnam",
+    "country": "Vietnam",
+    "state": "Central Vietnam",
+    "lat": 15.5097,
+    "long": 108.297501
+  },
+  {
     "name": "Hong Kong SAR",
     "id": "XN35959",
     "full_name": "Hong Kong SAR, China",
@@ -513,6 +891,15 @@
     "long": -95.383056
   },
   {
+    "name": "Ibiza",
+    "id": "XN4217",
+    "full_name": "Ibiza, Balearic Islands, Spain",
+    "country": "Spain",
+    "state": "Balearic Islands",
+    "lat": 38.9082999695,
+    "long": 1.432299614
+  },
+  {
     "name": "Inle Lake",
     "id": "XN30026",
     "full_name": "Inle Lake, Myanmar",
@@ -520,6 +907,15 @@
     "state": "Inle Lake",
     "lat": 20.58629,
     "long": 96.91018
+  },
+  {
+    "name": "Interlaken",
+    "id": "XN5011",
+    "full_name": "Interlaken, Swiss Alps, Switzerland",
+    "country": "Switzerland",
+    "state": "Swiss Alps",
+    "lat": 46.6859853,
+    "long": 7.8673189
   },
   {
     "name": "Isle of Palms",
@@ -531,6 +927,42 @@
     "long": -79.78775
   },
   {
+    "name": "Istanbul",
+    "id": "XN585",
+    "full_name": "Istanbul, Turkey",
+    "country": "Turkey",
+    "state": "",
+    "lat": 41.0033342172,
+    "long": 28.9792728424
+  },
+  {
+    "name": "Jackson Hole",
+    "id": "XN5261",
+    "full_name": "Jackson Hole, Wyoming, USA",
+    "country": "USA",
+    "state": "Wyoming",
+    "lat": 43.4745213036,
+    "long": -110.77559745
+  },
+  {
+    "name": "Jackson",
+    "id": "XN51006",
+    "full_name": "Jackson, Wyoming, USA",
+    "country": "USA",
+    "state": "Wyoming",
+    "lat": 43.47675,
+    "long": -110.764021
+  },
+  {
+    "name": "Jacksonville",
+    "id": "XN4373",
+    "full_name": "Jacksonville, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 30.332184,
+    "long": -81.655651
+  },
+  {
     "name": "Jamaica",
     "id": "XN34",
     "full_name": "Jamaica",
@@ -538,6 +970,24 @@
     "state": "",
     "lat": 18.109581,
     "long": -77.297508
+  },
+  {
+    "name": "Kauai",
+    "id": "XN670",
+    "full_name": "Kauai, Hawaii, USA",
+    "country": "USA",
+    "state": "Hawaii",
+    "lat": 22.2188736586,
+    "long": -159.4277143478
+  },
+  {
+    "name": "Kejimkujik National Park",
+    "id": "XN50645",
+    "full_name": "Kejimkujik National Park, Nova Scotia, Canada",
+    "country": "Canada",
+    "state": "Nova Scotia",
+    "lat": 45.61538,
+    "long": -65.02487
   },
   {
     "name": "Key Largo",
@@ -556,6 +1006,87 @@
     "state": "Florida",
     "lat": 24.5557025,
     "long": -81.7825914
+  },
+  {
+    "name": "Kotor",
+    "id": "XN23078",
+    "full_name": "Kotor, Adriatic Coast, Montenegro",
+    "country": "Montenegro",
+    "state": "Adriatic Coast",
+    "lat": 42.42466,
+    "long": 18.77123
+  },
+  {
+    "name": "Krabi",
+    "id": "XN348",
+    "full_name": "Krabi, Southern Thailand and Andaman Coast, Thailand",
+    "country": "Thailand",
+    "state": "Southern Thailand and Andaman Coast",
+    "lat": 8.1191811,
+    "long": 99.1013498
+  },
+  {
+    "name": "Krakow",
+    "id": "XN529",
+    "full_name": "Krakow, Poland",
+    "country": "Poland",
+    "state": "",
+    "lat": 50.0646501,
+    "long": 19.9449799
+  },
+  {
+    "name": "Kruger National Park",
+    "id": "XN776",
+    "full_name": "Kruger National Park, South Africa",
+    "country": "South Africa",
+    "state": "Kruger National Park",
+    "lat": -23.8214244,
+    "long": 31.4456179
+  },
+  {
+    "name": "Kuala Besut",
+    "id": "XN50693",
+    "full_name": "Kuala Besut, Malaysia",
+    "country": "Malaysia",
+    "state": "",
+    "lat": 5.82865,
+    "long": 102.56138
+  },
+  {
+    "name": "Kuala Lumpur",
+    "id": "XN335",
+    "full_name": "Kuala Lumpur, Malaysia",
+    "country": "Malaysia",
+    "state": "",
+    "lat": 3.139003,
+    "long": 101.686855
+  },
+  {
+    "name": "Kuala Terengganu",
+    "id": "XN50606",
+    "full_name": "Kuala Terengganu, Malaysia",
+    "country": "Malaysia",
+    "state": "",
+    "lat": 5.31965,
+    "long": 103.132103
+  },
+  {
+    "name": "Kyoto Prefecture",
+    "id": "XN50170",
+    "full_name": "Kyoto Prefecture, Japan",
+    "country": "Japan",
+    "state": "Kyoto Prefecture",
+    "lat": 35.0979177,
+    "long": 135.4386738
+  },
+  {
+    "name": "Kyoto",
+    "id": "XN332",
+    "full_name": "Kyoto, Kansai, Japan",
+    "country": "Japan",
+    "state": "Kansai",
+    "lat": 35.0116363,
+    "long": 135.7680294
   },
   {
     "name": "La Fortuna",
@@ -693,6 +1224,24 @@
     "long": -115.172816
   },
   {
+    "name": "Lima",
+    "id": "XN928",
+    "full_name": "Lima, Peru",
+    "country": "Peru",
+    "state": "",
+    "lat": -12.0433333,
+    "long": -77.0283333
+  },
+  {
+    "name": "Limassol",
+    "id": "XN4429",
+    "full_name": "Limassol, Cyprus",
+    "country": "Cyprus",
+    "state": "",
+    "lat": 34.70713,
+    "long": 33.02262
+  },
+  {
     "name": "Lisbon",
     "id": "XN538",
     "full_name": "Lisbon, Portugal",
@@ -765,6 +1314,15 @@
     "long": 97.959857
   },
   {
+    "name": "Malaga",
+    "id": "XN956",
+    "full_name": "Malaga, Andalucia, Spain",
+    "country": "Spain",
+    "state": "Andalucia",
+    "lat": 36.7196484,
+    "long": -4.4200163
+  },
+  {
     "name": "Maldives",
     "id": "XN4672",
     "full_name": "Maldives",
@@ -792,6 +1350,42 @@
     "long": -156.4655685425
   },
   {
+    "name": "Mauritius",
+    "id": "XN4463",
+    "full_name": "Mauritius",
+    "country": "Mauritius",
+    "state": "",
+    "lat": -20.348404,
+    "long": 57.552152
+  },
+  {
+    "name": "Melbourne",
+    "id": "XN384",
+    "full_name": "Melbourne, Victoria, Australia",
+    "country": "Australia",
+    "state": "Victoria",
+    "lat": -37.814251,
+    "long": 144.963169
+  },
+  {
+    "name": "Mexico",
+    "id": "XN76",
+    "full_name": "Mexico",
+    "country": "Mexico",
+    "state": "",
+    "lat": 23.634501,
+    "long": -102.552784
+  },
+  {
+    "name": "Mexico City",
+    "id": "XN628",
+    "full_name": "Mexico City, Central Mexico, Mexico",
+    "country": "Mexico",
+    "state": "Central Mexico",
+    "lat": 19.4270499,
+    "long": -99.1275711
+  },
+  {
     "name": "Miami",
     "id": "XN662",
     "full_name": "Miami, Florida, USA",
@@ -799,6 +1393,15 @@
     "state": "Florida",
     "lat": 25.7836623106,
     "long": -80.1908397675
+  },
+  {
+    "name": "Milan",
+    "id": "XN512",
+    "full_name": "Milan, Lombardy, Italy",
+    "country": "Italy",
+    "state": "Lombardy",
+    "lat": 45.4636889,
+    "long": 9.1881408
   },
   {
     "name": "Milton Keynes",
@@ -819,6 +1422,42 @@
     "long": -77.921387
   },
   {
+    "name": "Montreal",
+    "id": "XN625",
+    "full_name": "Montreal, Quebec, Canada",
+    "country": "Canada",
+    "state": "Quebec",
+    "lat": 45.508867,
+    "long": -73.554242
+  },
+  {
+    "name": "Mount Abu",
+    "id": "XN50337",
+    "full_name": "Mount Abu, Rajasthan, India",
+    "country": "India",
+    "state": "Rajasthan",
+    "lat": 24.5926,
+    "long": 72.7156
+  },
+  {
+    "name": "Munich",
+    "id": "XN487",
+    "full_name": "Munich, Bavaria, Germany",
+    "country": "Germany",
+    "state": "Bavaria",
+    "lat": 48.1391265,
+    "long": 11.5801863
+  },
+  {
+    "name": "Mykonos",
+    "id": "XN958",
+    "full_name": "Mykonos, Cyclades Islands, Greece",
+    "country": "Greece",
+    "state": "Cyclades Islands",
+    "lat": 37.4469973049,
+    "long": 25.3280246258
+  },
+  {
     "name": "Myrtle Beach",
     "id": "XN5217",
     "full_name": "Myrtle Beach, South Carolina, USA",
@@ -826,6 +1465,51 @@
     "state": "South Carolina",
     "lat": 33.6889,
     "long": -78.8869
+  },
+  {
+    "name": "Nairobi",
+    "id": "XN5280",
+    "full_name": "Nairobi, Kenya",
+    "country": "Kenya",
+    "state": "",
+    "lat": -1.28333,
+    "long": 36.81667
+  },
+  {
+    "name": "Napa & Sonoma",
+    "id": "XN914",
+    "full_name": "Napa & Sonoma, California, USA",
+    "country": "USA",
+    "state": "California",
+    "lat": 38.3047222,
+    "long": -122.2988889
+  },
+  {
+    "name": "Napareuli",
+    "id": "XN51852",
+    "full_name": "Napareuli, Georgia",
+    "country": "Georgia",
+    "state": "",
+    "lat": 42.04997,
+    "long": 45.50504
+  },
+  {
+    "name": "Naples",
+    "id": "XN22381",
+    "full_name": "Naples, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 26.142036,
+    "long": -81.79481
+  },
+  {
+    "name": "Naples",
+    "id": "XN508",
+    "full_name": "Naples, Italy",
+    "country": "Italy",
+    "state": "",
+    "lat": 40.8401614692,
+    "long": 14.2596960068
   },
   {
     "name": "Nashville",
@@ -945,6 +1629,24 @@
     "long": 174.885971
   },
   {
+    "name": "Nice",
+    "id": "XN478",
+    "full_name": "Nice, French Riviera, France",
+    "country": "France",
+    "state": "French Riviera",
+    "lat": 43.7034273,
+    "long": 7.2662656
+  },
+  {
+    "name": "North Goa District",
+    "id": "XN51584",
+    "full_name": "North Goa District, India",
+    "country": "India",
+    "state": "North Goa District",
+    "lat": 15.534861,
+    "long": 73.93041
+  },
+  {
     "name": "Ocho Rios",
     "id": "XN434",
     "full_name": "Ocho Rios, Jamaica",
@@ -954,6 +1656,15 @@
     "long": -77.0749282837
   },
   {
+    "name": "Olympic National Park",
+    "id": "XN50807",
+    "full_name": "Olympic National Park, Washington, USA",
+    "country": "USA",
+    "state": "Washington",
+    "lat": 48.242321,
+    "long": -124.525742
+  },
+  {
     "name": "Orlando",
     "id": "XN663",
     "full_name": "Orlando, Florida, USA",
@@ -961,6 +1672,33 @@
     "state": "Florida",
     "lat": 28.5383355,
     "long": -81.3792365
+  },
+  {
+    "name": "Osaka Prefecture",
+    "id": "XN50171",
+    "full_name": "Osaka Prefecture, Japan",
+    "country": "Japan",
+    "state": "Osaka Prefecture",
+    "lat": 34.677563,
+    "long": 135.3459764
+  },
+  {
+    "name": "Osaka",
+    "id": "XN333",
+    "full_name": "Osaka, Osaka Prefecture, Japan",
+    "country": "Japan",
+    "state": "Osaka Prefecture",
+    "lat": 34.6937378,
+    "long": 135.5021651
+  },
+  {
+    "name": "Outer Banks",
+    "id": "XN26783",
+    "full_name": "Outer Banks, North Carolina, USA",
+    "country": "USA",
+    "state": "North Carolina",
+    "lat": 35.55849,
+    "long": -75.46652
   },
   {
     "name": "Palm - Eagle Beach",
@@ -1008,6 +1746,33 @@
     "long": -48.33466
   },
   {
+    "name": "Panama",
+    "id": "XN749",
+    "full_name": "Panama",
+    "country": "Panama",
+    "state": "",
+    "lat": 8.537981,
+    "long": -80.782127
+  },
+  {
+    "name": "Panama City Beach",
+    "id": "XN22828",
+    "full_name": "Panama City Beach, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 30.176591,
+    "long": -85.805488
+  },
+  {
+    "name": "Panama City",
+    "id": "XN950",
+    "full_name": "Panama City, Panama",
+    "country": "Panama",
+    "state": "",
+    "lat": 8.983005,
+    "long": -79.515332
+  },
+  {
     "name": "Paris",
     "id": "XN479",
     "full_name": "Paris, Île-de-France, France",
@@ -1017,6 +1782,15 @@
     "long": 2.3509871
   },
   {
+    "name": "Park City",
+    "id": "XN22368",
+    "full_name": "Park City, Utah, USA",
+    "country": "USA",
+    "state": "Utah",
+    "lat": 40.646062,
+    "long": -111.497973
+  },
+  {
     "name": "Los Glaciares National Park",
     "id": "XN51225",
     "full_name": "Patagonia, Chile",
@@ -1024,6 +1798,24 @@
     "state": "Patagonia",
     "lat": -38.457881,
     "long": -72.414871
+  },
+  {
+    "name": "Petra",
+    "id": "XN24520",
+    "full_name": "Petra, Jordan",
+    "country": "Jordan",
+    "state": "",
+    "lat": 30.322135,
+    "long": 35.451604
+  },
+  {
+    "name": "Philadelphia",
+    "id": "XN906",
+    "full_name": "Philadelphia, Pennsylvania, USA",
+    "country": "USA",
+    "state": "Pennsylvania",
+    "lat": 39.952335,
+    "long": -75.163789
   },
   {
     "name": "Phoenix",
@@ -1071,6 +1863,87 @@
     "long": -87.0738850994
   },
   {
+    "name": "Portland",
+    "id": "XN4382",
+    "full_name": "Portland, Maine, USA",
+    "country": "USA",
+    "state": "Maine",
+    "lat": 43.66147,
+    "long": -70.25533
+  },
+  {
+    "name": "Portland",
+    "id": "XN5065",
+    "full_name": "Portland, Oregon, USA",
+    "country": "USA",
+    "state": "Oregon",
+    "lat": 45.5234515,
+    "long": -122.6762071
+  },
+  {
+    "name": "Porto Alegre",
+    "id": "XN29098",
+    "full_name": "Porto Alegre, South Brazil, Brazil",
+    "country": "Brazil",
+    "state": "South Brazil",
+    "lat": -30.03465,
+    "long": -51.21766
+  },
+  {
+    "name": "Porto Belo",
+    "id": "XN4445",
+    "full_name": "Porto Belo, Brazil",
+    "country": "Brazil",
+    "state": "",
+    "lat": -27.154703,
+    "long": -48.575912
+  },
+  {
+    "name": "Porto Ercole",
+    "id": "XN50671",
+    "full_name": "Porto Ercole, Tuscany, Italy",
+    "country": "Italy",
+    "state": "Tuscany",
+    "lat": 42.39507,
+    "long": 11.20359
+  },
+  {
+    "name": "Porto Seguro",
+    "id": "XN29262",
+    "full_name": "Porto Seguro, Northeast Brazil, Brazil",
+    "country": "Brazil",
+    "state": "Northeast Brazil",
+    "lat": -16.44435,
+    "long": -39.06537
+  },
+  {
+    "name": "Porto de Galinhas",
+    "id": "XN25314",
+    "full_name": "Porto de Galinhas, Northeast Brazil, Brazil",
+    "country": "Brazil",
+    "state": "Northeast Brazil",
+    "lat": -8.5011,
+    "long": -35.005
+  },
+  {
+    "name": "Porto",
+    "id": "XN26879",
+    "full_name": "Porto, Northern Portugal, Portugal",
+    "country": "Portugal",
+    "state": "Northern Portugal",
+    "lat": 41.15794,
+    "long": -8.62911
+  },
+  {
+    "name": "Portofino",
+    "id": "XN4232",
+    "full_name": "Portofino, Piedmont & Liguria, Italy",
+    "country": "Italy",
+    "state": "Piedmont & Liguria",
+    "lat": 44.30316,
+    "long": 9.20979
+  },
+  {
     "name": "Prague",
     "id": "XN462",
     "full_name": "Prague, Czech Republic",
@@ -1078,6 +1951,15 @@
     "state": "",
     "lat": 50.0878114,
     "long": 14.4204598
+  },
+  {
+    "name": "Puebla City",
+    "id": "XN50490",
+    "full_name": "Puebla City, Puebla, Mexico",
+    "country": "Mexico",
+    "state": "Puebla",
+    "lat": 19.041439,
+    "long": -98.206276
   },
   {
     "name": "Puerto Ayora",
@@ -1224,6 +2106,51 @@
     "long": -84.82942
   },
   {
+    "name": "Quebec City",
+    "id": "XN626",
+    "full_name": "Quebec City, Quebec, Canada",
+    "country": "Canada",
+    "state": "Quebec",
+    "lat": 46.802071,
+    "long": -71.244926
+  },
+  {
+    "name": "Quebec",
+    "id": "XN264",
+    "full_name": "Quebec, Canada",
+    "country": "Canada",
+    "state": "Quebec",
+    "lat": 52.9399159,
+    "long": -73.5491361
+  },
+  {
+    "name": "Vieux-Montreal (Old Montreal)",
+    "id": "XN59216",
+    "full_name": "Quebec, Canada",
+    "country": "Canada",
+    "state": "Quebec",
+    "lat": 45.507034,
+    "long": -73.55346
+  },
+  {
+    "name": "Queenstown",
+    "id": "XN407",
+    "full_name": "Queenstown, South Island, New Zealand",
+    "country": "New Zealand",
+    "state": "South Island",
+    "lat": -45.031104,
+    "long": 168.662731
+  },
+  {
+    "name": "Reykjavik",
+    "id": "XN905",
+    "full_name": "Reykjavik, Iceland",
+    "country": "Iceland",
+    "state": "",
+    "lat": 64.141391017,
+    "long": -21.893863678
+  },
+  {
     "name": "Rio Lagartos",
     "id": "XN50527",
     "full_name": "Rio Lagartos, Riviera Maya & the Yucatan, Mexico",
@@ -1287,6 +2214,15 @@
     "long": -59.5393
   },
   {
+    "name": "San Antonio De Belen",
+    "id": "XN50316",
+    "full_name": "San Antonio De Belen, Costa Rica",
+    "country": "Costa Rica",
+    "state": "",
+    "lat": 9.98,
+    "long": -84.1853
+  },
+  {
     "name": "San Antonio de los Cobres",
     "id": "XN50970",
     "full_name": "San Antonio de los Cobres, Northwest Argentina, Argentina",
@@ -1294,6 +2230,24 @@
     "state": "Northwest Argentina",
     "lat": -24.21804,
     "long": -66.31877
+  },
+  {
+    "name": "San Antonio",
+    "id": "XN50583",
+    "full_name": "San Antonio, Chile",
+    "country": "Chile",
+    "state": "",
+    "lat": -33.58865,
+    "long": -71.608994
+  },
+  {
+    "name": "San Antonio",
+    "id": "XN910",
+    "full_name": "San Antonio, Texas, USA",
+    "country": "USA",
+    "state": "Texas",
+    "lat": 29.4241219,
+    "long": -98.4936282
   },
   {
     "name": "San Cristobal",
@@ -1440,6 +2394,24 @@
     "long": 25.4615092
   },
   {
+    "name": "Sao Martinho do Porto",
+    "id": "XN50945",
+    "full_name": "Sao Martinho do Porto, Portugal",
+    "country": "Portugal",
+    "state": "",
+    "lat": 39.510247,
+    "long": -9.131989
+  },
+  {
+    "name": "Sarasota",
+    "id": "XN25738",
+    "full_name": "Sarasota, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 27.336435,
+    "long": -82.530653
+  },
+  {
     "name": "Savannah",
     "id": "XN5166",
     "full_name": "Savannah, Georgia, USA",
@@ -1467,6 +2439,51 @@
     "long": -122.3373126984
   },
   {
+    "name": "Sedona",
+    "id": "XN750",
+    "full_name": "Sedona, Arizona, USA",
+    "country": "USA",
+    "state": "Arizona",
+    "lat": 34.85867,
+    "long": -111.76321
+  },
+  {
+    "name": "Seoul",
+    "id": "XN973",
+    "full_name": "Seoul, South Korea",
+    "country": "South Korea",
+    "state": "",
+    "lat": 37.566535,
+    "long": 126.9779692
+  },
+  {
+    "name": "Seville",
+    "id": "XN556",
+    "full_name": "Seville, Andalucia, Spain",
+    "country": "Spain",
+    "state": "Andalucia",
+    "lat": 37.38264,
+    "long": -5.9962951
+  },
+  {
+    "name": "Seychelles",
+    "id": "XN4868",
+    "full_name": "Seychelles",
+    "country": "Seychelles",
+    "state": "",
+    "lat": 4.6796,
+    "long": 55.492
+  },
+  {
+    "name": "Siem Reap",
+    "id": "XN5480",
+    "full_name": "Siem Reap, Cambodia",
+    "country": "Cambodia",
+    "state": "",
+    "lat": 13.6915376984,
+    "long": 104.1001326026
+  },
+  {
     "name": "Singapore",
     "id": "XN18",
     "full_name": "Singapore",
@@ -1483,6 +2500,132 @@
     "state": "",
     "lat": 1.39384070411002,
     "long": 103.862451845808
+  },
+  {
+    "name": "Split",
+    "id": "XN4185",
+    "full_name": "Split, Dalmatia, Croatia",
+    "country": "Croatia",
+    "state": "Dalmatia",
+    "lat": 43.5139,
+    "long": 16.4558
+  },
+  {
+    "name": "St Augustine",
+    "id": "XN823",
+    "full_name": "St Augustine, Florida, USA",
+    "country": "USA",
+    "state": "Florida",
+    "lat": 29.8942639,
+    "long": -81.3132083
+  },
+  {
+    "name": "St Barthelemy",
+    "id": "XN4326",
+    "full_name": "St Barthelemy",
+    "country": "St Barthelemy",
+    "state": "",
+    "lat": 17.9139,
+    "long": -62.8339
+  },
+  {
+    "name": "St Croix",
+    "id": "XN28885",
+    "full_name": "St Croix, US Virgin Islands",
+    "country": "US Virgin Islands",
+    "state": "St Croix",
+    "lat": 17.70014,
+    "long": -64.86272
+  },
+  {
+    "name": "St John",
+    "id": "XN4521",
+    "full_name": "St John, US Virgin Islands",
+    "country": "US Virgin Islands",
+    "state": "St John",
+    "lat": 18.3401872422,
+    "long": -64.7410583496
+  },
+  {
+    "name": "St Kitts",
+    "id": "XN930",
+    "full_name": "St Kitts, St Kitts and Nevis",
+    "country": "St Kitts and Nevis",
+    "state": "St Kitts",
+    "lat": 17.3433796,
+    "long": -62.7559043
+  },
+  {
+    "name": "St Lucia",
+    "id": "XN38",
+    "full_name": "St Lucia",
+    "country": "St Lucia",
+    "state": "",
+    "lat": 13.909444,
+    "long": -60.978893
+  },
+  {
+    "name": "St Lucia",
+    "id": "XN41314",
+    "full_name": "St Lucia, KwaZulu-Natal, South Africa",
+    "country": "South Africa",
+    "state": "KwaZulu-Natal",
+    "lat": -28.3738127,
+    "long": 32.4052262
+  },
+  {
+    "name": "St Maarten",
+    "id": "XN728",
+    "full_name": "St Maarten",
+    "country": "St Maarten",
+    "state": "",
+    "lat": 18.0308266,
+    "long": -63.0736329
+  },
+  {
+    "name": "St Maarten",
+    "id": "XN5625",
+    "full_name": "St Maarten, St Maarten",
+    "country": "St Maarten",
+    "state": "St Maarten",
+    "lat": 18.041215,
+    "long": -63.053073
+  },
+  {
+    "name": "St Martin",
+    "id": "XN5624",
+    "full_name": "St Martin, St Maarten",
+    "country": "St Maarten",
+    "state": "St Martin",
+    "lat": 18.101111,
+    "long": -63.051944
+  },
+  {
+    "name": "St Moritz",
+    "id": "XN5013",
+    "full_name": "St Moritz, Swiss Alps, Switzerland",
+    "country": "Switzerland",
+    "state": "Swiss Alps",
+    "lat": 46.4950997,
+    "long": 9.8361419
+  },
+  {
+    "name": "St Thomas",
+    "id": "XN965",
+    "full_name": "St Thomas, US Virgin Islands",
+    "country": "US Virgin Islands",
+    "state": "St Thomas",
+    "lat": 18.3545255291,
+    "long": -64.9285125732
+  },
+  {
+    "name": "Stockholm",
+    "id": "XN907",
+    "full_name": "Stockholm, Sweden",
+    "country": "Sweden",
+    "state": "",
+    "lat": 59.328110858,
+    "long": 18.0756425858
   },
   {
     "name": "Sydney",
@@ -1512,6 +2655,24 @@
     "long": -82.4541950226
   },
   {
+    "name": "Tel Aviv",
+    "id": "XN920",
+    "full_name": "Tel Aviv, Israel",
+    "country": "Israel",
+    "state": "",
+    "lat": 32.066157,
+    "long": 34.777821
+  },
+  {
+    "name": "Telluride",
+    "id": "XN26378",
+    "full_name": "Telluride, Colorado, USA",
+    "country": "USA",
+    "state": "Colorado",
+    "lat": 37.937494,
+    "long": -107.812285
+  },
+  {
     "name": "Tokyo Prefecture",
     "id": "XN50157",
     "full_name": "Tokyo Prefecture, Japan",
@@ -1528,6 +2689,15 @@
     "state": "Kanto",
     "lat": 35.6894875,
     "long": 139.6917064
+  },
+  {
+    "name": "Tongariro National Park",
+    "id": "XN33378",
+    "full_name": "Tongariro National Park, North Island, New Zealand",
+    "country": "New Zealand",
+    "state": "North Island",
+    "lat": -39.272709,
+    "long": 175.5802278
   },
   {
     "name": "Toronto",
@@ -1566,6 +2736,15 @@
     "long": -71.797928
   },
   {
+    "name": "Tuscany",
+    "id": "XN206",
+    "full_name": "Tuscany, Italy",
+    "country": "Italy",
+    "state": "Tuscany",
+    "lat": 43.5671153,
+    "long": 10.9807003
+  },
+  {
     "name": "Palm Jumeirah",
     "id": "XN51421",
     "full_name": "United Arab Emirates",
@@ -1573,6 +2752,15 @@
     "state": "",
     "lat": 25.128878,
     "long": 55.119466
+  },
+  {
+    "name": "Vail",
+    "id": "XN22367",
+    "full_name": "Vail, Colorado, USA",
+    "country": "USA",
+    "state": "Colorado",
+    "lat": 39.640264,
+    "long": -106.374195
   },
   {
     "name": "Vancouver Island",
@@ -1620,6 +2808,33 @@
     "long": -60.951618
   },
   {
+    "name": "Volcanoes National Park",
+    "id": "XN23351",
+    "full_name": "Volcanoes National Park, Rwanda",
+    "country": "Rwanda",
+    "state": "Volcanoes National Park",
+    "lat": -1.432028,
+    "long": 29.56663
+  },
+  {
+    "name": "Washington DC",
+    "id": "XN657",
+    "full_name": "Washington DC, USA",
+    "country": "USA",
+    "state": "",
+    "lat": 38.8951118,
+    "long": -77.0363658
+  },
+  {
+    "name": "Washington",
+    "id": "XN298",
+    "full_name": "Washington, USA",
+    "country": "USA",
+    "state": "Washington",
+    "lat": 48.001618,
+    "long": -119.738492
+  },
+  {
     "name": "West Palm Beach",
     "id": "XN24204",
     "full_name": "West Palm Beach, Florida, USA",
@@ -1645,5 +2860,50 @@
     "state": "Western Cape",
     "lat": -33.227792,
     "long": 21.856859
+  },
+  {
+    "name": "Whistler",
+    "id": "XN618",
+    "full_name": "Whistler, British Columbia, Canada",
+    "country": "Canada",
+    "state": "British Columbia",
+    "lat": 50.116168,
+    "long": -122.959423
+  },
+  {
+    "name": "Yellowstone National Park",
+    "id": "XN22411",
+    "full_name": "Yellowstone National Park, Wyoming, USA",
+    "country": "USA",
+    "state": "Wyoming",
+    "lat": 44.42797,
+    "long": -110.58845
+  },
+  {
+    "name": "Zanzibar City",
+    "id": "XN24350",
+    "full_name": "Zanzibar City, Zanzibar, Tanzania",
+    "country": "Tanzania",
+    "state": "Zanzibar",
+    "lat": -6.169657,
+    "long": 39.202575
+  },
+  {
+    "name": "Zanzibar",
+    "id": "XN5590",
+    "full_name": "Zanzibar, Tanzania",
+    "country": "Tanzania",
+    "state": "Zanzibar",
+    "lat": -6.165917,
+    "long": 39.202641
+  },
+  {
+    "name": "Zurich",
+    "id": "XN577",
+    "full_name": "Zurich, Switzerland",
+    "country": "Switzerland",
+    "state": "",
+    "lat": 47.3690239,
+    "long": 8.5380326
   }
 ]
