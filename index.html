@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Xeni Quick Builder</title>
 <style>
-  :root{ --primary:#0f766e; --ink:#111827; --line:#d1d5db; --muted:#6b7280; --soft:#f3f4f6; }
+  :root{ --primary:#0f766e; --btn-text:#fff; --ink:#111827; --line:#d1d5db; --muted:#6b7280; --soft:#f3f4f6; }
   *{ box-sizing:border-box; }
   html,body{ margin:0; }
   body{ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:transparent; }
@@ -13,8 +13,12 @@
   .qb-card{ background:#fff; border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 6px 24px rgba(0,0,0,.06); overflow:hidden; }
   /* tabs */
   .qb-tabs{ display:flex; gap:2px; background:var(--soft); padding:6px 6px 0; overflow-x:auto; }
-  .qb-tab{ appearance:none; border:none; background:transparent; padding:11px 16px; font-size:14px; font-weight:600; color:var(--muted); cursor:pointer; border-radius:10px 10px 0 0; white-space:nowrap; }
+  .qb-tab{ appearance:none; border:none; background:transparent; padding:11px 15px; font-size:14px; font-weight:600; color:var(--muted); cursor:pointer; border-radius:10px 10px 0 0; white-space:nowrap; display:inline-flex; align-items:center; gap:7px; transition:color .15s, background .15s; }
+  .qb-tab:hover{ color:var(--ink); }
   .qb-tab.active{ background:#fff; color:var(--primary); box-shadow:0 -2px 0 var(--primary) inset; }
+  .qb-tab svg{ width:16px; height:16px; }
+  .qb-logo{ padding:14px 18px 2px; }
+  .qb-logo img{ height:30px; max-width:180px; object-fit:contain; display:block; }
   .qb-body{ padding:18px; }
   .qb-title{ font-size:17px; font-weight:700; margin:0 0 14px; }
   /* form grid */
@@ -26,8 +30,9 @@
   .fld label{ font-size:12px; font-weight:600; color:var(--muted); margin:0 0 5px; }
   .fld input, .fld select{ width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:9px; font-size:14px; color:var(--ink); background:#fff; }
   .fld input:focus,.fld select:focus{ outline:none; border-color:var(--primary); box-shadow:0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent); }
-  .qb-btn{ width:100%; padding:12px 20px; border:none; border-radius:9px; background:var(--primary); color:#fff; font-size:15px; font-weight:700; cursor:pointer; white-space:nowrap; }
-  .qb-btn:hover{ filter:brightness(.95); }
+  .qb-btn{ width:100%; padding:12px 20px; border:none; border-radius:9px; background:var(--primary); color:var(--btn-text); font-size:15px; font-weight:700; cursor:pointer; white-space:nowrap; transition:filter .15s, transform .05s; }
+  .qb-btn:hover{ filter:brightness(1.06); }
+  .qb-btn:active{ transform:translateY(1px); }
   .trip{ display:flex; gap:14px; margin:0 2px 10px; font-size:13px; color:var(--ink); }
   .trip label{ display:flex; align-items:center; gap:5px; cursor:pointer; font-weight:600; }
   /* autocomplete */
@@ -42,6 +47,15 @@
   .soon{ padding:26px 12px; text-align:center; color:var(--muted); font-size:14px; }
   .qb-foot{ font-size:11px; color:var(--muted); text-align:center; padding:0 12px 12px; }
   .qb-foot a{ color:var(--muted); }
+  .fld input{ transition:border-color .15s, box-shadow .15s; }
+  .fld input:hover{ border-color:#9ca3af; }
+  .ac-loading{ padding:12px; color:var(--muted); font-size:13px; display:flex; align-items:center; gap:8px; }
+  .ac-spin{ width:14px; height:14px; border:2px solid var(--line); border-top-color:var(--primary); border-radius:50%; animation:qbspin .7s linear infinite; }
+  @keyframes qbspin{ to{ transform:rotate(360deg); } }
+  /* seamless: drop the card chrome so the widget blends into the host page */
+  body.seamless .qb-card{ background:transparent; border:none; box-shadow:none; }
+  body.seamless .qb-tabs{ background:transparent; padding-left:0; }
+  body.seamless .qb-tab.active{ background:rgba(255,255,255,.55); }
 </style>
 </head>
 <body>
@@ -61,9 +75,30 @@ var QB = {
   primary:     P.get('primary')  || '',
   poweredShow: P.get('powered') !== '0',                 // ?powered=0 hides it
   poweredText: P.get('poweredText') || 'Powered by Xeni',
+  logo:        P.get('logo')  || '',
+  bg:          P.get('bg')    || 'card',                 // card | seamless
   startTab:    P.get('tab') || 'hotels'
 };
-if(QB.primary) document.documentElement.style.setProperty('--primary', QB.primary[0]==='#'?QB.primary:'#'+QB.primary);
+// brand color + auto-contrast button text (dark text on light brand colors)
+function relLum(hex){ hex=hex.replace('#',''); if(hex.length!==6) return 0;
+  var c=[0,2,4].map(function(i){ var v=parseInt(hex.substr(i,2),16)/255; return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4); });
+  return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2];
+}
+if(QB.primary){
+  var hex = QB.primary[0]==='#'?QB.primary:'#'+QB.primary;
+  document.documentElement.style.setProperty('--primary', hex);
+  document.documentElement.style.setProperty('--btn-text', relLum(hex) > 0.55 ? '#111827' : '#ffffff');
+}
+if(QB.bg==='seamless') document.body.classList.add('seamless');
+
+// tab icons (inline SVG, currentColor)
+var ICONS = {
+  hotels:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M15 9h.01M9 13h.01M15 13h.01M10 21v-4h4v4"/></svg>',
+  flights:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5a2.1 2.1 0 0 0-3-3L13 8 4.8 6.2a1 1 0 0 0-.9 1.7l5.1 3.2-2 3.5-2.6-.4a1 1 0 0 0-.9 1.6L6 22l1.7-1.8 2.6 1.7a1 1 0 0 0 1.6-.9l-.4-2.6 3.5-2 3.2 5.1a1 1 0 0 0 1.7-.9z"/></svg>',
+  resorts:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8M2 22h20M4 11a6 6 0 0 1 8-3M20 11a6 6 0 0 0-8-3M12 8a4 4 0 0 0-4-4M12 8a4 4 0 0 1 4-4"/></svg>',
+  cars:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2M5 17a2 2 0 1 0 4 0M5 17h10M15 17a2 2 0 1 0 4 0M5 12h14"/></svg>',
+  activities:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M10 22l2-6 2 2v4M6 12l3-2 3 2 3-1"/></svg>'
+};
 
 /* ================= PRODUCTS ================= */
 var TABS = [
@@ -155,6 +190,7 @@ function wireAutocomplete(input, box, key){
   input.addEventListener('input', function(){
     input._sel=null; activeIdx=-1;
     if(input.value.trim().length<2){ box.classList.remove('open'); return; }
+    if(!DATA[key]){ box.innerHTML='<div class="ac-loading"><span class="ac-spin"></span>Loading destinations…</div>'; box.classList.add('open'); }
     loadData(key).then(function(){ matches=search(input.value); render(); });
   });
   box.addEventListener('mousedown', function(e){ var it=e.target.closest('.ac-item'); if(!it) return;
@@ -346,8 +382,15 @@ function selectTab(key){
   else if(key==='activities') activitiesPanel();
   else soonPanel((TABS.filter(function(t){return t.key===key;})[0]||{}).label||key);
 }
+// optional agency logo above the tabs
+if(QB.logo){
+  var lg=el('<div class="qb-logo"><img alt="logo"></div>');
+  lg.querySelector('img').src=QB.logo;
+  lg.querySelector('img').onerror=function(){ lg.style.display='none'; };
+  qbTabs.parentNode.insertBefore(lg, qbTabs);
+}
 TABS.forEach(function(t){
-  var b=el('<button class="qb-tab" data-k="'+t.key+'">'+t.label+(t.ready?'':' · soon')+'</button>');
+  var b=el('<button class="qb-tab" data-k="'+t.key+'">'+(ICONS[t.key]||'')+'<span>'+t.label+'</span></button>');
   b.addEventListener('click',function(){selectTab(t.key);}); qbTabs.appendChild(b);
 });
 // powered-by
