@@ -61,10 +61,6 @@
       </div>
       <div class="hint">Buttons, active tab, and highlights use this color. (Button text auto-adjusts for readability.)</div>
 
-      <label for="logo">Agency logo URL <span style="color:#6b7280;font-weight:400">(optional)</span></label>
-      <input type="text" id="logo" placeholder="https://…/logo.png">
-      <div class="hint">Shows above the tabs. Leave blank for none.</div>
-
       <label for="bg">Background</label>
       <select id="bg">
         <option value="card">Card — white box (default)</option>
@@ -160,8 +156,6 @@ function buildUrl(){
   if(wl) params.push('platform=' + encodeURIComponent(wl));
   var color = $('colorHex').value.replace('#','');
   if(color && color.toLowerCase() !== '0f766e') params.push('primary=' + color);
-  var logo = $('logo').value.trim();
-  if(logo) params.push('logo=' + encodeURIComponent(logo));
   if($('bg').value === 'seamless') params.push('bg=seamless');
   var vis = visibleKeys();
   if(vis.join(',') !== DEFAULT_TABS.join(',')) params.push('tabs=' + vis.join(','));
@@ -182,7 +176,7 @@ function refresh(){
 // sync color picker <-> hex
 $('color').addEventListener('input', function(){ $('colorHex').value=this.value; refresh(); });
 $('colorHex').addEventListener('input', function(){ var v=this.value.trim(); if(!/^#/.test(v)) v='#'+v; if(/^#[0-9a-fA-F]{6}$/.test(v)) $('color').value=v; refresh(); });
-['wl','tab','powText','logo'].forEach(function(id){ $(id).addEventListener('input', refresh); });
+['wl','tab','powText'].forEach(function(id){ $(id).addEventListener('input', refresh); });
 $('bg').addEventListener('change', refresh);
 $('showPow').addEventListener('change', function(){ $('powText').disabled=!this.checked; $('powText').style.opacity=this.checked?1:.5; refresh(); });
 

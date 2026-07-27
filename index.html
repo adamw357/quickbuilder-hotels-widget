@@ -17,8 +17,6 @@
   .qb-tab:hover{ color:var(--ink); }
   .qb-tab.active{ background:#fff; color:var(--primary); box-shadow:0 -2px 0 var(--primary) inset; }
   .qb-tab svg{ width:16px; height:16px; }
-  .qb-logo{ padding:14px 18px 2px; }
-  .qb-logo img{ height:30px; max-width:180px; object-fit:contain; display:block; }
   .qb-body{ padding:18px; }
   .qb-title{ font-size:17px; font-weight:700; margin:0 0 14px; }
   /* form grid */
@@ -75,7 +73,6 @@ var QB = {
   primary:     P.get('primary')  || '',
   poweredShow: P.get('powered') !== '0',                 // ?powered=0 hides it
   poweredText: P.get('poweredText') || 'Powered by Xeni',
-  logo:        P.get('logo')  || '',
   bg:          P.get('bg')    || 'card',                 // card | seamless
   startTab:    P.get('tab') || ''               // empty = first visible tab
 };
@@ -387,13 +384,6 @@ function selectTab(key){
   else if(key==='cars') carsPanel();
   else if(key==='activities') activitiesPanel();
   else soonPanel((TABS.filter(function(t){return t.key===key;})[0]||{}).label||key);
-}
-// optional agency logo above the tabs
-if(QB.logo){
-  var lg=el('<div class="qb-logo"><img alt="logo"></div>');
-  lg.querySelector('img').src=QB.logo;
-  lg.querySelector('img').onerror=function(){ lg.style.display='none'; };
-  qbTabs.parentNode.insertBefore(lg, qbTabs);
 }
 TABS.forEach(function(t){
   var b=el('<button class="qb-tab" data-k="'+t.key+'">'+(ICONS[t.key]||'')+'<span>'+t.label+'</span></button>');
