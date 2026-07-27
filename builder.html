@@ -61,6 +61,14 @@
       </div>
       <div class="hint">Buttons, active tab, and highlights use this color. (Button text auto-adjusts for readability.)</div>
 
+      <label for="lang">Widget language</label>
+      <select id="lang">
+        <option value="en">English</option>
+        <option value="es">Español (Spanish)</option>
+        <option value="fr">Français (French)</option>
+      </select>
+      <div class="hint">Translates everything the visitor sees. The search results page follows the white-label site's own language setting.</div>
+
       <label for="bg">Background</label>
       <select id="bg">
         <option value="card">Card — white box (default)</option>
@@ -80,6 +88,10 @@
         <option value="cars">Cars</option>
         <option value="activities">Activities</option>
       </select>
+
+      <label for="redirText">Redirect message</label>
+      <input type="text" id="redirText" placeholder="Opening your booking site. Your results will open in a new tab.">
+      <div class="hint">Shown briefly after a visitor clicks Search. Leave blank for the default (auto-translated with the language above).</div>
 
       <label class="chk"><input type="checkbox" id="showPow" checked> Show a "Powered by" line</label>
       <input type="text" id="powText" value="Powered by Xeni" style="margin-top:8px">
@@ -157,6 +169,9 @@ function buildUrl(){
   var color = $('colorHex').value.replace('#','');
   if(color && color.toLowerCase() !== '0f766e') params.push('primary=' + color);
   if($('bg').value === 'seamless') params.push('bg=seamless');
+  if($('lang').value !== 'en') params.push('lang=' + $('lang').value);
+  var rt = $('redirText').value.trim();
+  if(rt) params.push('redirectText=' + encodeURIComponent(rt));
   var vis = visibleKeys();
   if(vis.join(',') !== DEFAULT_TABS.join(',')) params.push('tabs=' + vis.join(','));
   var tab = $('tab').value;
@@ -176,8 +191,9 @@ function refresh(){
 // sync color picker <-> hex
 $('color').addEventListener('input', function(){ $('colorHex').value=this.value; refresh(); });
 $('colorHex').addEventListener('input', function(){ var v=this.value.trim(); if(!/^#/.test(v)) v='#'+v; if(/^#[0-9a-fA-F]{6}$/.test(v)) $('color').value=v; refresh(); });
-['wl','tab','powText'].forEach(function(id){ $(id).addEventListener('input', refresh); });
+['wl','tab','powText','redirText'].forEach(function(id){ $(id).addEventListener('input', refresh); });
 $('bg').addEventListener('change', refresh);
+$('lang').addEventListener('change', refresh);
 $('showPow').addEventListener('change', function(){ $('powText').disabled=!this.checked; $('powText').style.opacity=this.checked?1:.5; refresh(); });
 
 // copy buttons

@@ -50,6 +50,11 @@
   .ac-loading{ padding:12px; color:var(--muted); font-size:13px; display:flex; align-items:center; gap:8px; }
   .ac-spin{ width:14px; height:14px; border:2px solid var(--line); border-top-color:var(--primary); border-radius:50%; animation:qbspin .7s linear infinite; }
   @keyframes qbspin{ to{ transform:rotate(360deg); } }
+  /* redirect veil: soft feedback while the results tab opens */
+  .qb-veil{ position:fixed; inset:0; background:rgba(255,255,255,.88); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; opacity:0; pointer-events:none; transition:opacity .3s; z-index:99; text-align:center; padding:20px; }
+  .qb-veil.show{ opacity:1; pointer-events:auto; }
+  .qb-veil .qb-veil-spin{ width:34px; height:34px; border:3px solid var(--line); border-top-color:var(--primary); border-radius:50%; animation:qbspin .8s linear infinite; }
+  .qb-veil-msg{ font-size:15px; font-weight:600; color:var(--ink); max-width:420px; }
   /* seamless: drop the card chrome so the widget blends into the host page */
   body.seamless .qb-card{ background:transparent; border:none; box-shadow:none; }
   body.seamless .qb-tabs{ background:transparent; padding-left:0; }
@@ -88,6 +93,38 @@ if(QB.primary){
 }
 if(QB.bg==='seamless') document.body.classList.add('seamless');
 
+/* ================= LANGUAGE (?lang=en|es|fr; unknown falls back to en) ================= */
+var I18N = {
+  en:{ hotels:'Hotels', flights:'Flights', resorts:'Resorts', cars:'Cars', activities:'Activities',
+    titleHotels:'Book Your Stay', titleFlights:'Find Flights', titleResorts:'Find a Resort', titleCars:'Rent a Car', titleActivities:'Things to Do',
+    dest:'Destination', checkin:'Check-in', checkout:'Check-out', guests:'Guests', from:'From', to:'To',
+    departure:'Departure', ret:'Return', passengers:'Passengers', pickupLoc:'Pick-up location', pickup:'Pick-up', dropoff:'Drop-off', date:'Date',
+    phWhere:'Where are you going?', phCityAirport:'City or airport', phBeach:'Beach, island, city…', phAirportCity:'Airport or city',
+    searchHotels:'Search Hotels', searchFlights:'Search Flights', searchResorts:'Search Resorts', searchCars:'Search Cars', searchActivities:'Search Activities',
+    roundTrip:'Round-trip', oneWay:'One-way', sameDrop:'Drop-off same as pick-up.',
+    noMatch:'No match — type a place and search anyway.', loading:'Loading destinations…', soon:'coming soon',
+    redirect:'Opening your booking site. Your results will open in a new tab.' },
+  es:{ hotels:'Hoteles', flights:'Vuelos', resorts:'Resorts', cars:'Autos', activities:'Actividades',
+    titleHotels:'Reserva tu estadía', titleFlights:'Encuentra vuelos', titleResorts:'Encuentra un resort', titleCars:'Renta un auto', titleActivities:'Qué hacer',
+    dest:'Destino', checkin:'Llegada', checkout:'Salida', guests:'Huéspedes', from:'Origen', to:'Destino',
+    departure:'Ida', ret:'Regreso', passengers:'Pasajeros', pickupLoc:'Lugar de recogida', pickup:'Recogida', dropoff:'Devolución', date:'Fecha',
+    phWhere:'¿A dónde vas?', phCityAirport:'Ciudad o aeropuerto', phBeach:'Playa, isla, ciudad…', phAirportCity:'Aeropuerto o ciudad',
+    searchHotels:'Buscar hoteles', searchFlights:'Buscar vuelos', searchResorts:'Buscar resorts', searchCars:'Buscar autos', searchActivities:'Buscar actividades',
+    roundTrip:'Ida y vuelta', oneWay:'Solo ida', sameDrop:'Devolución en el mismo lugar.',
+    noMatch:'Sin resultados. Escribe un lugar y busca de todas formas.', loading:'Cargando destinos…', soon:'próximamente',
+    redirect:'Abriendo tu sitio de reservas. Tus resultados se abrirán en una nueva pestaña.' },
+  fr:{ hotels:'Hôtels', flights:'Vols', resorts:'Resorts', cars:'Voitures', activities:'Activités',
+    titleHotels:'Réservez votre séjour', titleFlights:'Trouvez un vol', titleResorts:'Trouvez un resort', titleCars:'Louez une voiture', titleActivities:'À faire sur place',
+    dest:'Destination', checkin:'Arrivée', checkout:'Départ', guests:'Voyageurs', from:'De', to:'À',
+    departure:'Aller', ret:'Retour', passengers:'Passagers', pickupLoc:'Lieu de prise en charge', pickup:'Prise en charge', dropoff:'Restitution', date:'Date',
+    phWhere:'Où allez-vous ?', phCityAirport:'Ville ou aéroport', phBeach:'Plage, île, ville…', phAirportCity:'Aéroport ou ville',
+    searchHotels:'Rechercher des hôtels', searchFlights:'Rechercher des vols', searchResorts:'Rechercher des resorts', searchCars:'Rechercher des voitures', searchActivities:'Rechercher des activités',
+    roundTrip:'Aller-retour', oneWay:'Aller simple', sameDrop:'Restitution au même endroit.',
+    noMatch:'Aucun résultat. Saisissez un lieu et lancez la recherche.', loading:'Chargement des destinations…', soon:'bientôt disponible',
+    redirect:'Ouverture de votre site de réservation. Vos résultats s\'ouvriront dans un nouvel onglet.' }
+};
+var T = I18N[(P.get('lang')||'en').toLowerCase()] || I18N.en;
+
 // tab icons (inline SVG, currentColor)
 var ICONS = {
   hotels:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M15 9h.01M9 13h.01M15 13h.01M10 21v-4h4v4"/></svg>',
@@ -99,11 +136,11 @@ var ICONS = {
 
 /* ================= PRODUCTS ================= */
 var ALL_TABS = [
-  {key:'hotels',     label:'Hotels',     ready:true},
-  {key:'flights',    label:'Flights',    ready:true},
-  {key:'resorts',    label:'Resorts',    ready:true},
-  {key:'cars',       label:'Cars',       ready:true},
-  {key:'activities', label:'Activities', ready:true}
+  {key:'hotels',     label:T.hotels,     ready:true},
+  {key:'flights',    label:T.flights,    ready:true},
+  {key:'resorts',    label:T.resorts,    ready:true},
+  {key:'cars',       label:T.cars,       ready:true},
+  {key:'activities', label:T.activities, ready:true}
 ];
 // ?tabs=cars,hotels — which products show, in strip order; unknown keys ignored, empty/invalid falls back to all
 var TABS = (P.get('tabs')||'').toLowerCase().split(',').map(function(s){return s.trim();})
@@ -160,7 +197,16 @@ function uuid(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,fu
 function isoDate(offsetDays){ return new Date(Date.now()+offsetDays*864e5).toISOString().slice(0,10); }
 function prom(s){ s=s||''; return s.split(',').length*100 + s.length; }
 function el(html){ var t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstChild; }
-function go(url){ var w=window.open(url,'_blank'); if(!w){ try{window.top.location.href=url;}catch(e){window.location.href=url;} } }
+function go(url){
+  veil.classList.add('show');
+  setTimeout(function(){ veil.classList.remove('show'); }, 2600);
+  var w=window.open(url,'_blank');
+  if(!w){ try{window.top.location.href=url;}catch(e){window.location.href=url;} }
+}
+// redirect veil (soft feedback while the results tab opens); ?redirectText= overrides the translated default
+var veil=el('<div class="qb-veil"><div class="qb-veil-spin"></div><div class="qb-veil-msg"></div></div>');
+veil.querySelector('.qb-veil-msg').textContent = P.get('redirectText') || T.redirect;
+document.body.appendChild(veil);
 
 var DATA={}; // cache: product -> array
 function loadData(key){
@@ -184,7 +230,7 @@ function wireAutocomplete(input, box, key){
     return starts.concat(contains).slice(0,8);
   }
   function render(){
-    if(!matches.length){ box.innerHTML='<div class="ac-empty">No match — type a place and search anyway.</div>'; box.classList.add('open'); return; }
+    if(!matches.length){ box.innerHTML='<div class="ac-empty">'+T.noMatch+'</div>'; box.classList.add('open'); return; }
     box.innerHTML=matches.map(function(d,i){
       return '<div class="ac-item'+(i===activeIdx?' active':'')+'" data-i="'+i+'"><span class="ac-pin">●</span>'
         +'<span><span class="ac-main">'+cfg.main(d)+'</span><br><span class="ac-sub">'+cfg.sub(d)+'</span></span></div>';
@@ -193,7 +239,7 @@ function wireAutocomplete(input, box, key){
   input.addEventListener('input', function(){
     input._sel=null; activeIdx=-1;
     if(input.value.trim().length<2){ box.classList.remove('open'); return; }
-    if(!DATA[key]){ box.innerHTML='<div class="ac-loading"><span class="ac-spin"></span>Loading destinations…</div>'; box.classList.add('open'); }
+    if(!DATA[key]){ box.innerHTML='<div class="ac-loading"><span class="ac-spin"></span>'+T.loading+'</div>'; box.classList.add('open'); }
     loadData(key).then(function(){ matches=search(input.value); render(); });
   });
   box.addEventListener('mousedown', function(e){ var it=e.target.closest('.ac-item'); if(!it) return;
@@ -278,13 +324,13 @@ function isoDateFrom(d, addDays){ var t=new Date(d+'T00:00:00'); t.setDate(t.get
 
 /* ================= panels ================= */
 function hotelsPanel(){
-  var wrap=el('<div><div class="qb-title">Book Your Stay</div>'
+  var wrap=el('<div><div class="qb-title">'+T.titleHotels+'</div>'
    +'<div class="qb-row hotels">'
-   +'<div class="fld"><label>Destination</label><input id="h-dest" autocomplete="off" placeholder="Where are you going?"><div class="ac" id="h-ac"></div></div>'
-   +'<div class="fld"><label>Check-in</label><input id="h-in" type="date"></div>'
-   +'<div class="fld"><label>Check-out</label><input id="h-out" type="date"></div>'
-   +'<div class="fld"><label>Guests</label><input id="h-guests" type="number" min="1" value="2"></div>'
-   +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="h-go">Search Hotels</button></div>'
+   +'<div class="fld"><label>'+T.dest+'</label><input id="h-dest" autocomplete="off" placeholder="'+T.phWhere+'"><div class="ac" id="h-ac"></div></div>'
+   +'<div class="fld"><label>'+T.checkin+'</label><input id="h-in" type="date"></div>'
+   +'<div class="fld"><label>'+T.checkout+'</label><input id="h-out" type="date"></div>'
+   +'<div class="fld"><label>'+T.guests+'</label><input id="h-guests" type="number" min="1" value="2"></div>'
+   +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="h-go">'+T.searchHotels+'</button></div>'
    +'</div><input type="hidden" id="h-rooms" value="1"></div>');
   qbBody.innerHTML=''; qbBody.appendChild(wrap);
   var dest=wrap.querySelector('#h-dest');
@@ -297,16 +343,16 @@ function hotelsPanel(){
   });
 }
 function flightsPanel(){
-  var wrap=el('<div><div class="qb-title">Find Flights</div>'
-   +'<div class="trip"><label><input type="radio" name="trip" value="round" checked> Round-trip</label>'
-   +'<label><input type="radio" name="trip" value="one"> One-way</label></div>'
+  var wrap=el('<div><div class="qb-title">'+T.titleFlights+'</div>'
+   +'<div class="trip"><label><input type="radio" name="trip" value="round" checked> '+T.roundTrip+'</label>'
+   +'<label><input type="radio" name="trip" value="one"> '+T.oneWay+'</label></div>'
    +'<div class="qb-row flights">'
-   +'<div class="fld"><label>From</label><input id="f-from" autocomplete="off" placeholder="City or airport"><div class="ac" id="f-fac"></div></div>'
-   +'<div class="fld"><label>To</label><input id="f-to" autocomplete="off" placeholder="City or airport"><div class="ac" id="f-tac"></div></div>'
-   +'<div class="fld"><label>Departure</label><input id="f-dep" type="date"></div>'
-   +'<div class="fld"><label>Return</label><input id="f-ret" type="date"></div>'
-   +'<div class="fld"><label>Passengers</label><input id="f-pax" type="number" min="1" value="1"></div>'
-   +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="f-go">Search Flights</button></div>'
+   +'<div class="fld"><label>'+T.from+'</label><input id="f-from" autocomplete="off" placeholder="'+T.phCityAirport+'"><div class="ac" id="f-fac"></div></div>'
+   +'<div class="fld"><label>'+T.to+'</label><input id="f-to" autocomplete="off" placeholder="'+T.phCityAirport+'"><div class="ac" id="f-tac"></div></div>'
+   +'<div class="fld"><label>'+T.departure+'</label><input id="f-dep" type="date"></div>'
+   +'<div class="fld"><label>'+T.ret+'</label><input id="f-ret" type="date"></div>'
+   +'<div class="fld"><label>'+T.passengers+'</label><input id="f-pax" type="number" min="1" value="1"></div>'
+   +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="f-go">'+T.searchFlights+'</button></div>'
    +'</div></div>');
   qbBody.innerHTML=''; qbBody.appendChild(wrap);
   var from=wrap.querySelector('#f-from'), to=wrap.querySelector('#f-to'), ret=wrap.querySelector('#f-ret');
@@ -324,13 +370,13 @@ function flightsPanel(){
   });
 }
 function resortsPanel(){
-  var wrap=el('<div><div class="qb-title">Find a Resort</div>'
+  var wrap=el('<div><div class="qb-title">'+T.titleResorts+'</div>'
    +'<div class="qb-row hotels">'
-   +'<div class="fld"><label>Destination</label><input id="r-dest" autocomplete="off" placeholder="Beach, island, city…"><div class="ac" id="r-ac"></div></div>'
-   +'<div class="fld"><label>Check-in</label><input id="r-in" type="date"></div>'
-   +'<div class="fld"><label>Check-out</label><input id="r-out" type="date"></div>'
-   +'<div class="fld"><label>Guests</label><input id="r-guests" type="number" min="1" value="2"></div>'
-   +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="r-go">Search Resorts</button></div>'
+   +'<div class="fld"><label>'+T.dest+'</label><input id="r-dest" autocomplete="off" placeholder="'+T.phBeach+'"><div class="ac" id="r-ac"></div></div>'
+   +'<div class="fld"><label>'+T.checkin+'</label><input id="r-in" type="date"></div>'
+   +'<div class="fld"><label>'+T.checkout+'</label><input id="r-out" type="date"></div>'
+   +'<div class="fld"><label>'+T.guests+'</label><input id="r-guests" type="number" min="1" value="2"></div>'
+   +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="r-go">'+T.searchResorts+'</button></div>'
    +'</div></div>');
   qbBody.innerHTML=''; qbBody.appendChild(wrap);
   var dest=wrap.querySelector('#r-dest'); wireAutocomplete(dest, wrap.querySelector('#r-ac'),'resorts');
@@ -341,13 +387,13 @@ function resortsPanel(){
   });
 }
 function carsPanel(){
-  var wrap=el('<div><div class="qb-title">Rent a Car</div>'
+  var wrap=el('<div><div class="qb-title">'+T.titleCars+'</div>'
    +'<div class="qb-row flights">'
-   +'<div class="fld"><label>Pick-up location</label><input id="c-pick" autocomplete="off" placeholder="Airport or city"><div class="ac" id="c-ac"></div></div>'
-   +'<div class="fld"><label>Pick-up</label><input id="c-pud" type="datetime-local"></div>'
-   +'<div class="fld"><label>Drop-off</label><input id="c-dod" type="datetime-local"></div>'
-   +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="c-go">Search Cars</button></div>'
-   +'</div><div class="qb-foot" style="text-align:left;padding:8px 2px 0">Drop-off same as pick-up.</div></div>');
+   +'<div class="fld"><label>'+T.pickupLoc+'</label><input id="c-pick" autocomplete="off" placeholder="'+T.phAirportCity+'"><div class="ac" id="c-ac"></div></div>'
+   +'<div class="fld"><label>'+T.pickup+'</label><input id="c-pud" type="datetime-local"></div>'
+   +'<div class="fld"><label>'+T.dropoff+'</label><input id="c-dod" type="datetime-local"></div>'
+   +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="c-go">'+T.searchCars+'</button></div>'
+   +'</div><div class="qb-foot" style="text-align:left;padding:8px 2px 0">'+T.sameDrop+'</div></div>');
   qbBody.innerHTML=''; qbBody.appendChild(wrap);
   var pick=wrap.querySelector('#c-pick'); wireAutocomplete(pick, wrap.querySelector('#c-ac'),'cars');
   wrap.querySelector('#c-pud').value=isoDate(14)+'T10:00'; wrap.querySelector('#c-dod').value=isoDate(17)+'T10:00'; loadData('cars');
@@ -357,12 +403,12 @@ function carsPanel(){
   });
 }
 function activitiesPanel(){
-  var wrap=el('<div><div class="qb-title">Things to Do</div>'
+  var wrap=el('<div><div class="qb-title">'+T.titleActivities+'</div>'
    +'<div class="qb-row hotels">'
-   +'<div class="fld"><label>Destination</label><input id="a-dest" autocomplete="off" placeholder="Where are you going?"><div class="ac" id="a-ac"></div></div>'
-   +'<div class="fld"><label>Date</label><input id="a-date" type="date"></div>'
-   +'<div class="fld"><label>Guests</label><input id="a-guests" type="number" min="1" value="2"></div>'
-   +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="a-go">Search Activities</button></div>'
+   +'<div class="fld"><label>'+T.dest+'</label><input id="a-dest" autocomplete="off" placeholder="'+T.phWhere+'"><div class="ac" id="a-ac"></div></div>'
+   +'<div class="fld"><label>'+T.date+'</label><input id="a-date" type="date"></div>'
+   +'<div class="fld"><label>'+T.guests+'</label><input id="a-guests" type="number" min="1" value="2"></div>'
+   +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="a-go">'+T.searchActivities+'</button></div>'
    +'</div></div>');
   qbBody.innerHTML=''; qbBody.appendChild(wrap);
   var dest=wrap.querySelector('#a-dest'); wireAutocomplete(dest, wrap.querySelector('#a-ac'),'activities');
@@ -372,7 +418,7 @@ function activitiesPanel(){
     go(activitiesUrl({dest:dest,date:wrap.querySelector('#a-date'),guests:wrap.querySelector('#a-guests')}));
   });
 }
-function soonPanel(label){ qbBody.innerHTML='<div class="soon"><strong>'+label+'</strong> coming soon.</div>'; }
+function soonPanel(label){ qbBody.innerHTML='<div class="soon"><strong>'+label+'</strong> '+T.soon+'.</div>'; }
 
 /* ================= tabs / boot ================= */
 var qbTabs=document.getElementById('qb-tabs'), qbBody=document.getElementById('qb-body');
