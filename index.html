@@ -10,9 +10,9 @@
   html,body{ margin:0; }
   body{ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:transparent; }
   .qb{ max-width:1040px; margin:0 auto; padding:14px; }
-  .qb-card{ background:#fff; border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 6px 24px rgba(0,0,0,.06); overflow:hidden; }
+  .qb-card{ background:#fff; border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 6px 24px rgba(0,0,0,.06); }  /* no overflow:hidden — it clips the autocomplete dropdown */
   /* tabs */
-  .qb-tabs{ display:flex; gap:2px; background:var(--soft); padding:6px 6px 0; overflow-x:auto; }
+  .qb-tabs{ display:flex; gap:2px; background:var(--soft); padding:6px 6px 0; overflow-x:auto; border-radius:13px 13px 0 0; }
   .qb-tab{ appearance:none; border:none; background:transparent; padding:11px 15px; font-size:14px; font-weight:600; color:var(--muted); cursor:pointer; border-radius:10px 10px 0 0; white-space:nowrap; display:inline-flex; align-items:center; gap:7px; transition:color .15s, background .15s; }
   .qb-tab:hover{ color:var(--ink); }
   .qb-tab.active{ background:#fff; color:var(--primary); box-shadow:0 -2px 0 var(--primary) inset; }
