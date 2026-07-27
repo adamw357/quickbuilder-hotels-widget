@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Xeni Quick Builder — Embed Generator</title>
 <style>
-  :root{ --primary:#0f766e; --ink:#111827; --line:#d1d5db; --muted:#6b7280; --soft:#f3f4f6; }
+  :root{ --primary:#004e7a; --primary-dark:#003a5c; --ink:#111827; --line:#d1d5db; --muted:#6b7280; --soft:#f3f4f6; }
   *{ box-sizing:border-box; }
   body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#f9fafb; }
   .wrap{ max-width:1100px; margin:0 auto; padding:28px 20px 60px; }
@@ -18,7 +18,7 @@
   label{ display:block; font-size:13px; font-weight:600; margin:14px 0 6px; }
   label:first-of-type{ margin-top:0; }
   input[type=text], select{ width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:9px; font-size:14px; color:var(--ink); }
-  input:focus,select:focus{ outline:none; border-color:#0f766e; box-shadow:0 0 0 3px rgba(15,118,110,.15); }
+  input:focus,select:focus{ outline:none; border-color:#004e7a; box-shadow:0 0 0 3px rgba(0,78,122,.15); }
   .hint{ font-size:12px; color:var(--muted); margin-top:5px; }
   .row2{ display:flex; gap:10px; align-items:center; }
   .row2 input[type=color]{ width:44px; height:40px; border:1px solid var(--line); border-radius:8px; padding:2px; background:#fff; cursor:pointer; }
@@ -34,10 +34,17 @@
   .out{ margin-top:18px; }
   .out h3{ font-size:13px; margin:0 0 6px; }
   .codebox{ position:relative; background:#0b1220; color:#e5e7eb; border-radius:10px; padding:12px 44px 12px 12px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; word-break:break-all; white-space:pre-wrap; }
-  .copy{ position:absolute; top:8px; right:8px; background:#0f766e; color:#fff; border:none; border-radius:7px; padding:5px 10px; font-size:12px; font-weight:600; cursor:pointer; }
+  .copy{ position:absolute; top:8px; right:8px; background:#004e7a; color:#fff; border:none; border-radius:7px; padding:5px 10px; font-size:12px; font-weight:600; cursor:pointer; }
   .copy.ok{ background:#059669; }
   .steps{ font-size:13px; color:var(--ink); background:var(--soft); border-radius:10px; padding:12px 14px; margin-top:10px; line-height:1.6; }
-  .steps b{ color:#0f766e; }
+  .steps b{ color:#004e7a; }
+  .save-btn{ width:100%; margin-top:18px; padding:12px; border:none; border-radius:9px; background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%); color:#fff; font-size:14px; font-weight:700; cursor:pointer; transition:transform .2s, box-shadow .2s; }
+  .save-btn:hover:not(:disabled){ transform:translateY(-1px); box-shadow:0 4px 12px rgba(0,78,122,.4); }
+  .save-btn:disabled{ background:#e5e7eb; color:#6b7280; cursor:default; }
+  .save-banner{ display:none; margin-top:10px; background:rgba(39,174,96,.12); border:1px solid rgba(39,174,96,.35); color:#1e8449; font-size:13px; font-weight:600; border-radius:9px; padding:10px 12px; line-height:1.5; }
+  .save-banner.show{ display:block; }
+  .restore-note{ font-size:12.5px; color:var(--ink); background:var(--soft); border-radius:8px; padding:8px 10px; margin-bottom:14px; }
+  .restore-note a{ color:#004e7a; font-weight:600; }
 </style>
 </head>
 <body>
@@ -50,14 +57,16 @@
     <div class="card">
       <h2>1. Configure</h2>
 
+      <div class="restore-note" id="restoreNote" style="display:none">Restored your saved configuration. <a href="#" id="resetCfg">Start over</a></div>
+
       <label for="wl">White-label URL <span style="color:#dc2626">*</span></label>
       <input type="text" id="wl" placeholder="youragency.booking.clubxeni.com" value="lifestylevacation.uat.booking.clubxeni.com">
       <div class="hint">The agency's Xeni booking site. Search results open here.</div>
 
       <label>Brand color</label>
       <div class="row2">
-        <input type="color" id="color" value="#0f766e">
-        <input type="text" id="colorHex" value="#0f766e" style="max-width:120px">
+        <input type="color" id="color" value="#004e7a">
+        <input type="text" id="colorHex" value="#004e7a" style="max-width:120px">
       </div>
       <div class="hint">Buttons, active tab, and highlights use this color. (Button text auto-adjusts for readability.)</div>
 
@@ -96,6 +105,10 @@
       <label class="chk"><input type="checkbox" id="showPow" checked> Show a "Powered by" line</label>
       <input type="text" id="powText" value="Powered by Xeni" style="margin-top:8px">
       <div class="hint">Turn the checkbox off to hide it, or change the text (e.g. "Powered by TravelNest").</div>
+
+      <button type="button" class="save-btn" id="saveBtn" disabled>Save configuration</button>
+      <div class="hint" style="text-align:center">Saved in this browser, so your settings are here next time.</div>
+      <div class="save-banner" id="saveBanner">Configuration saved. To publish changes to your live site, copy the updated URL below and paste it into your embed.</div>
     </div>
 
     <!-- ============ PREVIEW + OUTPUT ============ -->
@@ -167,7 +180,7 @@ function buildUrl(){
   var wl = normUrl($('wl').value);
   if(wl) params.push('platform=' + encodeURIComponent(wl));
   var color = $('colorHex').value.replace('#','');
-  if(color && color.toLowerCase() !== '0f766e') params.push('primary=' + color);
+  if(color && color.toLowerCase() !== '004e7a') params.push('primary=' + color);
   if($('bg').value === 'seamless') params.push('bg=seamless');
   if($('lang').value !== 'en') params.push('lang=' + $('lang').value);
   var rt = $('redirText').value.trim();
@@ -186,6 +199,7 @@ function refresh(){
   $('iframeOut').textContent = '<iframe src="' + url + '" width="100%" height="550" style="border:none;" loading="lazy"></iframe>';
   // only reload preview if the URL actually changed (avoids flicker while typing)
   if($('preview').getAttribute('data-src') !== url){ $('preview').setAttribute('data-src', url); $('preview').src = url; }
+  syncSave();
 }
 
 // sync color picker <-> hex
@@ -207,7 +221,57 @@ document.querySelectorAll('.copy').forEach(function(btn){
   });
 });
 
+/* ---- save / restore (this browser only; localStorage) ---- */
+var LS_KEY='qbBuilderConfig';
+function lsGet(){ try{ return localStorage.getItem(LS_KEY); }catch(e){ return null; } }
+function lsSet(v){ try{ localStorage.setItem(LS_KEY,v); }catch(e){} }
+function lsDel(){ try{ localStorage.removeItem(LS_KEY); }catch(e){} }
+function cfgState(){
+  return JSON.stringify({ wl:$('wl').value, color:$('colorHex').value, bg:$('bg').value, lang:$('lang').value,
+    redirText:$('redirText').value, tab:$('tab').value, showPow:$('showPow').checked, powText:$('powText').value,
+    prods:prods.map(function(p){ return {key:p.key,on:p.on}; }) });
+}
+var savedState=null;
+function syncSave(){
+  var b=$('saveBtn'); if(!b) return;
+  var dirty = cfgState()!==savedState;
+  b.disabled=!dirty;
+  b.textContent = dirty ? 'Save changes' : (lsGet() ? 'Saved ✓' : 'Save configuration');
+}
+$('saveBtn').addEventListener('click', function(){
+  savedState=cfgState(); lsSet(savedState); syncSave();
+  var bn=$('saveBanner'); bn.classList.add('show');
+  clearTimeout(bn._t); bn._t=setTimeout(function(){ bn.classList.remove('show'); }, 6000);
+});
+$('resetCfg').addEventListener('click', function(e){ e.preventDefault(); lsDel(); location.reload(); });
+
+// boot: restore saved config (if any), then render
+var pendingTab=null, restored=false;
+(function(){
+  var raw=lsGet(); if(!raw) return;
+  try{
+    var c=JSON.parse(raw);
+    $('wl').value=c.wl||'';
+    if(/^#[0-9a-fA-F]{6}$/.test(c.color||'')){ $('colorHex').value=c.color; $('color').value=c.color; }
+    $('bg').value=c.bg||'card'; $('lang').value=c.lang||'en'; $('redirText').value=c.redirText||'';
+    $('showPow').checked=('showPow' in c)?!!c.showPow:true;
+    $('powText').value=('powText' in c)?c.powText:'Powered by Xeni';
+    $('powText').disabled=!$('showPow').checked; $('powText').style.opacity=$('showPow').checked?1:.5;
+    if(c.prods && c.prods.length){
+      var byKey={}; prods.forEach(function(p){ byKey[p.key]=p; });
+      var re=[];
+      c.prods.forEach(function(sp){ if(byKey[sp.key]){ byKey[sp.key].on=!!sp.on; re.push(byKey[sp.key]); delete byKey[sp.key]; } });
+      DEFAULT_TABS.forEach(function(k){ if(byKey[k]) re.push(byKey[k]); });
+      if(re.some(function(p){ return p.on; })) prods=re;
+    }
+    pendingTab=c.tab; restored=true;
+  }catch(e){}
+})();
 syncProds();
+if(pendingTab && visibleKeys().indexOf(pendingTab)>-1){ $('tab').value=pendingTab; refresh(); }
+if(restored){ $('restoreNote').style.display='block'; }
+savedState=cfgState();
+syncSave();
 </script>
 </body>
 </html>
