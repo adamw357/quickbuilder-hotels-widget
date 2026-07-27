@@ -36,6 +36,7 @@
   /* autocomplete */
   .ac{ position:absolute; top:100%; left:0; right:0; z-index:50; background:#fff; border:1px solid var(--line); border-radius:10px; margin-top:4px; box-shadow:0 10px 30px rgba(0,0,0,.12); max-height:260px; overflow-y:auto; display:none; }
   .ac.open{ display:block; }
+  .ac.up{ top:auto; bottom:100%; margin-top:0; margin-bottom:4px; box-shadow:0 -10px 30px rgba(0,0,0,.12); }
   .ac-item{ padding:9px 12px; cursor:pointer; font-size:14px; display:flex; gap:9px; align-items:center; }
   .ac-item:hover,.ac-item.active{ background:var(--soft); }
   .ac-pin{ color:var(--primary); flex:0 0 auto; font-size:11px; }
@@ -218,6 +219,13 @@ function loadData(key){
 /* generic autocomplete: input + box, product cfg, stores picked object on input._sel */
 function wireAutocomplete(input, box, key){
   var cfg=AC[key], matches=[], activeIdx=-1;
+  // size/flip the dropdown to the room actually available inside the (possibly short) embed iframe
+  function fitBox(){
+    var r=input.getBoundingClientRect(), fr=box.parentNode.getBoundingClientRect();
+    var below=window.innerHeight-r.bottom-12, above=fr.top-12;  // .ac.up hangs above the whole .fld (label included)
+    if(below<140 && above>below){ box.classList.add('up'); box.style.maxHeight=Math.min(260, above-4)+'px'; }
+    else { box.classList.remove('up'); box.style.maxHeight=Math.min(260, Math.max(90, below-8))+'px'; }
+  }
   function search(q){
     q=(q||'').toLowerCase().trim(); if(q.length<2) return [];
     var list=DATA[key]||[], starts=[], contains=[];
@@ -230,6 +238,7 @@ function wireAutocomplete(input, box, key){
     return starts.concat(contains).slice(0,8);
   }
   function render(){
+    fitBox();
     if(!matches.length){ box.innerHTML='<div class="ac-empty">'+T.noMatch+'</div>'; box.classList.add('open'); return; }
     box.innerHTML=matches.map(function(d,i){
       return '<div class="ac-item'+(i===activeIdx?' active':'')+'" data-i="'+i+'"><span class="ac-pin">●</span>'
@@ -239,7 +248,7 @@ function wireAutocomplete(input, box, key){
   input.addEventListener('input', function(){
     input._sel=null; activeIdx=-1;
     if(input.value.trim().length<2){ box.classList.remove('open'); return; }
-    if(!DATA[key]){ box.innerHTML='<div class="ac-loading"><span class="ac-spin"></span>'+T.loading+'</div>'; box.classList.add('open'); }
+    if(!DATA[key]){ box.innerHTML='<div class="ac-loading"><span class="ac-spin"></span>'+T.loading+'</div>'; fitBox(); box.classList.add('open'); }
     loadData(key).then(function(){ matches=search(input.value); render(); });
   });
   box.addEventListener('mousedown', function(e){ var it=e.target.closest('.ac-item'); if(!it) return;
