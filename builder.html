@@ -24,6 +24,12 @@
   .row2 input[type=color]{ width:44px; height:40px; border:1px solid var(--line); border-radius:8px; padding:2px; background:#fff; cursor:pointer; }
   .chk{ display:flex; align-items:center; gap:8px; font-weight:600; font-size:13px; margin-top:14px; cursor:pointer; }
   .chk input{ width:16px; height:16px; }
+  .prod{ display:flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--line); border-radius:8px; margin-top:6px; background:#fff; font-size:13px; font-weight:600; }
+  .prod input{ width:16px; height:16px; }
+  .prod .nm{ flex:1; }
+  .prod button{ width:28px; height:26px; border:1px solid var(--line); background:var(--soft); border-radius:6px; cursor:pointer; font-size:12px; line-height:1; color:var(--ink); }
+  .prod button:disabled{ opacity:.35; cursor:default; }
+  .prod.off{ opacity:.55; }
   .preview-frame{ width:100%; height:560px; border:1px solid #e5e7eb; border-radius:12px; background:#fff; }
   .out{ margin-top:18px; }
   .out h3{ font-size:13px; margin:0 0 6px; }
@@ -65,6 +71,10 @@
         <option value="seamless">Seamless — transparent</option>
       </select>
       <div class="hint">Seamless blends into a colored page section (best on lighter backgrounds).</div>
+
+      <label>Products</label>
+      <div id="prodList"></div>
+      <div class="hint">Uncheck to hide a product. Arrows set the left-to-right tab order.</div>
 
       <label for="tab">Opening tab</label>
       <select id="tab">
@@ -110,6 +120,35 @@
 var WIDGET_BASE = 'https://adamw357.github.io/quickbuilder-hotels-widget/';
 var $ = function(id){ return document.getElementById(id); };
 
+var DEFAULT_TABS = ['hotels','flights','resorts','cars','activities'];
+var PROD_LABELS = {hotels:'Hotels',flights:'Flights',resorts:'Resorts',cars:'Cars',activities:'Activities'};
+var prods = DEFAULT_TABS.map(function(k){ return {key:k, on:true}; });
+function visibleKeys(){ return prods.filter(function(p){return p.on;}).map(function(p){return p.key;}); }
+
+function renderProds(){
+  var host=$('prodList'); host.innerHTML='';
+  var onCount=visibleKeys().length;
+  prods.forEach(function(p,i){
+    var row=document.createElement('div'); row.className='prod'+(p.on?'':' off');
+    row.innerHTML='<input type="checkbox"'+(p.on?' checked':'')+(p.on&&onCount===1?' disabled':'')+'>'
+      +'<span class="nm">'+PROD_LABELS[p.key]+'</span>'
+      +'<button type="button" title="Move up"'+(i===0?' disabled':'')+'>&#9650;</button>'
+      +'<button type="button" title="Move down"'+(i===prods.length-1?' disabled':'')+'>&#9660;</button>';
+    var cb=row.querySelector('input'), btns=row.querySelectorAll('button');
+    cb.addEventListener('change', function(){ p.on=cb.checked; syncProds(); });
+    btns[0].addEventListener('click', function(){ prods.splice(i,1); prods.splice(i-1,0,p); syncProds(); });
+    btns[1].addEventListener('click', function(){ prods.splice(i,1); prods.splice(i+1,0,p); syncProds(); });
+    host.appendChild(row);
+  });
+}
+function syncProds(){
+  // opening-tab dropdown only offers visible products; snap to first visible if current got hidden
+  var vis=visibleKeys(), sel=$('tab'), cur=sel.value;
+  sel.innerHTML=vis.map(function(k){return '<option value="'+k+'">'+PROD_LABELS[k]+'</option>';}).join('');
+  sel.value = vis.indexOf(cur)>-1 ? cur : vis[0];
+  renderProds(); refresh();
+}
+
 function normUrl(u){
   u = (u||'').trim().replace(/\/+$/,'');
   if(u && !/^https?:\/\//i.test(u)) u = 'https://' + u;
@@ -124,8 +163,10 @@ function buildUrl(){
   var logo = $('logo').value.trim();
   if(logo) params.push('logo=' + encodeURIComponent(logo));
   if($('bg').value === 'seamless') params.push('bg=seamless');
+  var vis = visibleKeys();
+  if(vis.join(',') !== DEFAULT_TABS.join(',')) params.push('tabs=' + vis.join(','));
   var tab = $('tab').value;
-  if(tab !== 'hotels') params.push('tab=' + tab);
+  if(tab && tab !== vis[0]) params.push('tab=' + tab);
   if(!$('showPow').checked){ params.push('powered=0'); }
   else { var t=$('powText').value.trim(); if(t && t !== 'Powered by Xeni') params.push('poweredText=' + encodeURIComponent(t)); }
   return WIDGET_BASE + (params.length ? '?' + params.join('&') : '');
@@ -156,7 +197,7 @@ document.querySelectorAll('.copy').forEach(function(btn){
   });
 });
 
-refresh();
+syncProds();
 </script>
 </body>
 </html>

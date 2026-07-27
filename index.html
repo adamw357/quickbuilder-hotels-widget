@@ -77,7 +77,7 @@ var QB = {
   poweredText: P.get('poweredText') || 'Powered by Xeni',
   logo:        P.get('logo')  || '',
   bg:          P.get('bg')    || 'card',                 // card | seamless
-  startTab:    P.get('tab') || 'hotels'
+  startTab:    P.get('tab') || ''               // empty = first visible tab
 };
 // brand color + auto-contrast button text (dark text on light brand colors)
 function relLum(hex){ hex=hex.replace('#',''); if(hex.length!==6) return 0;
@@ -101,13 +101,19 @@ var ICONS = {
 };
 
 /* ================= PRODUCTS ================= */
-var TABS = [
+var ALL_TABS = [
   {key:'hotels',     label:'Hotels',     ready:true},
   {key:'flights',    label:'Flights',    ready:true},
   {key:'resorts',    label:'Resorts',    ready:true},
   {key:'cars',       label:'Cars',       ready:true},
   {key:'activities', label:'Activities', ready:true}
 ];
+// ?tabs=cars,hotels — which products show, in strip order; unknown keys ignored, empty/invalid falls back to all
+var TABS = (P.get('tabs')||'').toLowerCase().split(',').map(function(s){return s.trim();})
+  .filter(function(k,i,a){return a.indexOf(k)===i;})
+  .map(function(k){return ALL_TABS.filter(function(t){return t.key===k;})[0];})
+  .filter(function(t){return !!t;});
+if(!TABS.length) TABS = ALL_TABS;
 // autocomplete config per product
 var AC = {
   hotels: {
@@ -398,7 +404,7 @@ TABS.forEach(function(t){
   var f=document.getElementById('qb-foot');
   if(QB.poweredShow && QB.poweredText){ f.textContent=QB.poweredText; } else { f.style.display='none'; }
 })();
-selectTab(TABS.some(function(t){return t.key===QB.startTab;})?QB.startTab:'hotels');
+selectTab(TABS.some(function(t){return t.key===QB.startTab;})?QB.startTab:TABS[0].key);
 </script>
 </body>
 </html>
