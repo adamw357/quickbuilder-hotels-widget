@@ -237,7 +237,9 @@ var AC = {
 
 /* ================= helpers ================= */
 function uuid(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0,v=c==='x'?r:(r&0x3|0x8);return v.toString(16);});}
-function isoDate(offsetDays){ return new Date(Date.now()+offsetDays*864e5).toISOString().slice(0,10); }
+/* local-date formatting on purpose: toISOString() is UTC and shifts the day for visitors in UTC+ timezones */
+function fmtDate(t){ return t.getFullYear()+'-'+('0'+(t.getMonth()+1)).slice(-2)+'-'+('0'+t.getDate()).slice(-2); }
+function isoDate(offsetDays){ var t=new Date(); t.setDate(t.getDate()+offsetDays); return fmtDate(t); }
 function prom(s){ s=s||''; return s.split(',').length*100 + s.length; }
 function el(html){ var t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstChild; }
 function go(url){
@@ -304,6 +306,31 @@ function wireAutocomplete(input, box, key){
     else if(e.key==='Escape'){box.classList.remove('open');}
   });
   document.addEventListener('click', function(e){ if(!box.parentNode.contains(e.target)) box.classList.remove('open'); });
+}
+
+/* ============ date-pair guards: end can never precede start; no past dates ============ */
+function guardDates(a, b, minGap){  // minGap in days: 1 = at least one night, 0 = same-day ok
+  function fix(){
+    var today=isoDate(0);
+    if(a.value && a.value<today) a.value=today;
+    if(!a.value) return;
+    var min=isoDateFrom(a.value, minGap);
+    b.min=min;
+    if(b.value<min) b.value=min;
+  }
+  a.min=isoDate(0);
+  a.addEventListener('change', fix); b.addEventListener('change', fix);
+  fix();
+}
+function guardTimes(a, b){  // datetime-local pair (cars): drop-off snaps to pickup +1 day when invalid
+  function fix(){
+    if(!a.value) return;
+    b.min=a.value;
+    if(b.value<=a.value){ var p=a.value.split('T'); b.value=isoDateFrom(p[0],1)+'T'+(p[1]||'10:00'); }
+  }
+  a.min=isoDate(0)+'T00:00';
+  a.addEventListener('change', fix); b.addEventListener('change', fix);
+  fix();
 }
 
 /* ============ traveler/rooms popovers ============ */
@@ -488,7 +515,7 @@ function activitiesUrl(f){
   p.append('preference',JSON.stringify([]));
   return QB.platformUrl.replace(/\/+$/,'')+'/booknow/activity/v2/search?'+p.toString();
 }
-function isoDateFrom(d, addDays){ var t=new Date(d+'T00:00:00'); t.setDate(t.getDate()+addDays); return t.toISOString().slice(0,10); }
+function isoDateFrom(d, addDays){ var t=new Date(d+'T00:00:00'); t.setDate(t.getDate()+addDays); return fmtDate(t); }
 
 /* ================= panels ================= */
 function hotelsPanel(){
@@ -504,6 +531,7 @@ function hotelsPanel(){
   var dest=wrap.querySelector('#h-dest');
   wireAutocomplete(dest, wrap.querySelector('#h-ac'), 'hotels');
   wrap.querySelector('#h-in').value=isoDate(14); wrap.querySelector('#h-out').value=isoDate(17);
+  guardDates(wrap.querySelector('#h-in'), wrap.querySelector('#h-out'), 1);
   var getRooms=wireRoomsPop(wrap.querySelector('#h-rg-fld'), wrap.querySelector('#h-rg'));
   loadData('hotels');
   wrap.querySelector('#h-go').addEventListener('click',function(){
@@ -532,6 +560,7 @@ function flightsPanel(){
   wireAutocomplete(from, wrap.querySelector('#f-fac'), 'flights');
   wireAutocomplete(to, wrap.querySelector('#f-tac'), 'flights');
   wrap.querySelector('#f-dep').value=isoDate(14); ret.value=isoDate(21);
+  guardDates(wrap.querySelector('#f-dep'), ret, 0);
   var getTrav=wireTravPop(wrap.querySelector('#f-pax-fld'), wrap.querySelector('#f-pax'));
   loadData('flights');
   // toggle return enabled by trip type
@@ -553,7 +582,9 @@ function resortsPanel(){
    +'</div></div>');
   qbBody.innerHTML=''; qbBody.appendChild(wrap);
   var dest=wrap.querySelector('#r-dest'); wireAutocomplete(dest, wrap.querySelector('#r-ac'),'resorts');
-  wrap.querySelector('#r-in').value=isoDate(14); wrap.querySelector('#r-out').value=isoDate(17); loadData('resorts');
+  wrap.querySelector('#r-in').value=isoDate(14); wrap.querySelector('#r-out').value=isoDate(17);
+  guardDates(wrap.querySelector('#r-in'), wrap.querySelector('#r-out'), 1);
+  loadData('resorts');
   wrap.querySelector('#r-go').addEventListener('click',function(){
     if(!dest.value.trim()){dest.focus();return;}
     go(resortsUrl({dest:dest,cin:wrap.querySelector('#r-in'),cout:wrap.querySelector('#r-out')}));
@@ -571,7 +602,9 @@ function carsPanel(){
   qbBody.innerHTML=''; qbBody.appendChild(wrap);
   var pick=wrap.querySelector('#c-pick'); wireAutocomplete(pick, wrap.querySelector('#c-ac'),'cars');
   // +15d not +14: the cars API rejects pickups under 14 days out ("pickup date must be at least 14 days after current time"), and +14 at 10:00 AM can land just inside that window
-  wrap.querySelector('#c-pud').value=isoDate(15)+'T10:00'; wrap.querySelector('#c-dod').value=isoDate(18)+'T10:00'; loadData('cars');
+  wrap.querySelector('#c-pud').value=isoDate(15)+'T10:00'; wrap.querySelector('#c-dod').value=isoDate(18)+'T10:00';
+  guardTimes(wrap.querySelector('#c-pud'), wrap.querySelector('#c-dod'));
+  loadData('cars');
   wrap.querySelector('#c-go').addEventListener('click',function(){
     if(!pick.value.trim()){pick.focus();return;}
     go(carsUrl({pick:pick,pickup:wrap.querySelector('#c-pud'),drop:wrap.querySelector('#c-dod'),age:wrap.querySelector('#c-age')}));
@@ -587,7 +620,9 @@ function activitiesPanel(){
    +'</div></div>');
   qbBody.innerHTML=''; qbBody.appendChild(wrap);
   var dest=wrap.querySelector('#a-dest'); wireAutocomplete(dest, wrap.querySelector('#a-ac'),'activities');
-  wrap.querySelector('#a-date').value=isoDate(14); loadData('activities');
+  var aDate=wrap.querySelector('#a-date'); aDate.value=isoDate(14); aDate.min=isoDate(0);
+  aDate.addEventListener('change', function(){ if(aDate.value && aDate.value<aDate.min) aDate.value=aDate.min; });
+  loadData('activities');
   wrap.querySelector('#a-go').addEventListener('click',function(){
     if(!dest.value.trim()){dest.focus();return;}
     go(activitiesUrl({dest:dest,date:wrap.querySelector('#a-date'),guests:wrap.querySelector('#a-guests')}));
