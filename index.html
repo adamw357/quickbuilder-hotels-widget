@@ -105,7 +105,10 @@ var QB = {
   poweredShow: P.get('powered') !== '0',                 // ?powered=0 hides it
   poweredText: P.get('poweredText') || 'Powered by Xeni',
   bg:          P.get('bg')    || 'card',                 // card | seamless
-  startTab:    P.get('tab') || ''               // empty = first visible tab
+  startTab:    P.get('tab') || '',              // empty = first visible tab
+  // live autocomplete proxy (holds the shared Xeni credential server-side).
+  // ?api=<base> overrides (Xeni swaps in their own copy at handoff); ?api=0 forces bundled-data-only mode.
+  api:         (function(a){ return (a==='0'||a==='off') ? '' : (a || 'https://quickbuilder-proxy-production.up.railway.app').replace(/\/+$/,''); })(P.get('api'))
 };
 // brand color + auto-contrast button text (dark text on light brand colors)
 function relLum(hex){ hex=hex.replace('#',''); if(hex.length!==6) return 0;
@@ -236,7 +239,7 @@ var AC = {
     file:'data/activities.json',
     starts:function(d){return [d.name];},
     hay:function(d){return (d.name+' '+(d.p?d.dest:d.full_name)).toLowerCase();},
-    main:function(d){return d.name;}, sub:function(d){return d.p?(d.dest+' · '+T.actTag):d.full_name;},
+    main:function(d){return d.name;}, sub:function(d){return d.p?((d.dest?d.dest+' · ':'')+T.actTag):d.full_name;},
     pick:function(d){return d.p?d.name:d.full_name;},
     rank:function(d){return d.p?5:1;}  // destinations group first, then products (matches the OTA)
   }
@@ -260,11 +263,25 @@ var veil=el('<div class="qb-veil"><div class="qb-veil-spin"></div><div class="qb
 veil.querySelector('.qb-veil-msg').textContent = P.get('redirectText') || T.redirect;
 document.body.appendChild(veil);
 
-var DATA={}; // cache: product -> array
+var DATA={}; // cache: product -> array (bundled datasets; the offline fallback when live mode is on)
 function loadData(key){
   if(DATA[key]) return Promise.resolve(DATA[key]);
   return fetch(AC[key].file).then(function(r){return r.json();}).then(function(j){ DATA[key]=j; return j; })
     .catch(function(){ DATA[key]=[]; return []; });
+}
+// panels call warm() on open: in live mode skip the eager download, the bundle only loads if the proxy fails
+function warm(key){ if(!QB.api) loadData(key); }
+// live suggestions from the proxy; resolves null on any failure so the caller falls back to bundled data
+var LIVE={}; // cache: product:query -> entries
+function liveSearch(key, q){
+  var ck=key+':'+q.toLowerCase();
+  if(LIVE[ck]) return Promise.resolve(LIVE[ck]);
+  var ctrl=('AbortController' in window)?new AbortController():null;
+  var t=ctrl?setTimeout(function(){ctrl.abort();},4000):null;
+  return fetch(QB.api+'/ac/'+key+'?q='+encodeURIComponent(q), ctrl?{signal:ctrl.signal}:{})
+    .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+    .then(function(list){ if(t)clearTimeout(t); if(!(list instanceof Array)) throw 0; LIVE[ck]=list; return list; })
+    .catch(function(){ if(t)clearTimeout(t); return null; });
 }
 
 /* generic autocomplete: input + box, product cfg, stores picked object on input._sel */
@@ -296,11 +313,27 @@ function wireAutocomplete(input, box, key){
         +'<span><span class="ac-main">'+cfg.main(d)+'</span><br><span class="ac-sub">'+cfg.sub(d)+'</span></span></div>';
     }).join(''); box.classList.add('open');
   }
+  var seq=0;
+  function bundled(q, mySeq){
+    if(!DATA[key]){ box.innerHTML='<div class="ac-loading"><span class="ac-spin"></span>'+T.loading+'</div>'; fitBox(); box.classList.add('open'); }
+    loadData(key).then(function(){ if(mySeq===seq){ matches=search(q); render(); } });
+  }
   input.addEventListener('input', function(){
     input._sel=null; activeIdx=-1;
-    if(input.value.trim().length<2){ box.classList.remove('open'); return; }
-    if(!DATA[key]){ box.innerHTML='<div class="ac-loading"><span class="ac-spin"></span>'+T.loading+'</div>'; fitBox(); box.classList.add('open'); }
-    loadData(key).then(function(){ matches=search(input.value); render(); });
+    var q=input.value.trim();
+    if(q.length<2){ box.classList.remove('open'); return; }
+    var mySeq=++seq;
+    if(!QB.api){ bundled(q, mySeq); return; }
+    // live mode: debounce, then proxy; bundled datasets are the fallback if the proxy is down
+    box.innerHTML='<div class="ac-loading"><span class="ac-spin"></span>'+T.loading+'</div>'; fitBox(); box.classList.add('open');
+    clearTimeout(input._deb);
+    input._deb=setTimeout(function(){
+      liveSearch(key, q).then(function(list){
+        if(mySeq!==seq) return;
+        if(list){ matches=list.slice(0,8); render(); }
+        else bundled(q, mySeq);
+      });
+    }, 250);
   });
   box.addEventListener('mousedown', function(e){ var it=e.target.closest('.ac-item'); if(!it) return;
     var d=matches[+it.getAttribute('data-i')]; input._sel=d; input.value=cfg.pick(d); box.classList.remove('open');
@@ -443,7 +476,7 @@ function wireTravPop(fld, input){
 function hotelsUrl(f){
   var loc=f.dest._sel || {id:"0",name:f.dest.value,full_name:f.dest.value,country:"",type:"City",lat:0,long:0};
   var parts=(loc.full_name||'').split(',').map(function(s){return s.trim();});
-  var state=parts.length>=3?parts[parts.length-2]:"";
+  var state=loc.state||(parts.length>=3?parts[parts.length-2]:"");
   var cin=f.cin.value||isoDate(14), cout=f.cout.value||isoDate(17);
   var p=new URLSearchParams();
   p.append('correlationId',uuid());
@@ -554,7 +587,7 @@ function hotelsPanel(){
   wrap.querySelector('#h-in').value=isoDate(14); wrap.querySelector('#h-out').value=isoDate(17);
   guardDates(wrap.querySelector('#h-in'), wrap.querySelector('#h-out'), 1);
   var getRooms=wireRoomsPop(wrap.querySelector('#h-rg-fld'), wrap.querySelector('#h-rg'));
-  loadData('hotels');
+  warm('hotels');
   wrap.querySelector('#h-go').addEventListener('click',function(){
     if(!dest.value.trim()){dest.focus();return;}
     go(hotelsUrl({dest:dest,cin:wrap.querySelector('#h-in'),cout:wrap.querySelector('#h-out'),rooms:getRooms}));
@@ -583,7 +616,7 @@ function flightsPanel(){
   wrap.querySelector('#f-dep').value=isoDate(14); ret.value=isoDate(21);
   guardDates(wrap.querySelector('#f-dep'), ret, 0);
   var getTrav=wireTravPop(wrap.querySelector('#f-pax-fld'), wrap.querySelector('#f-pax'));
-  loadData('flights');
+  warm('flights');
   // toggle return enabled by trip type
   wrap.querySelectorAll('input[name=trip]').forEach(function(r){ r.addEventListener('change',function(){
     var one=wrap.querySelector('input[name=trip]:checked').value==='one'; ret.disabled=one; ret.style.opacity=one?.45:1;
@@ -605,7 +638,7 @@ function resortsPanel(){
   var dest=wrap.querySelector('#r-dest'); wireAutocomplete(dest, wrap.querySelector('#r-ac'),'resorts');
   wrap.querySelector('#r-in').value=isoDate(14); wrap.querySelector('#r-out').value=isoDate(17);
   guardDates(wrap.querySelector('#r-in'), wrap.querySelector('#r-out'), 1);
-  loadData('resorts');
+  warm('resorts');
   wrap.querySelector('#r-go').addEventListener('click',function(){
     if(!dest.value.trim()){dest.focus();return;}
     go(resortsUrl({dest:dest,cin:wrap.querySelector('#r-in'),cout:wrap.querySelector('#r-out')}));
@@ -631,7 +664,7 @@ function carsPanel(){
   // +15d not +14: the cars API rejects pickups under 14 days out ("pickup date must be at least 14 days after current time"), and +14 at 10:00 AM can land just inside that window
   wrap.querySelector('#c-pud').value=isoDate(15)+'T10:00'; wrap.querySelector('#c-dod').value=isoDate(18)+'T10:00';
   guardTimes(wrap.querySelector('#c-pud'), wrap.querySelector('#c-dod'));
-  loadData('cars');
+  warm('cars');
   wrap.querySelector('#c-go').addEventListener('click',function(){
     if(!pick.value.trim()){pick.focus();return;}
     go(carsUrl({pick:pick,dropLoc:dropLoc,pickup:wrap.querySelector('#c-pud'),drop:wrap.querySelector('#c-dod'),age:wrap.querySelector('#c-age'),nat:wrap.querySelector('#c-nat')}));
@@ -649,7 +682,7 @@ function activitiesPanel(){
   var dest=wrap.querySelector('#a-dest'); wireAutocomplete(dest, wrap.querySelector('#a-ac'),'activities');
   var aDate=wrap.querySelector('#a-date'); aDate.value=isoDate(14); aDate.min=isoDate(0);
   aDate.addEventListener('change', function(){ if(aDate.value && aDate.value<aDate.min) aDate.value=aDate.min; });
-  loadData('activities');
+  warm('activities');
   wrap.querySelector('#a-go').addEventListener('click',function(){
     if(!dest.value.trim()){dest.focus();return;}
     go(activitiesUrl({dest:dest,date:wrap.querySelector('#a-date'),guests:wrap.querySelector('#a-guests')}));
