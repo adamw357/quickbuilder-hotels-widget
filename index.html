@@ -24,7 +24,7 @@
   .qb-row.hotels{ grid-template-columns:2fr 1fr 1fr 1.1fr auto; }
   .qb-row.flights{ grid-template-columns:1.4fr 1.4fr 1fr 1fr .9fr auto; }
   .qb-row.resorts{ grid-template-columns:2fr 1fr 1fr auto; }
-  .qb-row.cars{ grid-template-columns:1.8fr 1.2fr 1.2fr .7fr auto; }
+  .qb-row.cars{ grid-template-columns:1.5fr 1.5fr 1.1fr 1.1fr auto; }
   @media (max-width:860px){ .qb-row{ grid-template-columns:1fr 1fr !important; } .qb-search-cell{ grid-column:1 / -1; } }
   .fld{ position:relative; display:flex; flex-direction:column; min-width:0; }
   .fld label{ font-size:12px; font-weight:600; color:var(--muted); margin:0 0 5px; }
@@ -36,7 +36,8 @@
   .trip{ display:flex; gap:14px; margin:0 2px 10px; font-size:13px; color:var(--ink); flex-wrap:wrap; align-items:center; }
   .trip label{ display:flex; align-items:center; gap:5px; cursor:pointer; font-weight:600; }
   .trip .sel-wrap{ display:flex; align-items:center; gap:6px; font-weight:600; }
-  .trip select{ padding:6px 8px; border:1px solid var(--line); border-radius:7px; font-size:13px; color:var(--ink); background:#fff; }
+  .trip select{ padding:6px 8px; border:1px solid var(--line); border-radius:7px; font-size:13px; color:var(--ink); background:#fff; max-width:200px; }
+  .trip input[type=number]{ width:64px; padding:6px 8px; border:1px solid var(--line); border-radius:7px; font-size:13px; color:var(--ink); }
   /* traveler/rooms popover (same iframe-fit rules as the autocomplete dropdown) */
   .fld input[readonly]{ cursor:pointer; background:#fff; }
   .pop{ position:absolute; top:100%; left:0; z-index:60; background:#fff; border:1px solid var(--line); border-radius:10px; margin-top:4px; box-shadow:0 10px 30px rgba(0,0,0,.12); display:none; padding:12px; min-width:252px; overflow-y:auto; }
@@ -126,7 +127,8 @@ var I18N = {
     departure:'Departure', ret:'Return', passengers:'Passengers', pickupLoc:'Pick-up location', pickup:'Pick-up', dropoff:'Drop-off', date:'Date',
     phWhere:'Where are you going?', phCityAirport:'City or airport', phBeach:'Beach, island, city…', phAirportCity:'Airport or city',
     searchHotels:'Search Hotels', searchFlights:'Search Flights', searchResorts:'Search Resorts', searchCars:'Search Cars', searchActivities:'Search Activities',
-    roundTrip:'Round-trip', oneWay:'One-way', sameDrop:'Drop-off same as pick-up.',
+    roundTrip:'Round-trip', oneWay:'One-way',
+    dropoffLoc:'Drop-off location', samePickup:'Same as pickup', nationality:'Driver\'s nationality',
     noMatch:'No match — type a place and search anyway.', loading:'Loading destinations…', soon:'coming soon',
     redirect:'Opening your booking site. Your results will open in a new tab.',
     room:'Room', rooms:'Rooms', guest:'Guest', guestsW:'Guests',
@@ -141,7 +143,8 @@ var I18N = {
     departure:'Ida', ret:'Regreso', passengers:'Pasajeros', pickupLoc:'Lugar de recogida', pickup:'Recogida', dropoff:'Devolución', date:'Fecha',
     phWhere:'¿A dónde vas?', phCityAirport:'Ciudad o aeropuerto', phBeach:'Playa, isla, ciudad…', phAirportCity:'Aeropuerto o ciudad',
     searchHotels:'Buscar hoteles', searchFlights:'Buscar vuelos', searchResorts:'Buscar resorts', searchCars:'Buscar autos', searchActivities:'Buscar actividades',
-    roundTrip:'Ida y vuelta', oneWay:'Solo ida', sameDrop:'Devolución en el mismo lugar.',
+    roundTrip:'Ida y vuelta', oneWay:'Solo ida',
+    dropoffLoc:'Lugar de devolución', samePickup:'Igual que la recogida', nationality:'Nacionalidad del conductor',
     noMatch:'Sin resultados. Escribe un lugar y busca de todas formas.', loading:'Cargando destinos…', soon:'próximamente',
     redirect:'Abriendo tu sitio de reservas. Tus resultados se abrirán en una nueva pestaña.',
     room:'Habitación', rooms:'Habitaciones', guest:'Huésped', guestsW:'Huéspedes',
@@ -156,7 +159,8 @@ var I18N = {
     departure:'Aller', ret:'Retour', passengers:'Passagers', pickupLoc:'Lieu de prise en charge', pickup:'Prise en charge', dropoff:'Restitution', date:'Date',
     phWhere:'Où allez-vous ?', phCityAirport:'Ville ou aéroport', phBeach:'Plage, île, ville…', phAirportCity:'Aéroport ou ville',
     searchHotels:'Rechercher des hôtels', searchFlights:'Rechercher des vols', searchResorts:'Rechercher des resorts', searchCars:'Rechercher des voitures', searchActivities:'Rechercher des activités',
-    roundTrip:'Aller-retour', oneWay:'Aller simple', sameDrop:'Restitution au même endroit.',
+    roundTrip:'Aller-retour', oneWay:'Aller simple',
+    dropoffLoc:'Lieu de restitution', samePickup:'Identique à la prise en charge', nationality:'Nationalité du conducteur',
     noMatch:'Aucun résultat. Saisissez un lieu et lancez la recherche.', loading:'Chargement des destinations…', soon:'bientôt disponible',
     redirect:'Ouverture de votre site de réservation. Vos résultats s\'ouvriront dans un nouvel onglet.',
     room:'Chambre', rooms:'Chambres', guest:'Voyageur', guestsW:'Voyageurs',
@@ -176,6 +180,9 @@ var ICONS = {
   cars:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2M5 17a2 2 0 1 0 4 0M5 17h10M15 17a2 2 0 1 0 4 0M5 12h14"/></svg>',
   activities:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M10 22l2-6 2 2v4M6 12l3-2 3 2 3-1"/></svg>'
 };
+
+// driver nationality options, scraped from the OTA's own select (2026-07-29); values feed the cars 'country' param
+var COUNTRIES=[["AF","Afghanistan"],["AX","Aland Islands (Finland)"],["AL","Albania"],["DZ","Algeria"],["AS","American Samoa (USA)"],["AD","Andorra"],["AO","Angola"],["AI","Anguilla (UK)"],["AG","Antigua and Barbuda"],["AR","Argentina"],["AM","Armenia"],["AW","Aruba (Netherlands)"],["AU","Australia"],["AT","Austria"],["AZ","Azerbaijan"],["BS","Bahamas"],["BH","Bahrain"],["BD","Bangladesh"],["BB","Barbados"],["BY","Belarus"],["BE","Belgium"],["BZ","Belize"],["BJ","Benin"],["BM","Bermuda (UK)"],["BO","Bolivia"],["BQ","Bonaire, Sint Eustatius and Saba"],["BA","Bosnia and Herzegovina"],["BW","Botswana"],["BR","Brazil"],["IO","British Indian Ocean Territory (UK)"],["VG","British Virgin Islands (UK)"],["BN","Brunei"],["BG","Bulgaria"],["BF","Burkina Faso"],["BI","Burundi"],["CV","Cabo Verde"],["KH","Cambodia"],["CM","Cameroon"],["CA","Canada"],["KY","Cayman Islands (UK)"],["CF","Central African Republic"],["TD","Chad"],["CL","Chile"],["CN","China"],["CX","Christmas Island (Australia)"],["CC","Cocos (Keeling) Islands (Australia)"],["CO","Colombia"],["KM","Comoros"],["CD","Congo, Democratic Republic of the"],["CG","Congo, Republic of the"],["CR","Costa Rica"],["CI","Cote d'Ivoire"],["HR","Croatia"],["CW","Curacao (Netherlands)"],["CY","Cyprus"],["CZ","Czechia"],["DK","Denmark"],["DJ","Djibouti"],["DM","Dominica"],["DO","Dominican Republic"],["EC","Ecuador"],["EG","Egypt"],["SV","El Salvador"],["GQ","Equatorial Guinea"],["EE","Estonia"],["SZ","Eswatini"],["ET","Ethiopia"],["FK","Falkland Islands (UK)"],["FJ","Fiji"],["FI","Finland"],["FR","France"],["GF","French Guiana (France)"],["PF","French Polynesia (France)"],["GA","Gabon"],["GM","Gambia"],["GE","Georgia"],["DE","Germany"],["GI","Gibraltar (UK)"],["GR","Greece"],["GL","Greenland (Denmark)"],["GD","Grenada"],["GP","Guadeloupe (France)"],["GU","Guam (USA)"],["GT","Guatemala"],["GN","Guinea"],["GW","Guinea-Bissau"],["GY","Guyana"],["HT","Haiti"],["HN","Honduras"],["HK","Hong Kong (China)"],["HU","Hungary"],["IS","Iceland"],["IN","India"],["ID","Indonesia"],["IE","Ireland"],["IL","Israel"],["IT","Italy"],["JM","Jamaica"],["JP","Japan"],["JO","Jordan"],["KZ","Kazakhstan"],["KE","Kenya"],["KI","Kiribati"],["XK","Kosovo"],["KW","Kuwait"],["KG","Kyrgyzstan"],["LA","Laos"],["LV","Latvia"],["LB","Lebanon"],["LS","Lesotho"],["LR","Liberia"],["LI","Liechtenstein"],["LT","Lithuania"],["LU","Luxembourg"],["MO","Macau (China)"],["MG","Madagascar"],["MW","Malawi"],["MY","Malaysia"],["MV","Maldives"],["ML","Mali"],["MT","Malta"],["MH","Marshall Islands"],["MQ","Martinique (France)"],["MU","Mauritius"],["YT","Mayotte (France)"],["MX","Mexico"],["FM","Micronesia"],["MD","Moldova"],["MC","Monaco"],["MN","Mongolia"],["ME","Montenegro"],["MS","Montserrat (UK)"],["MA","Morocco"],["MZ","Mozambique"],["MM","Myanmar"],["NA","Namibia"],["NR","Nauru"],["NP","Nepal"],["NL","Netherlands"],["NC","New Caledonia (France)"],["NZ","New Zealand"],["NI","Nicaragua"],["NE","Niger"],["NG","Nigeria"],["NU","Niue (New Zealand)"],["NF","Norfolk Island (Australia)"],["MK","North Macedonia"],["MP","Northern Mariana Islands (USA)"],["NO","Norway"],["OM","Oman"],["PK","Pakistan"],["PW","Palau"],["PS","Palestine"],["PA","Panama"],["PG","Papua New Guinea"],["PY","Paraguay"],["PE","Peru"],["PH","Philippines"],["PN","Pitcairn Islands (UK)"],["PL","Poland"],["PT","Portugal"],["PR","Puerto Rico (USA)"],["QA","Qatar"],["RE","Reunion (France)"],["RO","Romania"],["RU","Russia"],["RW","Rwanda"],["BL","Saint Barthelemy (France)"],["SH","Saint Helena, Ascension and Tristan da Cunha"],["KN","Saint Kitts and Nevis"],["LC","Saint Lucia"],["MF","Saint Martin (France)"],["PM","Saint Pierre and Miquelon (France)"],["VC","Saint Vincent and the Grenadines"],["WS","Samoa"],["SM","San Marino"],["SA","Saudi Arabia"],["SN","Senegal"],["RS","Serbia"],["SC","Seychelles"],["SL","Sierra Leone"],["SG","Singapore"],["SX","Sint Maarten (Netherlands)"],["SK","Slovakia"],["SI","Slovenia"],["SB","Solomon Islands"],["SO","Somalia"],["ZA","South Africa"],["GS","South Georgia Island (UK)"],["KR","South Korea"],["ES","Spain"],["LK","Sri Lanka"],["SR","Suriname"],["SJ","Svalbard and Jan Mayen (Norway)"],["SE","Sweden"],["CH","Switzerland"],["TW","Taiwan"],["TJ","Tajikistan"],["TZ","Tanzania"],["TH","Thailand"],["TL","Timor-Leste"],["TG","Togo"],["TK","Tokelau (New Zealand)"],["TO","Tonga"],["TT","Trinidad and Tobago"],["TN","Tunisia"],["TR","Turkey"],["TC","Turks and Caicos Islands (UK)"],["TV","Tuvalu"],["VI","US Virgin Islands (USA)"],["UG","Uganda"],["UA","Ukraine"],["AE","United Arab Emirates"],["GB","United Kingdom"],["US","United States of America"],["UY","Uruguay"],["UZ","Uzbekistan"],["VU","Vanuatu"],["VA","Vatican City (Holy See)"],["VE","Venezuela"],["VN","Vietnam"],["WK","Wake Island (USA)"],["WF","Wallis and Futuna (France)"],["YE","Yemen"],["ZM","Zambia"],["ZW","Zimbabwe"]];
 
 /* ================= PRODUCTS ================= */
 var ALL_TABS = [
@@ -483,24 +490,33 @@ function resortsUrl(f){
   return QB.platformUrl.replace(/\/+$/,'')+'/booknow/resort/search?'+p.toString();
 }
 function twelveHr(t){ if(!t) return '10:00 AM'; var a=t.split(':'),h=parseInt(a[0],10),m=a[1],ap=h>=12?'PM':'AM'; h=h%12||12; return h+':'+m+' '+ap; }
+function carLoc(s){
+  return {id:s.id||"",name:s.name,city_name:s.city_name||"",country_name:s.country_name||"",iata_code:s.iata_code||"",type:s.type||"location",coordinates:s.coordinates||{},region_id:s.region_id||"",state:s.state||""};
+}
 function carsUrl(f){
   var s=f.pick._sel || {id:"",name:f.pick.value,city_name:"",country_name:"",iata_code:"",type:"location",coordinates:{},region_id:"",state:""};
+  // drop-off: empty field = same as pickup; typed/picked = different location (OTA capture 2026-07-29)
+  var dSel=f.dropLoc._sel, dRaw=f.dropLoc.value.trim();
+  var d=dSel || (dRaw?{id:"",name:dRaw,city_name:"",country_name:"",iata_code:"",type:"location",coordinates:{},region_id:"",state:""}:null);
   var coords=s.coordinates||{};
   var pu=f.pickup.value.split('T'), dp=f.drop.value.split('T');
   var age=Math.max(18,Math.min(99,parseInt(f.age.value)||25));
+  var ret=d||s;  // return/dropoff side of the trip
   var p=new URLSearchParams();
-  p.append('code','US');
+  p.append('code','US');  // stays US even for non-US nationality — matches the OTA (nationality goes in 'country')
   p.append('correlationId',uuid());
-  p.append('country','US'); p.append('currency','USD'); p.append('driverAge',String(age));
-  p.append('dropOffLocation',''); p.append('dropOffLocationData',''); p.append('dropOffOption','Same as pick-up');
-  p.append('dropoffTime',twelveHr(dp[1])); p.append('dropoff_location',s.name);
+  p.append('country',f.nat.value||'US'); p.append('currency','USD'); p.append('driverAge',String(age));
+  p.append('dropOffLocation',d?d.name:'');
+  p.append('dropOffLocationData',d?JSON.stringify(carLoc(d)):'');
+  p.append('dropOffOption',d?'Drop-off at different location':'Same as pick-up');
+  p.append('dropoffTime',twelveHr(dp[1])); p.append('dropoff_location',ret.name);
   p.append('endDate',dp[0]||'');
-  p.append('location',JSON.stringify({id:s.id||"",name:s.name,city_name:s.city_name||"",country_name:s.country_name||"",iata_code:s.iata_code||"",type:s.type||"location",coordinates:coords,region_id:s.region_id||"",state:s.state||""}));
+  p.append('location',JSON.stringify(carLoc(s)));
   p.append('pickupCode',s.iata_code||""); p.append('pickupTime',twelveHr(pu[1]));
   p.append('pickupType',s.type==='airport'?'iata':'geo');
   p.append('pickup_geo',(coords.lat!=null?coords.lat+','+coords.lon:''));
   p.append('pickup_location',s.name);
-  p.append('returnCode',s.iata_code||""); p.append('returnType',s.type==='airport'?'iata':'geo');
+  p.append('returnCode',ret.iata_code||""); p.append('returnType',ret.type==='airport'?'iata':'geo');
   p.append('startDate',pu[0]||'');
   return QB.platformUrl.replace(/\/+$/,'')+'/booknow/cars/v2/search?'+p.toString();
 }
@@ -591,23 +607,29 @@ function resortsPanel(){
   });
 }
 function carsPanel(){
+  var natOpts=COUNTRIES.map(function(c){ return '<option value="'+c[0]+'"'+(c[0]==='US'?' selected':'')+'>'+c[1]+'</option>'; }).join('');
   var wrap=el('<div><div class="qb-title">'+T.titleCars+'</div>'
    +'<div class="qb-row cars">'
    +'<div class="fld"><label>'+T.pickupLoc+'</label><input id="c-pick" autocomplete="off" placeholder="'+T.phAirportCity+'"><div class="ac" id="c-ac"></div></div>'
+   +'<div class="fld"><label>'+T.dropoffLoc+'</label><input id="c-drop" autocomplete="off" placeholder="'+T.samePickup+'"><div class="ac" id="c-dac"></div></div>'
    +'<div class="fld"><label>'+T.pickup+'</label><input id="c-pud" type="datetime-local"></div>'
    +'<div class="fld"><label>'+T.dropoff+'</label><input id="c-dod" type="datetime-local"></div>'
-   +'<div class="fld"><label>'+T.driverAge+'</label><input id="c-age" type="number" min="18" max="99" value="25"></div>'
    +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="c-go">'+T.searchCars+'</button></div>'
-   +'</div><div class="qb-foot" style="text-align:left;padding:8px 2px 0">'+T.sameDrop+'</div></div>');
+   +'</div>'
+   +'<div class="trip" style="margin:10px 2px 0">'
+   +'<span class="sel-wrap"><span>'+T.nationality+'</span><select id="c-nat">'+natOpts+'</select></span>'
+   +'<span class="sel-wrap"><span>'+T.driverAge+'</span><input id="c-age" type="number" min="18" max="99" value="25"></span>'
+   +'</div></div>');
   qbBody.innerHTML=''; qbBody.appendChild(wrap);
   var pick=wrap.querySelector('#c-pick'); wireAutocomplete(pick, wrap.querySelector('#c-ac'),'cars');
+  var dropLoc=wrap.querySelector('#c-drop'); wireAutocomplete(dropLoc, wrap.querySelector('#c-dac'),'cars');
   // +15d not +14: the cars API rejects pickups under 14 days out ("pickup date must be at least 14 days after current time"), and +14 at 10:00 AM can land just inside that window
   wrap.querySelector('#c-pud').value=isoDate(15)+'T10:00'; wrap.querySelector('#c-dod').value=isoDate(18)+'T10:00';
   guardTimes(wrap.querySelector('#c-pud'), wrap.querySelector('#c-dod'));
   loadData('cars');
   wrap.querySelector('#c-go').addEventListener('click',function(){
     if(!pick.value.trim()){pick.focus();return;}
-    go(carsUrl({pick:pick,pickup:wrap.querySelector('#c-pud'),drop:wrap.querySelector('#c-dod'),age:wrap.querySelector('#c-age')}));
+    go(carsUrl({pick:pick,dropLoc:dropLoc,pickup:wrap.querySelector('#c-pud'),drop:wrap.querySelector('#c-dod'),age:wrap.querySelector('#c-age'),nat:wrap.querySelector('#c-nat')}));
   });
 }
 function activitiesPanel(){
