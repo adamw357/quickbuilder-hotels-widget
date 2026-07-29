@@ -23,6 +23,8 @@
   .qb-row{ display:grid; gap:10px; align-items:end; }
   .qb-row.hotels{ grid-template-columns:2fr 1fr 1fr 1.1fr auto; }
   .qb-row.flights{ grid-template-columns:1.4fr 1.4fr 1fr 1fr .9fr auto; }
+  .qb-row.resorts{ grid-template-columns:2fr 1fr 1fr auto; }
+  .qb-row.cars{ grid-template-columns:1.8fr 1.2fr 1.2fr .7fr auto; }
   @media (max-width:860px){ .qb-row{ grid-template-columns:1fr 1fr !important; } .qb-search-cell{ grid-column:1 / -1; } }
   .fld{ position:relative; display:flex; flex-direction:column; min-width:0; }
   .fld label{ font-size:12px; font-weight:600; color:var(--muted); margin:0 0 5px; }
@@ -31,8 +33,30 @@
   .qb-btn{ width:100%; padding:12px 20px; border:none; border-radius:9px; background:var(--primary); color:var(--btn-text); font-size:15px; font-weight:700; cursor:pointer; white-space:nowrap; transition:filter .15s, transform .05s; }
   .qb-btn:hover{ filter:brightness(1.06); }
   .qb-btn:active{ transform:translateY(1px); }
-  .trip{ display:flex; gap:14px; margin:0 2px 10px; font-size:13px; color:var(--ink); }
+  .trip{ display:flex; gap:14px; margin:0 2px 10px; font-size:13px; color:var(--ink); flex-wrap:wrap; align-items:center; }
   .trip label{ display:flex; align-items:center; gap:5px; cursor:pointer; font-weight:600; }
+  .trip .sel-wrap{ display:flex; align-items:center; gap:6px; font-weight:600; }
+  .trip select{ padding:6px 8px; border:1px solid var(--line); border-radius:7px; font-size:13px; color:var(--ink); background:#fff; }
+  /* traveler/rooms popover (same iframe-fit rules as the autocomplete dropdown) */
+  .fld input[readonly]{ cursor:pointer; background:#fff; }
+  .pop{ position:absolute; top:100%; left:0; z-index:60; background:#fff; border:1px solid var(--line); border-radius:10px; margin-top:4px; box-shadow:0 10px 30px rgba(0,0,0,.12); display:none; padding:12px; min-width:252px; overflow-y:auto; }
+  .pop.open{ display:block; }
+  .pop.up{ top:auto; bottom:100%; margin-top:0; margin-bottom:4px; box-shadow:0 -10px 30px rgba(0,0,0,.12); }
+  .pop-room{ border-bottom:1px solid var(--soft); padding:2px 0 8px; margin-bottom:8px; }
+  .pop-head{ display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:13px; margin:2px 0 4px; }
+  .pop-x{ border:none; background:none; color:var(--muted); cursor:pointer; font-size:12px; padding:2px; }
+  .pop-x:hover{ color:var(--ink); }
+  .pop-row{ display:flex; justify-content:space-between; align-items:center; gap:10px; margin:7px 0; font-size:13px; font-weight:600; }
+  .pop-row .hint{ display:block; font-size:11px; color:var(--muted); font-weight:400; }
+  .step{ display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:8px; overflow:hidden; flex:0 0 auto; }
+  .step button{ width:28px; height:28px; border:none; background:#fff; color:var(--primary); font-size:16px; cursor:pointer; line-height:1; }
+  .step button:disabled{ color:#c7ccd4; cursor:default; }
+  .step span{ min-width:26px; text-align:center; font-weight:600; font-size:13px; }
+  .age-row{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin:6px 0; font-size:12px; color:var(--muted); }
+  .age-row input{ width:64px; padding:6px 8px; border:1px solid var(--line); border-radius:7px; font-size:13px; color:var(--ink); }
+  .pop-foot{ display:flex; justify-content:space-between; align-items:center; margin-top:4px; gap:10px; }
+  .pop-add{ border:none; background:none; color:var(--primary); font-weight:700; font-size:13px; cursor:pointer; padding:6px 0; }
+  .pop-done{ border:none; background:var(--primary); color:var(--btn-text); font-weight:700; font-size:13px; border-radius:8px; padding:8px 16px; cursor:pointer; }
   /* autocomplete */
   .ac{ position:absolute; top:100%; left:0; right:0; z-index:50; background:#fff; border:1px solid var(--line); border-radius:10px; margin-top:4px; box-shadow:0 10px 30px rgba(0,0,0,.12); max-height:260px; overflow-y:auto; display:none; }
   .ac.open{ display:block; }
@@ -104,7 +128,13 @@ var I18N = {
     searchHotels:'Search Hotels', searchFlights:'Search Flights', searchResorts:'Search Resorts', searchCars:'Search Cars', searchActivities:'Search Activities',
     roundTrip:'Round-trip', oneWay:'One-way', sameDrop:'Drop-off same as pick-up.',
     noMatch:'No match — type a place and search anyway.', loading:'Loading destinations…', soon:'coming soon',
-    redirect:'Opening your booking site. Your results will open in a new tab.' },
+    redirect:'Opening your booking site. Your results will open in a new tab.',
+    room:'Room', rooms:'Rooms', guest:'Guest', guestsW:'Guests',
+    adults:'Adults', adult1:'Adult', childrenW:'Children', child1:'Child', infants:'Infants', infant1:'Infant',
+    adultHint:'12+ yrs', childHint:'2-12 yrs', infantHint:'Under 2',
+    childAge:'Child {n} age', addRoom:'Add room', remove:'Remove', done:'Done',
+    cls:'Class', cabinEco:'Economy', cabinPre:'Premium', cabinBus:'Business', cabinFirst:'First',
+    nonstop:'Nonstop only', driverAge:'Driver age' },
   es:{ hotels:'Hoteles', flights:'Vuelos', resorts:'Resorts', cars:'Autos', activities:'Actividades',
     titleHotels:'Reserva tu estadía', titleFlights:'Encuentra vuelos', titleResorts:'Encuentra un resort', titleCars:'Renta un auto', titleActivities:'Qué hacer',
     dest:'Destino', checkin:'Llegada', checkout:'Salida', guests:'Huéspedes', from:'Origen', to:'Destino',
@@ -113,7 +143,13 @@ var I18N = {
     searchHotels:'Buscar hoteles', searchFlights:'Buscar vuelos', searchResorts:'Buscar resorts', searchCars:'Buscar autos', searchActivities:'Buscar actividades',
     roundTrip:'Ida y vuelta', oneWay:'Solo ida', sameDrop:'Devolución en el mismo lugar.',
     noMatch:'Sin resultados. Escribe un lugar y busca de todas formas.', loading:'Cargando destinos…', soon:'próximamente',
-    redirect:'Abriendo tu sitio de reservas. Tus resultados se abrirán en una nueva pestaña.' },
+    redirect:'Abriendo tu sitio de reservas. Tus resultados se abrirán en una nueva pestaña.',
+    room:'Habitación', rooms:'Habitaciones', guest:'Huésped', guestsW:'Huéspedes',
+    adults:'Adultos', adult1:'Adulto', childrenW:'Niños', child1:'Niño', infants:'Bebés', infant1:'Bebé',
+    adultHint:'12+ años', childHint:'2-12 años', infantHint:'Menores de 2',
+    childAge:'Edad del niño {n}', addRoom:'Añadir habitación', remove:'Quitar', done:'Listo',
+    cls:'Clase', cabinEco:'Económica', cabinPre:'Premium', cabinBus:'Ejecutiva', cabinFirst:'Primera',
+    nonstop:'Solo vuelos directos', driverAge:'Edad del conductor' },
   fr:{ hotels:'Hôtels', flights:'Vols', resorts:'Resorts', cars:'Voitures', activities:'Activités',
     titleHotels:'Réservez votre séjour', titleFlights:'Trouvez un vol', titleResorts:'Trouvez un resort', titleCars:'Louez une voiture', titleActivities:'À faire sur place',
     dest:'Destination', checkin:'Arrivée', checkout:'Départ', guests:'Voyageurs', from:'De', to:'À',
@@ -122,7 +158,13 @@ var I18N = {
     searchHotels:'Rechercher des hôtels', searchFlights:'Rechercher des vols', searchResorts:'Rechercher des resorts', searchCars:'Rechercher des voitures', searchActivities:'Rechercher des activités',
     roundTrip:'Aller-retour', oneWay:'Aller simple', sameDrop:'Restitution au même endroit.',
     noMatch:'Aucun résultat. Saisissez un lieu et lancez la recherche.', loading:'Chargement des destinations…', soon:'bientôt disponible',
-    redirect:'Ouverture de votre site de réservation. Vos résultats s\'ouvriront dans un nouvel onglet.' }
+    redirect:'Ouverture de votre site de réservation. Vos résultats s\'ouvriront dans un nouvel onglet.',
+    room:'Chambre', rooms:'Chambres', guest:'Voyageur', guestsW:'Voyageurs',
+    adults:'Adultes', adult1:'Adulte', childrenW:'Enfants', child1:'Enfant', infants:'Bébés', infant1:'Bébé',
+    adultHint:'12 ans et +', childHint:'2-12 ans', infantHint:'Moins de 2 ans',
+    childAge:'Âge de l\'enfant {n}', addRoom:'Ajouter une chambre', remove:'Retirer', done:'OK',
+    cls:'Classe', cabinEco:'Économique', cabinPre:'Premium', cabinBus:'Affaires', cabinFirst:'Première',
+    nonstop:'Vols directs uniquement', driverAge:'Âge du conducteur' }
 };
 var T = I18N[(P.get('lang')||'en').toLowerCase()] || I18N.en;
 
@@ -264,58 +306,175 @@ function wireAutocomplete(input, box, key){
   document.addEventListener('click', function(e){ if(!box.parentNode.contains(e.target)) box.classList.remove('open'); });
 }
 
-/* ================= URL builders ================= */
+/* ============ traveler/rooms popovers ============ */
+function plural(n, one, many){ return n+' '+(n===1?one:many); }
+// same viewport-fit rules as the autocomplete dropdown: cap height to the room inside the iframe, flip up when there's more space above
+function fitPop(fld, pop){
+  var r=fld.getBoundingClientRect();
+  var below=window.innerHeight-r.bottom-12, above=r.top-12;
+  if(below<180 && above>below){ pop.classList.add('up'); pop.style.maxHeight=Math.max(120,Math.min(360, above-4))+'px'; }
+  else { pop.classList.remove('up'); pop.style.maxHeight=Math.max(120,Math.min(360, below-8))+'px'; }
+  pop.style.left='0px';
+  var pr=pop.getBoundingClientRect();
+  if(pr.right>window.innerWidth-8) pop.style.left=Math.min(0,(window.innerWidth-8-pr.width)-r.left)+'px';
+}
+function popShell(fld, input, render){
+  var pop=el('<div class="pop"></div>'); fld.appendChild(pop);
+  input.readOnly=true;
+  input.addEventListener('click', function(){
+    pop.classList.toggle('open');
+    if(pop.classList.contains('open')){ render(); fitPop(fld, pop); }
+  });
+  document.addEventListener('click', function(e){ if(!fld.contains(e.target)) pop.classList.remove('open'); });
+  return pop;
+}
+/* hotels: per-room adults/children + child ages */
+function wireRoomsPop(fld, input){
+  var rooms=[{adults:2, childs:0, ages:[]}];
+  function summary(){
+    var g=0; rooms.forEach(function(r){ g+=r.adults+r.childs; });
+    input.value=plural(rooms.length,T.room,T.rooms)+', '+plural(g,T.guest,T.guestsW);
+  }
+  function render(){
+    var h='';
+    rooms.forEach(function(r,i){
+      h+='<div class="pop-room"><div class="pop-head"><span>'+T.room+' '+(i+1)+'</span>'
+        +(rooms.length>1?'<button type="button" class="pop-x" data-del="'+i+'">'+T.remove+'</button>':'')+'</div>'
+        +'<div class="pop-row"><span>'+T.adults+'</span><span class="step"><button type="button" data-k="a-" data-i="'+i+'" '+(r.adults<=1?'disabled':'')+'>−</button><span>'+r.adults+'</span><button type="button" data-k="a+" data-i="'+i+'" '+(r.adults>=8?'disabled':'')+'>+</button></span></div>'
+        +'<div class="pop-row"><span>'+T.childrenW+'</span><span class="step"><button type="button" data-k="c-" data-i="'+i+'" '+(r.childs<=0?'disabled':'')+'>−</button><span>'+r.childs+'</span><button type="button" data-k="c+" data-i="'+i+'" '+(r.childs>=6?'disabled':'')+'>+</button></span></div>';
+      r.ages.forEach(function(a,j){
+        h+='<div class="age-row"><span>'+T.childAge.replace('{n}',j+1)+'</span><input type="number" min="1" max="17" value="'+a+'" data-age="'+i+':'+j+'"></div>';
+      });
+      h+='</div>';
+    });
+    h+='<div class="pop-foot"><button type="button" class="pop-add">+ '+T.addRoom+'</button><button type="button" class="pop-done">'+T.done+'</button></div>';
+    pop.innerHTML=h; summary();
+  }
+  var pop=popShell(fld, input, render);
+  pop.addEventListener('click', function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    if(b.classList.contains('pop-done')){ pop.classList.remove('open'); return; }
+    if(b.classList.contains('pop-add')){ if(rooms.length<4){ rooms.push({adults:2,childs:0,ages:[]}); render(); fitPop(fld,pop); } return; }
+    if(b.dataset.del!==undefined){ rooms.splice(+b.dataset.del,1); render(); fitPop(fld,pop); return; }
+    var i=+b.dataset.i, r=rooms[i], k=b.dataset.k; if(!r) return;
+    if(k==='a+'&&r.adults<8)r.adults++; else if(k==='a-'&&r.adults>1)r.adults--;
+    else if(k==='c+'&&r.childs<6){ r.childs++; r.ages.push(8); }
+    else if(k==='c-'&&r.childs>0){ r.childs--; r.ages.pop(); }
+    render(); fitPop(fld,pop);
+  });
+  pop.addEventListener('input', function(e){
+    var t=e.target; if(!t.dataset.age) return;
+    var q=t.dataset.age.split(':'); rooms[+q[0]].ages[+q[1]]=parseInt(t.value)||8;
+  });
+  summary();
+  return function(){ return rooms; };
+}
+/* flights: adults / children / infants steppers */
+function wireTravPop(fld, input){
+  var tr={adults:1, children:0, infants:0};
+  function summary(){
+    var s=plural(tr.adults,T.adult1,T.adults);
+    if(tr.children) s+=', '+plural(tr.children,T.child1,T.childrenW);
+    if(tr.infants) s+=', '+plural(tr.infants,T.infant1,T.infants);
+    input.value=s;
+  }
+  function row(key,label,hint,val,min,max){
+    return '<div class="pop-row"><span>'+label+'<span class="hint">'+hint+'</span></span><span class="step">'
+      +'<button type="button" data-k="'+key+'-" '+(val<=min?'disabled':'')+'>−</button><span>'+val+'</span>'
+      +'<button type="button" data-k="'+key+'+" '+(val>=max?'disabled':'')+'>+</button></span></div>';
+  }
+  function render(){
+    pop.innerHTML=row('a',T.adults,T.adultHint,tr.adults,1,9)
+      +row('c',T.childrenW,T.childHint,tr.children,0,8)
+      +row('i',T.infants,T.infantHint,tr.infants,0,tr.adults)
+      +'<div class="pop-foot"><span></span><button type="button" class="pop-done">'+T.done+'</button></div>';
+    summary();
+  }
+  var pop=popShell(fld, input, render);
+  pop.addEventListener('click', function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    if(b.classList.contains('pop-done')){ pop.classList.remove('open'); return; }
+    var k=b.dataset.k;
+    if(k==='a+'&&tr.adults<9)tr.adults++; else if(k==='a-'&&tr.adults>1)tr.adults--;
+    else if(k==='c+'&&tr.children<8)tr.children++; else if(k==='c-'&&tr.children>0)tr.children--;
+    else if(k==='i+'&&tr.infants<tr.adults)tr.infants++; else if(k==='i-'&&tr.infants>0)tr.infants--;
+    if(tr.infants>tr.adults)tr.infants=tr.adults;
+    render(); fitPop(fld,pop);
+  });
+  summary();
+  return function(){ return tr; };
+}
+
+/* ================= URL builders (shapes captured live from the OTA, 2026-07-29 — see docs/superpowers/specs/2026-07-29-search-params-design.md) ================= */
 function hotelsUrl(f){
   var loc=f.dest._sel || {id:"0",name:f.dest.value,full_name:f.dest.value,country:"",type:"City",lat:0,long:0};
+  var parts=(loc.full_name||'').split(',').map(function(s){return s.trim();});
+  var state=parts.length>=3?parts[parts.length-2]:"";
+  var cin=f.cin.value||isoDate(14), cout=f.cout.value||isoDate(17);
   var p=new URLSearchParams();
   p.append('correlationId',uuid());
-  if(f.cin.value) p.append('startDate',f.cin.value);
-  if(f.cout.value) p.append('endDate',f.cout.value);
+  p.append('startDate',cin);
+  p.append('endDate',cout);
+  p.append('forceGet','true');
   p.append('isOTA','true');
-  p.append('location',JSON.stringify({id:String(loc.id||"0"),name:loc.name,country:loc.country||"",full_name:loc.full_name||loc.name,type:loc.type||"City",location:{lat:loc.lat||0,long:loc.long||0}}));
-  var rooms=parseInt(f.rooms.value)||1, guests=parseInt(f.guests.value)||2, occ=[];
-  for(var i=0;i<rooms;i++) occ.push({id:uuid(),adults:Math.ceil(guests/rooms),childs:0,childages:[]});
-  p.append('occupancy',JSON.stringify(occ));
-  p.append('preference',JSON.stringify(["All"]));
+  p.append('location',JSON.stringify({id:String(loc.id||"0"),country:loc.country||"",full_name:loc.full_name||loc.name,location:{lat:loc.lat||0,long:loc.long||0},name:loc.name,state:state,type:loc.type||"City"}));
+  var rooms=f.rooms();
+  p.append('occupancy',JSON.stringify(rooms.map(function(r){
+    return {id:uuid(),numOfRoom:rooms.length,adults:r.adults,childs:r.childs,childages:r.ages.map(function(a){return Math.max(1,Math.min(17,parseInt(a)||8));})};
+  })));
+  p.append('paging',JSON.stringify({pageNo:1,pageSize:50}));
+  p.append('preference',JSON.stringify([]));
+  p.append('stayPeriod',JSON.stringify({start:cin,end:cout}));
   return QB.platformUrl.replace(/\/+$/,'')+'/booknow/hotels/v2/search?'+p.toString();
 }
 function airportObj(sel, raw){
-  if(sel) return {airport_code:sel.code,airport_name:sel.name,city_name:sel.city,country_code:sel.cc||'',country_name:sel.country||'',display:sel.code+' - '+sel.name+' - '+sel.city+' - '+sel.country,type:'Airport'};
-  return {airport_code:'',airport_name:'',city_name:'',country_code:'',country_name:'',display:raw||'',type:'Airport'};
+  if(sel) return {airport_code:sel.code,airport_name:sel.name,city_code:sel.city_code||'',city_name:sel.city,country_code:sel.cc||'',country_name:sel.country||''};
+  return {airport_code:'',airport_name:raw||'',city_code:'',city_name:raw||'',country_code:'',country_name:''};
 }
 function flightsUrl(f){
-  var dep=f.dep.value?new Date(f.dep.value+'T00:00:00'):new Date();
-  var ret=f.ret.value?new Date(f.ret.value+'T00:00:00'):null;
+  var dep=f.dep.value||isoDate(14);
   var round=f.body.querySelector('input[name=trip]:checked').value==='round';
+  var tr=f.trav();
   var q={
     selectedOrigin:airportObj(f.from._sel,f.from.value),
     selectedDestination:airportObj(f.to._sel,f.to.value),
-    rangeDate:{startDate:dep.toISOString(),endDate:(round&&ret?ret:dep).toISOString()},
+    rangeDate:{startDate:dep,endDate:(round?(f.ret.value||dep):dep)},
     route_type:round?'roundTrip':'oneWay',
-    cabin_type:'Economy', adults:parseInt(f.pax.value)||1, children:0, infants:0
+    cabin_type:f.cabin.value, adults:tr.adults, children:tr.children, infants:tr.infants
   };
-  var p=new URLSearchParams(); p.append('correlationId',uuid()); p.append('query',JSON.stringify(q));
+  if(f.nonstop.checked) q.max_stops_quantity='Direct';
+  var p=new URLSearchParams(); p.append('query',JSON.stringify(q));
   return QB.platformUrl.replace(/\/+$/,'')+'/booknow/flights/v2/search?'+p.toString();
 }
 function resortsUrl(f){
-  var s=f.dest._sel || {name:f.dest.value,full_name:f.dest.value,state:"",city:"",country:"",region:"",type:"city",lat:0,lon:0};
+  var s=f.dest._sel || {name:f.dest.value,full_name:f.dest.value,city:"",country:"",region:"",type:"city",lat:0,lon:0};
+  var cin=f.cin.value||isoDate(14), cout=f.cout.value||isoDate(17);
   var p=new URLSearchParams(); p.append('correlationId',uuid());
-  if(f.cin.value) p.append('startDate',f.cin.value);
-  if(f.cout.value) p.append('endDate',f.cout.value);
-  p.append('location',JSON.stringify({name:s.name,full_name:s.full_name||s.name,state:s.state||"",city:s.city||"",country:s.country||"",region:s.region||"",type:(s.type||"city"),location:{lat:s.lat||0,lon:s.lon||0}}));
+  p.append('endDate',new Date(cout+'T00:00:00').toString());
+  p.append('location',JSON.stringify({name:s.name,full_name:s.full_name||s.name,city:s.city||"",country:s.country||"",region:s.region||"",type:(s.type||"city"),location:{lat:s.lat||0,lon:s.lon||0}}));
+  p.append('startDate',new Date(cin+'T00:00:00').toString());
   return QB.platformUrl.replace(/\/+$/,'')+'/booknow/resort/search?'+p.toString();
 }
 function twelveHr(t){ if(!t) return '10:00 AM'; var a=t.split(':'),h=parseInt(a[0],10),m=a[1],ap=h>=12?'PM':'AM'; h=h%12||12; return h+':'+m+' '+ap; }
 function carsUrl(f){
-  var s=f.pick._sel || {id:"",name:f.pick.value,city_name:"",country_name:"",iata_code:"",type:"location",coordinates:{},region_id:""};
-  var p=new URLSearchParams(); p.append('correlationId',uuid());
-  p.append('country','US'); p.append('currency','USD'); p.append('driverAge','25'); p.append('driverCountry','US');
-  p.append('dropOffOption','Same as pick-up'); p.append('dropOffLocation',''); p.append('dropOffLocationData','');
+  var s=f.pick._sel || {id:"",name:f.pick.value,city_name:"",country_name:"",iata_code:"",type:"location",coordinates:{},region_id:"",state:""};
+  var coords=s.coordinates||{};
   var pu=f.pickup.value.split('T'), dp=f.drop.value.split('T');
-  p.append('startDate',pu[0]||''); p.append('endDate',dp[0]||'');
-  p.append('pickupTime',twelveHr(pu[1])); p.append('dropoffTime',twelveHr(dp[1]));
-  p.append('location',JSON.stringify({id:s.id||"",name:s.name,city_name:s.city_name||"",country_name:s.country_name||"",iata_code:s.iata_code||"",type:s.type||"location",coordinates:s.coordinates||{},region_id:s.region_id||""}));
-  p.append('pickupCode',s.iata_code||""); p.append('pickupType',s.type==='airport'?'iata':'geo');
+  var age=Math.max(18,Math.min(99,parseInt(f.age.value)||25));
+  var p=new URLSearchParams();
+  p.append('code','US');
+  p.append('correlationId',uuid());
+  p.append('country','US'); p.append('currency','USD'); p.append('driverAge',String(age));
+  p.append('dropOffLocation',''); p.append('dropOffLocationData',''); p.append('dropOffOption','Same as pick-up');
+  p.append('dropoffTime',twelveHr(dp[1])); p.append('dropoff_location',s.name);
+  p.append('endDate',dp[0]||'');
+  p.append('location',JSON.stringify({id:s.id||"",name:s.name,city_name:s.city_name||"",country_name:s.country_name||"",iata_code:s.iata_code||"",type:s.type||"location",coordinates:coords,region_id:s.region_id||"",state:s.state||""}));
+  p.append('pickupCode',s.iata_code||""); p.append('pickupTime',twelveHr(pu[1]));
+  p.append('pickupType',s.type==='airport'?'iata':'geo');
+  p.append('pickup_geo',(coords.lat!=null?coords.lat+','+coords.lon:''));
+  p.append('pickup_location',s.name);
+  p.append('returnCode',s.iata_code||""); p.append('returnType',s.type==='airport'?'iata':'geo');
+  p.append('startDate',pu[0]||'');
   return QB.platformUrl.replace(/\/+$/,'')+'/booknow/cars/v2/search?'+p.toString();
 }
 function activitiesUrl(f){
@@ -338,29 +497,34 @@ function hotelsPanel(){
    +'<div class="fld"><label>'+T.dest+'</label><input id="h-dest" autocomplete="off" placeholder="'+T.phWhere+'"><div class="ac" id="h-ac"></div></div>'
    +'<div class="fld"><label>'+T.checkin+'</label><input id="h-in" type="date"></div>'
    +'<div class="fld"><label>'+T.checkout+'</label><input id="h-out" type="date"></div>'
-   +'<div class="fld"><label>'+T.guests+'</label><input id="h-guests" type="number" min="1" value="2"></div>'
+   +'<div class="fld" id="h-rg-fld"><label>'+T.guests+'</label><input id="h-rg" autocomplete="off"></div>'
    +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="h-go">'+T.searchHotels+'</button></div>'
-   +'</div><input type="hidden" id="h-rooms" value="1"></div>');
+   +'</div></div>');
   qbBody.innerHTML=''; qbBody.appendChild(wrap);
   var dest=wrap.querySelector('#h-dest');
   wireAutocomplete(dest, wrap.querySelector('#h-ac'), 'hotels');
   wrap.querySelector('#h-in').value=isoDate(14); wrap.querySelector('#h-out').value=isoDate(17);
+  var getRooms=wireRoomsPop(wrap.querySelector('#h-rg-fld'), wrap.querySelector('#h-rg'));
   loadData('hotels');
   wrap.querySelector('#h-go').addEventListener('click',function(){
     if(!dest.value.trim()){dest.focus();return;}
-    go(hotelsUrl({dest:dest,cin:wrap.querySelector('#h-in'),cout:wrap.querySelector('#h-out'),guests:wrap.querySelector('#h-guests'),rooms:wrap.querySelector('#h-rooms')}));
+    go(hotelsUrl({dest:dest,cin:wrap.querySelector('#h-in'),cout:wrap.querySelector('#h-out'),rooms:getRooms}));
   });
 }
 function flightsPanel(){
   var wrap=el('<div><div class="qb-title">'+T.titleFlights+'</div>'
    +'<div class="trip"><label><input type="radio" name="trip" value="round" checked> '+T.roundTrip+'</label>'
-   +'<label><input type="radio" name="trip" value="one"> '+T.oneWay+'</label></div>'
+   +'<label><input type="radio" name="trip" value="one"> '+T.oneWay+'</label>'
+   +'<span class="sel-wrap"><span>'+T.cls+'</span><select id="f-cabin">'
+   +'<option value="Economy">'+T.cabinEco+'</option><option value="Premium">'+T.cabinPre+'</option>'
+   +'<option value="Business">'+T.cabinBus+'</option><option value="First">'+T.cabinFirst+'</option></select></span>'
+   +'<label><input type="checkbox" id="f-ns"> '+T.nonstop+'</label></div>'
    +'<div class="qb-row flights">'
    +'<div class="fld"><label>'+T.from+'</label><input id="f-from" autocomplete="off" placeholder="'+T.phCityAirport+'"><div class="ac" id="f-fac"></div></div>'
    +'<div class="fld"><label>'+T.to+'</label><input id="f-to" autocomplete="off" placeholder="'+T.phCityAirport+'"><div class="ac" id="f-tac"></div></div>'
    +'<div class="fld"><label>'+T.departure+'</label><input id="f-dep" type="date"></div>'
    +'<div class="fld"><label>'+T.ret+'</label><input id="f-ret" type="date"></div>'
-   +'<div class="fld"><label>'+T.passengers+'</label><input id="f-pax" type="number" min="1" value="1"></div>'
+   +'<div class="fld" id="f-pax-fld"><label>'+T.passengers+'</label><input id="f-pax" autocomplete="off"></div>'
    +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="f-go">'+T.searchFlights+'</button></div>'
    +'</div></div>');
   qbBody.innerHTML=''; qbBody.appendChild(wrap);
@@ -368,6 +532,7 @@ function flightsPanel(){
   wireAutocomplete(from, wrap.querySelector('#f-fac'), 'flights');
   wireAutocomplete(to, wrap.querySelector('#f-tac'), 'flights');
   wrap.querySelector('#f-dep').value=isoDate(14); ret.value=isoDate(21);
+  var getTrav=wireTravPop(wrap.querySelector('#f-pax-fld'), wrap.querySelector('#f-pax'));
   loadData('flights');
   // toggle return enabled by trip type
   wrap.querySelectorAll('input[name=trip]').forEach(function(r){ r.addEventListener('change',function(){
@@ -375,16 +540,15 @@ function flightsPanel(){
   });});
   wrap.querySelector('#f-go').addEventListener('click',function(){
     if(!from.value.trim()||!to.value.trim()){(from.value.trim()?to:from).focus();return;}
-    go(flightsUrl({from:from,to:to,dep:wrap.querySelector('#f-dep'),ret:ret,pax:wrap.querySelector('#f-pax'),body:wrap}));
+    go(flightsUrl({from:from,to:to,dep:wrap.querySelector('#f-dep'),ret:ret,trav:getTrav,cabin:wrap.querySelector('#f-cabin'),nonstop:wrap.querySelector('#f-ns'),body:wrap}));
   });
 }
 function resortsPanel(){
   var wrap=el('<div><div class="qb-title">'+T.titleResorts+'</div>'
-   +'<div class="qb-row hotels">'
+   +'<div class="qb-row resorts">'
    +'<div class="fld"><label>'+T.dest+'</label><input id="r-dest" autocomplete="off" placeholder="'+T.phBeach+'"><div class="ac" id="r-ac"></div></div>'
    +'<div class="fld"><label>'+T.checkin+'</label><input id="r-in" type="date"></div>'
    +'<div class="fld"><label>'+T.checkout+'</label><input id="r-out" type="date"></div>'
-   +'<div class="fld"><label>'+T.guests+'</label><input id="r-guests" type="number" min="1" value="2"></div>'
    +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="r-go">'+T.searchResorts+'</button></div>'
    +'</div></div>');
   qbBody.innerHTML=''; qbBody.appendChild(wrap);
@@ -392,23 +556,25 @@ function resortsPanel(){
   wrap.querySelector('#r-in').value=isoDate(14); wrap.querySelector('#r-out').value=isoDate(17); loadData('resorts');
   wrap.querySelector('#r-go').addEventListener('click',function(){
     if(!dest.value.trim()){dest.focus();return;}
-    go(resortsUrl({dest:dest,cin:wrap.querySelector('#r-in'),cout:wrap.querySelector('#r-out'),guests:wrap.querySelector('#r-guests')}));
+    go(resortsUrl({dest:dest,cin:wrap.querySelector('#r-in'),cout:wrap.querySelector('#r-out')}));
   });
 }
 function carsPanel(){
   var wrap=el('<div><div class="qb-title">'+T.titleCars+'</div>'
-   +'<div class="qb-row flights">'
+   +'<div class="qb-row cars">'
    +'<div class="fld"><label>'+T.pickupLoc+'</label><input id="c-pick" autocomplete="off" placeholder="'+T.phAirportCity+'"><div class="ac" id="c-ac"></div></div>'
    +'<div class="fld"><label>'+T.pickup+'</label><input id="c-pud" type="datetime-local"></div>'
    +'<div class="fld"><label>'+T.dropoff+'</label><input id="c-dod" type="datetime-local"></div>'
+   +'<div class="fld"><label>'+T.driverAge+'</label><input id="c-age" type="number" min="18" max="99" value="25"></div>'
    +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="c-go">'+T.searchCars+'</button></div>'
    +'</div><div class="qb-foot" style="text-align:left;padding:8px 2px 0">'+T.sameDrop+'</div></div>');
   qbBody.innerHTML=''; qbBody.appendChild(wrap);
   var pick=wrap.querySelector('#c-pick'); wireAutocomplete(pick, wrap.querySelector('#c-ac'),'cars');
-  wrap.querySelector('#c-pud').value=isoDate(14)+'T10:00'; wrap.querySelector('#c-dod').value=isoDate(17)+'T10:00'; loadData('cars');
+  // +15d not +14: the cars API rejects pickups under 14 days out ("pickup date must be at least 14 days after current time"), and +14 at 10:00 AM can land just inside that window
+  wrap.querySelector('#c-pud').value=isoDate(15)+'T10:00'; wrap.querySelector('#c-dod').value=isoDate(18)+'T10:00'; loadData('cars');
   wrap.querySelector('#c-go').addEventListener('click',function(){
     if(!pick.value.trim()){pick.focus();return;}
-    go(carsUrl({pick:pick,pickup:wrap.querySelector('#c-pud'),drop:wrap.querySelector('#c-dod')}));
+    go(carsUrl({pick:pick,pickup:wrap.querySelector('#c-pud'),drop:wrap.querySelector('#c-dod'),age:wrap.querySelector('#c-age')}));
   });
 }
 function activitiesPanel(){
