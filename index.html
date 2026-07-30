@@ -72,6 +72,26 @@
   .ac-main{ font-weight:600; }
   .ac-sub{ color:var(--muted); font-size:12px; }
   .ac-empty{ padding:10px 12px; color:var(--muted); font-size:13px; }
+  .ac-tag{ color:var(--muted); font-size:12px; text-transform:lowercase; }
+  .ac-right{ margin-left:auto; color:var(--muted); font-size:12px; font-weight:700; flex:0 0 auto; }
+  /* resorts region browser (mirror of the OTA's "Browse by Super Region" modal) */
+  .rg-btn{ position:absolute; right:8px; bottom:9px; border:none; background:none; color:var(--primary); font-size:12.5px; font-weight:700; cursor:pointer; padding:4px 6px; border-left:1px solid var(--line); border-radius:0; }
+  .rg-overlay{ position:fixed; inset:0; background:rgba(17,24,39,.45); z-index:120; display:none; align-items:center; justify-content:center; padding:10px; }
+  .rg-overlay.open{ display:flex; }
+  .rg-modal{ background:#fff; color:var(--ink); border-radius:12px; width:min(900px,100%); height:min(605px,100%); display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,.3); overflow:hidden; }  /* fixed dialog like the OTA (900x605); panes scroll inside */
+  .rg-head{ padding:12px 16px 8px; font-size:14px; font-weight:700; }
+  .rg-body{ display:flex; min-height:0; flex:1 1 auto; }
+  .rg-supers{ flex:0 0 clamp(150px,30%,224px); overflow-y:auto; border-right:1px solid var(--line); }
+  .rg-super{ padding:11px 14px; font-size:13px; cursor:pointer; }
+  .rg-super:hover{ background:var(--soft); }
+  .rg-super.active{ background:var(--soft); color:var(--primary); font-weight:700; }
+  .rg-subs{ flex:1 1 auto; overflow-y:auto; padding:6px 10px; }
+  .rg-sub{ display:flex; align-items:center; gap:8px; padding:6px 4px; font-size:13px; cursor:pointer; border-radius:6px; }
+  .rg-sub:hover{ background:var(--soft); }
+  .rg-sub input{ width:auto; flex:0 0 auto; margin:0; padding:0; accent-color:var(--primary); }
+  .rg-foot{ display:flex; justify-content:flex-end; gap:10px; padding:10px 14px; border-top:1px solid var(--line); }
+  .rg-cancel{ border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:8px; padding:8px 16px; font-size:13px; font-weight:600; cursor:pointer; }
+  .rg-done{ border:none; background:var(--primary); color:var(--btn-text); border-radius:8px; padding:8px 18px; font-size:13px; font-weight:700; cursor:pointer; }
   .soon{ padding:26px 12px; text-align:center; color:var(--muted); font-size:14px; }
   .qb-foot{ font-size:11px; color:var(--muted); text-align:center; padding:0 12px 12px; }
   .qb-foot a{ color:var(--muted); }
@@ -167,7 +187,7 @@ var I18N = {
     adultHint:'12+ yrs', childHint:'2-12 yrs', infantHint:'Under 2',
     childAge:'Child {n} age', addRoom:'Add room', remove:'Remove', done:'Done',
     cls:'Class', cabinEco:'Economy', cabinPre:'Premium', cabinBus:'Business', cabinFirst:'First',
-    nonstop:'Nonstop only', driverAge:'Driver age', actTag:'Activity', actType:'Activity type', allW:'All', resortW:'Resort' },
+    nonstop:'Nonstop only', driverAge:'Driver age', actTag:'Activity', actType:'Activity type', allW:'All', regionsBtn:'Regions', browseSuper:'Browse by Super Region', selectAll:'Select All', cancel:'Cancel' },
   es:{ hotels:'Hoteles', flights:'Vuelos', resorts:'Resorts', cars:'Autos', activities:'Actividades',
     titleHotels:'Reserva tu estadía', titleFlights:'Encuentra vuelos', titleResorts:'Encuentra un resort', titleCars:'Renta un auto', titleActivities:'Qué hacer',
     dest:'Destino', checkin:'Llegada', checkout:'Salida', guests:'Huéspedes', from:'Origen', to:'Destino',
@@ -183,7 +203,7 @@ var I18N = {
     adultHint:'12+ años', childHint:'2-12 años', infantHint:'Menores de 2',
     childAge:'Edad del niño {n}', addRoom:'Añadir habitación', remove:'Quitar', done:'Listo',
     cls:'Clase', cabinEco:'Económica', cabinPre:'Premium', cabinBus:'Ejecutiva', cabinFirst:'Primera',
-    nonstop:'Solo vuelos directos', driverAge:'Edad del conductor', actTag:'Actividad', actType:'Tipo de actividad', allW:'Todas', resortW:'Resort' },
+    nonstop:'Solo vuelos directos', driverAge:'Edad del conductor', actTag:'Actividad', actType:'Tipo de actividad', allW:'Todas', regionsBtn:'Regiones', browseSuper:'Explorar por región', selectAll:'Seleccionar todo', cancel:'Cancelar' },
   fr:{ hotels:'Hôtels', flights:'Vols', resorts:'Resorts', cars:'Voitures', activities:'Activités',
     titleHotels:'Réservez votre séjour', titleFlights:'Trouvez un vol', titleResorts:'Trouvez un resort', titleCars:'Louez une voiture', titleActivities:'À faire sur place',
     dest:'Destination', checkin:'Arrivée', checkout:'Départ', guests:'Voyageurs', from:'De', to:'À',
@@ -199,7 +219,7 @@ var I18N = {
     adultHint:'12 ans et +', childHint:'2-12 ans', infantHint:'Moins de 2 ans',
     childAge:'Âge de l\'enfant {n}', addRoom:'Ajouter une chambre', remove:'Retirer', done:'OK',
     cls:'Classe', cabinEco:'Économique', cabinPre:'Premium', cabinBus:'Affaires', cabinFirst:'Première',
-    nonstop:'Vols directs uniquement', driverAge:'Âge du conducteur', actTag:'Activité', actType:'Type d\'activité', allW:'Toutes', resortW:'Resort' }
+    nonstop:'Vols directs uniquement', driverAge:'Âge du conducteur', actTag:'Activité', actType:'Type d\'activité', allW:'Toutes', regionsBtn:'Régions', browseSuper:'Parcourir par grande région', selectAll:'Tout sélectionner', cancel:'Annuler' }
 };
 var LANG = (P.get('lang')||'en').toLowerCase(); if(!I18N[LANG]) LANG='en';
 var T = I18N[LANG];
@@ -267,28 +287,28 @@ var TABS = (P.get('tabs')||'').toLowerCase().split(',').map(function(s){return s
 if(!TABS.length) TABS = ALL_TABS;
 // autocomplete config per product
 var AC = {
-  hotels: {
+  hotels: {  // OTA renders: full_name + lowercase type tag ("multi-city", "neighbourhood", "point of interest"...)
     file:'data/hotels.json',
     starts:function(d){return [d.name];},
     hay:function(d){return (d.name+' '+d.full_name).toLowerCase();},
-    main:function(d){return d.name;}, sub:function(d){return d.full_name;},
+    main:function(d){return d.full_name;}, tag:function(d){return d.type||'';},
     pick:function(d){return d.full_name;},
     rank:function(d){return d.rank==null?1:d.rank;}
   },
-  flights: {
+  flights: {  // OTA renders: airport name / city, country / CODE on the right
     file:'data/flights.json',
     starts:function(d){return [d.code, d.city];},
     hay:function(d){return (d.code+' '+d.city+' '+d.name).toLowerCase();},
-    main:function(d){return d.code+' · '+d.city;}, sub:function(d){return d.name+', '+d.country;},
+    main:function(d){return d.name;}, sub:function(d){return d.city+', '+d.country;},
+    right:function(d){return d.code;},
     pick:function(d){return d.code+' - '+d.city;},
     rank:function(d){return d.rank==null?999:d.rank;}
   },
-  resorts: {  // two kinds of entries, like the OTA dropdown: destinations (state/city) + individual resorts
+  resorts: {  // OTA renders: full_name + lowercase type tag ("state", "city", "resort")
     file:'data/resorts.json',
     starts:function(d){return [d.name];},
     hay:function(d){return (d.name+' '+d.full_name).toLowerCase();},
-    main:function(d){return d.name;},
-    sub:function(d){return d.type==='resort' ? (((d.city||d.state||'')+(d.country?', '+d.country:'')).replace(/^, /,'')+' · '+T.resortW) : d.full_name;},
+    main:function(d){return d.full_name;}, tag:function(d){return d.type||'';},
     pick:function(d){return d.type==='resort'?d.name:d.full_name;},
     rank:function(d){return 1;}
   },
@@ -296,15 +316,16 @@ var AC = {
     file:'data/cars.json',
     starts:function(d){return [d.name, d.city_name, d.iata_code];},
     hay:function(d){return (d.name+' '+d.city_name+' '+d.iata_code).toLowerCase();},
-    main:function(d){return d.name;}, sub:function(d){return (d.city_name||d.state||'')+(d.country_name?', '+d.country_name:'');},
+    main:function(d){return d.name;}, sub:function(d){return [d.city_name,d.state,d.country_name].filter(function(x){return x;}).join(', ');},
     pick:function(d){return d.name;},
     rank:function(d){return d.type==='airport'?0:1;}  // car rentals: airports first
   },
-  activities: {  // two kinds of entries, like the OTA dropdown: destinations + individual products (p:1 = tour/transfer)
+  activities: {  // OTA renders: locations as name + full_name; products as name + lowercase "product" tag
     file:'data/activities.json',
     starts:function(d){return [d.name];},
-    hay:function(d){return (d.name+' '+(d.p?d.dest:d.full_name)).toLowerCase();},
-    main:function(d){return d.name;}, sub:function(d){return d.p?((d.dest?d.dest+' · ':'')+T.actTag):d.full_name;},
+    hay:function(d){return (d.name+' '+(d.p?(d.dest||''):d.full_name)).toLowerCase();},
+    main:function(d){return d.name;}, sub:function(d){return d.p?'':d.full_name;},
+    tag:function(d){return d.p?'product':'';},
     pick:function(d){return d.p?d.name:d.full_name;},
     rank:function(d){return d.p?5:1;}  // destinations group first, then products (matches the OTA)
   }
@@ -366,7 +387,7 @@ function wireAutocomplete(input, box, key){
       var s=cfg.starts(d).some(function(t){return (t||'').toLowerCase().indexOf(q)===0;});
       if(s) starts.push(d); else if(cfg.hay(d).indexOf(q)>-1) contains.push(d);
     }
-    var k=function(d){return cfg.rank(d)*1e6 + prom(cfg.sub(d));};
+    var k=function(d){return cfg.rank(d)*1e6 + prom(cfg.sub?cfg.sub(d):cfg.main(d));};
     starts.sort(function(a,b){return k(a)-k(b);}); contains.sort(function(a,b){return k(a)-k(b);});
     return starts.concat(contains).slice(0,8);
   }
@@ -374,8 +395,12 @@ function wireAutocomplete(input, box, key){
     fitBox();
     if(!matches.length){ box.innerHTML='<div class="ac-empty">'+T.noMatch+'</div>'; box.classList.add('open'); return; }
     box.innerHTML=matches.map(function(d,i){
+      var sub=cfg.sub?cfg.sub(d):'', tag=cfg.tag?cfg.tag(d):'', right=cfg.right?cfg.right(d):'';
       return '<div class="ac-item'+(i===activeIdx?' active':'')+'" data-i="'+i+'"><span class="ac-pin">●</span>'
-        +'<span><span class="ac-main">'+cfg.main(d)+'</span><br><span class="ac-sub">'+cfg.sub(d)+'</span></span></div>';
+        +'<span><span class="ac-main">'+cfg.main(d)+'</span>'
+        +(sub?'<br><span class="ac-sub">'+sub+'</span>':'')
+        +(tag?'<br><span class="ac-tag">'+tag+'</span>':'')+'</span>'
+        +(right?'<span class="ac-right">'+right+'</span>':'')+'</div>';
     }).join(''); box.classList.add('open');
   }
   var seq=0;
@@ -669,6 +694,96 @@ function activitiesUrl(f){
 }
 function isoDateFrom(d, addDays){ var t=new Date(d+'T00:00:00'); t.setDate(t.getDate()+addDays); return fmtDate(t); }
 
+/* ============ resorts region browser (mirror of the OTA modal; tree from rci_regions) ============ */
+var REGIONS=null;
+function loadRegions(){
+  if(REGIONS) return Promise.resolve(REGIONS);
+  return fetch('data/resort-regions.json').then(function(r){return r.json();}).then(function(j){ REGIONS=j; return j; });
+}
+// initial = {order:[superName...], bySuper:{superName:[subEntry...]}} or null
+function openRegionsModal(initial, onDone){
+  loadRegions().then(function(RG){
+    var bySuper={}, order=[];
+    if(initial){ order=initial.order.slice(); for(var k in initial.bySuper) bySuper[k]=initial.bySuper[k].slice(); }
+    var active = order.length ? order[0] : 'USA';  // OTA defaults to USA, or the first selected super
+    var ov=el('<div class="rg-overlay"><div class="rg-modal"><div class="rg-head">'+T.browseSuper+'</div>'
+      +'<div class="rg-body"><div class="rg-supers"></div><div class="rg-subs"></div></div>'
+      +'<div class="rg-foot"><button type="button" class="rg-cancel">'+T.cancel+'</button><button type="button" class="rg-done">'+T.done+'</button></div>'
+      +'</div></div>');
+    document.body.appendChild(ov); ov.classList.add('open');
+    var supersEl=ov.querySelector('.rg-supers'), subsEl=ov.querySelector('.rg-subs');
+    function superByName(n){ for(var i=0;i<RG.supers.length;i++) if(RG.supers[i].name===n) return RG.supers[i]; return null; }
+    function selNames(sup){ return (bySuper[sup]||[]).map(function(e){return e.name;}); }
+    function renderSupers(){
+      supersEl.innerHTML=RG.supers.map(function(s){
+        return '<div class="rg-super'+(s.name===active?' active':'')+'" data-n="'+s.name+'">'+s.name+'</div>';
+      }).join('');
+    }
+    function renderSubs(){
+      var sup=superByName(active); var subs=sup?(RG.subs[sup.id]||[]):[];
+      var names=selNames(active);
+      var h='<label class="rg-sub"><input type="checkbox" data-all="1" '+(subs.length&&names.length===subs.length?'checked':'')+'> <span><b>'+T.selectAll+'</b></span></label>';
+      h+=subs.map(function(e){
+        return '<label class="rg-sub"><input type="checkbox" data-n="'+e.name+'" '+(names.indexOf(e.name)>-1?'checked':'')+'> <span>'+e.name+'</span></label>';
+      }).join('');
+      subsEl.innerHTML=h;
+    }
+    function setEntry(e, on){
+      var list=bySuper[active]||[]; var i=-1;
+      for(var j=0;j<list.length;j++) if(list[j].name===e.name) i=j;
+      if(on && i<0) list.push(e);
+      if(!on && i>-1) list.splice(i,1);
+      bySuper[active]=list;
+      if(list.length && order.indexOf(active)<0) order.push(active);
+      if(!list.length){ var oi=order.indexOf(active); if(oi>-1) order.splice(oi,1); delete bySuper[active]; }
+    }
+    supersEl.addEventListener('click', function(ev){
+      var t=ev.target.closest('.rg-super'); if(!t) return;
+      active=t.getAttribute('data-n'); renderSupers(); renderSubs();
+    });
+    subsEl.addEventListener('change', function(ev){
+      var cb=ev.target; if(cb.tagName!=='INPUT') return;
+      var sup=superByName(active); var subs=sup?(RG.subs[sup.id]||[]):[];
+      if(cb.getAttribute('data-all')){ subs.forEach(function(e){ setEntry(e, cb.checked); }); }
+      else { var e=null; for(var j=0;j<subs.length;j++) if(subs[j].name===cb.getAttribute('data-n')) e=subs[j]; if(e) setEntry(e, cb.checked); }
+      renderSubs();
+    });
+    function close(){ ov.remove(); }
+    ov.addEventListener('click', function(ev){ if(ev.target===ov) close(); });
+    ov.querySelector('.rg-cancel').addEventListener('click', close);
+    ov.querySelector('.rg-done').addEventListener('click', function(){
+      close();
+      onDone(order.length ? {order:order, bySuper:bySuper} : null);
+    });
+    renderSupers(); renderSubs();
+  });
+}
+// URL for a region-browser search — shape captured from the OTA 2026-07-30:
+// region = base64 of the selected entries' pipe-codes flattened, deduped, ':'-joined
+function resortsRegionUrl(selData, cinEl, coutEl){
+  var cin=cinEl.value||isoDate(14), cout=coutEl.value||isoDate(17);
+  var codes=[], filterData=[], regions=[], statesByRegion={}, segs=[];
+  selData.order.forEach(function(sup){
+    var entries=selData.bySuper[sup]||[];
+    regions.push(sup); statesByRegion[sup]=[];
+    var names=[];
+    entries.forEach(function(en){
+      en.region.split('|').forEach(function(c){ if(c && codes.indexOf(c)<0) codes.push(c); });
+      filterData.push({name:en.name, type:en.level});
+      statesByRegion[sup].push({name:en.name, id:en.id});
+      names.push(en.name);
+    });
+    segs.push(sup+': '+names.join(', '));
+  });
+  var loc={ region:btoa(codes.join(':')), full_name:segs.join(', '), filterData:filterData,
+    regionData:{regions:regions, statesByRegion:statesByRegion}, location:{lat:0,lon:0} };
+  var p=new URLSearchParams(); p.append('correlationId',uuid());
+  p.append('endDate',new Date(cout+'T00:00:00').toString());
+  p.append('location',JSON.stringify(loc));
+  p.append('startDate',new Date(cin+'T00:00:00').toString());
+  return QB.platformUrl.replace(/\/+$/,'')+'/booknow/resort/search?'+p.toString();
+}
+
 /* ================= panels ================= */
 function hotelsPanel(){
   var wrap=el('<div><div class="qb-title">'+T.titleHotels+'</div>'
@@ -727,7 +842,7 @@ function flightsPanel(){
 function resortsPanel(){
   var wrap=el('<div><div class="qb-title">'+T.titleResorts+'</div>'
    +'<div class="qb-row resorts">'
-   +'<div class="fld"><label>'+T.dest+'</label><input id="r-dest" autocomplete="off" placeholder="'+T.phBeach+'"><div class="ac" id="r-ac"></div></div>'
+   +'<div class="fld"><label>'+T.dest+'</label><input id="r-dest" autocomplete="off" placeholder="'+T.phBeach+'" style="padding-right:76px"><button type="button" class="rg-btn" id="r-rgbtn">'+T.regionsBtn+'</button><div class="ac" id="r-ac"></div></div>'
    +'<div class="fld"><label>'+T.checkin+'</label><input id="r-in" type="date"></div>'
    +'<div class="fld"><label>'+T.checkout+'</label><input id="r-out" type="date"></div>'
    +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="r-go">'+T.searchResorts+'</button></div>'
@@ -736,8 +851,19 @@ function resortsPanel(){
   var dest=wrap.querySelector('#r-dest'); wireAutocomplete(dest, wrap.querySelector('#r-ac'),'resorts');
   wrap.querySelector('#r-in').value=isoDate(14); wrap.querySelector('#r-out').value=isoDate(17);
   guardDates(wrap.querySelector('#r-in'), wrap.querySelector('#r-out'), 1);
+  var regionSel=null;  // set by the Regions modal; cleared when the visitor types a destination instead
+  dest.addEventListener('input', function(){ regionSel=null; });
+  wrap.querySelector('#r-rgbtn').addEventListener('click', function(){
+    openRegionsModal(regionSel, function(sel){
+      regionSel=sel;
+      if(sel){ var segs=sel.order.map(function(sup){ return sup+': '+sel.bySuper[sup].map(function(e){return e.name;}).join(', '); });
+        dest.value=segs.join(', '); dest._sel=null; }
+      else if(dest.value.indexOf(':')>-1){ dest.value=''; }
+    });
+  });
   warm('resorts');
   wrap.querySelector('#r-go').addEventListener('click',function(){
+    if(regionSel){ go(resortsRegionUrl(regionSel, wrap.querySelector('#r-in'), wrap.querySelector('#r-out'))); return; }
     if(!dest.value.trim()){dest.focus();return;}
     go(resortsUrl({dest:dest,cin:wrap.querySelector('#r-in'),cout:wrap.querySelector('#r-out')}));
   });
