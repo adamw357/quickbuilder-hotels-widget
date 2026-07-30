@@ -55,6 +55,9 @@
   .step span{ min-width:26px; text-align:center; font-weight:600; font-size:13px; }
   .age-row{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin:6px 0; font-size:12px; color:var(--muted); }
   .age-row input{ width:64px; padding:6px 8px; border:1px solid var(--line); border-radius:7px; font-size:13px; color:var(--ink); }
+  .pop-opt{ display:flex; align-items:center; gap:8px; padding:6px 4px; font-size:13px; cursor:pointer; border-radius:6px; }
+  .pop-opt:hover{ background:var(--soft); }
+  .pop-opt input{ accent-color:var(--primary); margin:0; }
   .pop-foot{ display:flex; justify-content:space-between; align-items:center; margin-top:4px; gap:10px; }
   .pop-add{ border:none; background:none; color:var(--primary); font-weight:700; font-size:13px; cursor:pointer; padding:6px 0; }
   .pop-done{ border:none; background:var(--primary); color:var(--btn-text); font-weight:700; font-size:13px; border-radius:8px; padding:8px 16px; cursor:pointer; }
@@ -472,6 +475,32 @@ function wireRoomsPop(fld, input){
   summary();
   return function(){ return rooms; };
 }
+/* activities: multi-select category checklist, same as the OTA's control */
+function wireCatsPop(fld, input){
+  var sel=[];  // chosen slugs, in click order
+  function label(slug){ var c=null; for(var i=0;i<ACT_CATS.length;i++) if(ACT_CATS[i][0]===slug){c=ACT_CATS[i];break;} return c?c[ACT_LI]:slug; }
+  function summary(){ input.value = sel.length ? sel.map(label).join(', ') : T.allW; }
+  function render(){
+    var h='<div class="pop-opt" data-v=""><input type="checkbox" '+(sel.length?'':'checked')+'> <span>'+T.allW+'</span></div>';
+    ACT_CATS.forEach(function(c){
+      h+='<div class="pop-opt" data-v="'+c[0]+'"><input type="checkbox" '+(sel.indexOf(c[0])>-1?'checked':'')+'> <span>'+c[ACT_LI]+'</span></div>';
+    });
+    h+='<div class="pop-foot"><span></span><button type="button" class="pop-done">'+T.done+'</button></div>';
+    pop.innerHTML=h; summary();
+  }
+  var pop=popShell(fld, input, render);
+  pop.addEventListener('click', function(e){
+    var d=e.target.closest('.pop-done'); if(d){ pop.classList.remove('open'); return; }
+    var o=e.target.closest('.pop-opt'); if(!o) return;
+    var v=o.getAttribute('data-v');
+    if(!v){ sel=[]; }                                    // "All" clears the selection
+    else { var i=sel.indexOf(v); if(i>-1) sel.splice(i,1); else sel.push(v); }
+    render(); fitPop(fld,pop);
+  });
+  summary();
+  return function(){ return sel.slice(); };
+}
+
 /* flights: adults / children / infants steppers */
 function wireTravPop(fld, input){
   var tr={adults:1, children:0, infants:0};
@@ -598,7 +627,8 @@ function activitiesUrl(f){
   var s=sel || {name:f.dest.value,id:"",lat:0,long:0};
   var start=f.date.value, end=start?isoDateFrom(start,1):'';
   var p=new URLSearchParams();
-  if(f.cat && f.cat.value) p.append('categories',JSON.stringify([f.cat.value]));  // OTA results page preselects+filters from this (verified 2026-07-29)
+  var cats=f.cats?f.cats():[];
+  if(cats.length) p.append('categories',JSON.stringify(cats));  // OTA results page preselects+filters from this (verified 2026-07-29; multi verified 2026-07-30)
   p.append('correlationId',uuid());
   if(start) p.append('startDate',start); if(end) p.append('endDate',end);
   p.append('isOTA','true');
@@ -712,20 +742,20 @@ function activitiesPanel(){
   var wrap=el('<div><div class="qb-title">'+T.titleActivities+'</div>'
    +'<div class="qb-row hotels">'
    +'<div class="fld"><label>'+T.dest+'</label><input id="a-dest" autocomplete="off" placeholder="'+T.phWhere+'"><div class="ac" id="a-ac"></div></div>'
-   +'<div class="fld"><label>'+T.actType+'</label><select id="a-cat"><option value="">'+T.allW+'</option>'
-   +ACT_CATS.map(function(c){return '<option value="'+c[0]+'">'+c[ACT_LI]+'</option>';}).join('')+'</select></div>'
+   +'<div class="fld" id="a-cat-fld"><label>'+T.actType+'</label><input id="a-cat" autocomplete="off"></div>'
    +'<div class="fld"><label>'+T.date+'</label><input id="a-date" type="date"></div>'
    +'<div class="fld"><label>'+T.guests+'</label><input id="a-guests" type="number" min="1" value="2"></div>'
    +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="a-go">'+T.searchActivities+'</button></div>'
    +'</div></div>');
   qbBody.innerHTML=''; qbBody.appendChild(wrap);
   var dest=wrap.querySelector('#a-dest'); wireAutocomplete(dest, wrap.querySelector('#a-ac'),'activities');
+  var getCats=wireCatsPop(wrap.querySelector('#a-cat-fld'), wrap.querySelector('#a-cat'));
   var aDate=wrap.querySelector('#a-date'); aDate.value=isoDate(14); aDate.min=isoDate(0);
   aDate.addEventListener('change', function(){ if(aDate.value && aDate.value<aDate.min) aDate.value=aDate.min; });
   warm('activities');
   wrap.querySelector('#a-go').addEventListener('click',function(){
     if(!dest.value.trim()){dest.focus();return;}
-    go(activitiesUrl({dest:dest,date:wrap.querySelector('#a-date'),guests:wrap.querySelector('#a-guests'),cat:wrap.querySelector('#a-cat')}));
+    go(activitiesUrl({dest:dest,date:wrap.querySelector('#a-date'),guests:wrap.querySelector('#a-guests'),cats:getCats}));
   });
 }
 function soonPanel(label){ qbBody.innerHTML='<div class="soon"><strong>'+label+'</strong> '+T.soon+'.</div>'; }
