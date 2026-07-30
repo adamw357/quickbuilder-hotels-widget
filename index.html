@@ -143,7 +143,7 @@ var I18N = {
     adultHint:'12+ yrs', childHint:'2-12 yrs', infantHint:'Under 2',
     childAge:'Child {n} age', addRoom:'Add room', remove:'Remove', done:'Done',
     cls:'Class', cabinEco:'Economy', cabinPre:'Premium', cabinBus:'Business', cabinFirst:'First',
-    nonstop:'Nonstop only', driverAge:'Driver age', actTag:'Activity', actType:'Activity type', allW:'All' },
+    nonstop:'Nonstop only', driverAge:'Driver age', actTag:'Activity', actType:'Activity type', allW:'All', resortW:'Resort' },
   es:{ hotels:'Hoteles', flights:'Vuelos', resorts:'Resorts', cars:'Autos', activities:'Actividades',
     titleHotels:'Reserva tu estadía', titleFlights:'Encuentra vuelos', titleResorts:'Encuentra un resort', titleCars:'Renta un auto', titleActivities:'Qué hacer',
     dest:'Destino', checkin:'Llegada', checkout:'Salida', guests:'Huéspedes', from:'Origen', to:'Destino',
@@ -159,7 +159,7 @@ var I18N = {
     adultHint:'12+ años', childHint:'2-12 años', infantHint:'Menores de 2',
     childAge:'Edad del niño {n}', addRoom:'Añadir habitación', remove:'Quitar', done:'Listo',
     cls:'Clase', cabinEco:'Económica', cabinPre:'Premium', cabinBus:'Ejecutiva', cabinFirst:'Primera',
-    nonstop:'Solo vuelos directos', driverAge:'Edad del conductor', actTag:'Actividad', actType:'Tipo de actividad', allW:'Todas' },
+    nonstop:'Solo vuelos directos', driverAge:'Edad del conductor', actTag:'Actividad', actType:'Tipo de actividad', allW:'Todas', resortW:'Resort' },
   fr:{ hotels:'Hôtels', flights:'Vols', resorts:'Resorts', cars:'Voitures', activities:'Activités',
     titleHotels:'Réservez votre séjour', titleFlights:'Trouvez un vol', titleResorts:'Trouvez un resort', titleCars:'Louez une voiture', titleActivities:'À faire sur place',
     dest:'Destination', checkin:'Arrivée', checkout:'Départ', guests:'Voyageurs', from:'De', to:'À',
@@ -175,7 +175,7 @@ var I18N = {
     adultHint:'12 ans et +', childHint:'2-12 ans', infantHint:'Moins de 2 ans',
     childAge:'Âge de l\'enfant {n}', addRoom:'Ajouter une chambre', remove:'Retirer', done:'OK',
     cls:'Classe', cabinEco:'Économique', cabinPre:'Premium', cabinBus:'Affaires', cabinFirst:'Première',
-    nonstop:'Vols directs uniquement', driverAge:'Âge du conducteur', actTag:'Activité', actType:'Type d\'activité', allW:'Toutes' }
+    nonstop:'Vols directs uniquement', driverAge:'Âge du conducteur', actTag:'Activité', actType:'Type d\'activité', allW:'Toutes', resortW:'Resort' }
 };
 var LANG = (P.get('lang')||'en').toLowerCase(); if(!I18N[LANG]) LANG='en';
 var T = I18N[LANG];
@@ -259,12 +259,13 @@ var AC = {
     pick:function(d){return d.code+' - '+d.city;},
     rank:function(d){return d.rank==null?999:d.rank;}
   },
-  resorts: {
+  resorts: {  // two kinds of entries, like the OTA dropdown: destinations (state/city) + individual resorts
     file:'data/resorts.json',
     starts:function(d){return [d.name];},
     hay:function(d){return (d.name+' '+d.full_name).toLowerCase();},
-    main:function(d){return d.name;}, sub:function(d){return d.full_name;},
-    pick:function(d){return d.full_name;},
+    main:function(d){return d.name;},
+    sub:function(d){return d.type==='resort' ? (((d.city||d.state||'')+(d.country?', '+d.country:'')).replace(/^, /,'')+' · '+T.resortW) : d.full_name;},
+    pick:function(d){return d.type==='resort'?d.name:d.full_name;},
     rank:function(d){return 1;}
   },
   cars: {
@@ -582,9 +583,13 @@ function flightsUrl(f){
 function resortsUrl(f){
   var s=f.dest._sel || {name:f.dest.value,full_name:f.dest.value,city:"",country:"",region:"",type:"city",lat:0,lon:0};
   var cin=f.cin.value||isoDate(14), cout=f.cout.value||isoDate(17);
+  // serialize the picked suggestion verbatim, as the OTA does — resort entries carry extra
+  // fields (state, popularity, type:"resort") that must ride along; lat/lon nest into location
+  var loc={}; for(var k in s){ if(s.hasOwnProperty(k) && k!=='lat' && k!=='lon') loc[k]=s[k]; }
+  loc.location={lat:s.lat||0,lon:s.lon||0};
   var p=new URLSearchParams(); p.append('correlationId',uuid());
   p.append('endDate',new Date(cout+'T00:00:00').toString());
-  p.append('location',JSON.stringify({name:s.name,full_name:s.full_name||s.name,city:s.city||"",country:s.country||"",region:s.region||"",type:(s.type||"city"),location:{lat:s.lat||0,lon:s.lon||0}}));
+  p.append('location',JSON.stringify(loc));
   p.append('startDate',new Date(cin+'T00:00:00').toString());
   return QB.platformUrl.replace(/\/+$/,'')+'/booknow/resort/search?'+p.toString();
 }
