@@ -139,7 +139,7 @@ var I18N = {
     adultHint:'12+ yrs', childHint:'2-12 yrs', infantHint:'Under 2',
     childAge:'Child {n} age', addRoom:'Add room', remove:'Remove', done:'Done',
     cls:'Class', cabinEco:'Economy', cabinPre:'Premium', cabinBus:'Business', cabinFirst:'First',
-    nonstop:'Nonstop only', driverAge:'Driver age', actTag:'Activity' },
+    nonstop:'Nonstop only', driverAge:'Driver age', actTag:'Activity', actType:'Activity type', allW:'All' },
   es:{ hotels:'Hoteles', flights:'Vuelos', resorts:'Resorts', cars:'Autos', activities:'Actividades',
     titleHotels:'Reserva tu estadía', titleFlights:'Encuentra vuelos', titleResorts:'Encuentra un resort', titleCars:'Renta un auto', titleActivities:'Qué hacer',
     dest:'Destino', checkin:'Llegada', checkout:'Salida', guests:'Huéspedes', from:'Origen', to:'Destino',
@@ -155,7 +155,7 @@ var I18N = {
     adultHint:'12+ años', childHint:'2-12 años', infantHint:'Menores de 2',
     childAge:'Edad del niño {n}', addRoom:'Añadir habitación', remove:'Quitar', done:'Listo',
     cls:'Clase', cabinEco:'Económica', cabinPre:'Premium', cabinBus:'Ejecutiva', cabinFirst:'Primera',
-    nonstop:'Solo vuelos directos', driverAge:'Edad del conductor', actTag:'Actividad' },
+    nonstop:'Solo vuelos directos', driverAge:'Edad del conductor', actTag:'Actividad', actType:'Tipo de actividad', allW:'Todas' },
   fr:{ hotels:'Hôtels', flights:'Vols', resorts:'Resorts', cars:'Voitures', activities:'Activités',
     titleHotels:'Réservez votre séjour', titleFlights:'Trouvez un vol', titleResorts:'Trouvez un resort', titleCars:'Louez une voiture', titleActivities:'À faire sur place',
     dest:'Destination', checkin:'Arrivée', checkout:'Départ', guests:'Voyageurs', from:'De', to:'À',
@@ -171,9 +171,10 @@ var I18N = {
     adultHint:'12 ans et +', childHint:'2-12 ans', infantHint:'Moins de 2 ans',
     childAge:'Âge de l\'enfant {n}', addRoom:'Ajouter une chambre', remove:'Retirer', done:'OK',
     cls:'Classe', cabinEco:'Économique', cabinPre:'Premium', cabinBus:'Affaires', cabinFirst:'Première',
-    nonstop:'Vols directs uniquement', driverAge:'Âge du conducteur', actTag:'Activité' }
+    nonstop:'Vols directs uniquement', driverAge:'Âge du conducteur', actTag:'Activité', actType:'Type d\'activité', allW:'Toutes' }
 };
-var T = I18N[(P.get('lang')||'en').toLowerCase()] || I18N.en;
+var LANG = (P.get('lang')||'en').toLowerCase(); if(!I18N[LANG]) LANG='en';
+var T = I18N[LANG];
 
 // tab icons (inline SVG, currentColor)
 var ICONS = {
@@ -186,6 +187,41 @@ var ICONS = {
 
 // driver nationality options, scraped from the OTA's own select (2026-07-29); values feed the cars 'country' param
 var COUNTRIES=[["AF","Afghanistan"],["AX","Aland Islands (Finland)"],["AL","Albania"],["DZ","Algeria"],["AS","American Samoa (USA)"],["AD","Andorra"],["AO","Angola"],["AI","Anguilla (UK)"],["AG","Antigua and Barbuda"],["AR","Argentina"],["AM","Armenia"],["AW","Aruba (Netherlands)"],["AU","Australia"],["AT","Austria"],["AZ","Azerbaijan"],["BS","Bahamas"],["BH","Bahrain"],["BD","Bangladesh"],["BB","Barbados"],["BY","Belarus"],["BE","Belgium"],["BZ","Belize"],["BJ","Benin"],["BM","Bermuda (UK)"],["BO","Bolivia"],["BQ","Bonaire, Sint Eustatius and Saba"],["BA","Bosnia and Herzegovina"],["BW","Botswana"],["BR","Brazil"],["IO","British Indian Ocean Territory (UK)"],["VG","British Virgin Islands (UK)"],["BN","Brunei"],["BG","Bulgaria"],["BF","Burkina Faso"],["BI","Burundi"],["CV","Cabo Verde"],["KH","Cambodia"],["CM","Cameroon"],["CA","Canada"],["KY","Cayman Islands (UK)"],["CF","Central African Republic"],["TD","Chad"],["CL","Chile"],["CN","China"],["CX","Christmas Island (Australia)"],["CC","Cocos (Keeling) Islands (Australia)"],["CO","Colombia"],["KM","Comoros"],["CD","Congo, Democratic Republic of the"],["CG","Congo, Republic of the"],["CR","Costa Rica"],["CI","Cote d'Ivoire"],["HR","Croatia"],["CW","Curacao (Netherlands)"],["CY","Cyprus"],["CZ","Czechia"],["DK","Denmark"],["DJ","Djibouti"],["DM","Dominica"],["DO","Dominican Republic"],["EC","Ecuador"],["EG","Egypt"],["SV","El Salvador"],["GQ","Equatorial Guinea"],["EE","Estonia"],["SZ","Eswatini"],["ET","Ethiopia"],["FK","Falkland Islands (UK)"],["FJ","Fiji"],["FI","Finland"],["FR","France"],["GF","French Guiana (France)"],["PF","French Polynesia (France)"],["GA","Gabon"],["GM","Gambia"],["GE","Georgia"],["DE","Germany"],["GI","Gibraltar (UK)"],["GR","Greece"],["GL","Greenland (Denmark)"],["GD","Grenada"],["GP","Guadeloupe (France)"],["GU","Guam (USA)"],["GT","Guatemala"],["GN","Guinea"],["GW","Guinea-Bissau"],["GY","Guyana"],["HT","Haiti"],["HN","Honduras"],["HK","Hong Kong (China)"],["HU","Hungary"],["IS","Iceland"],["IN","India"],["ID","Indonesia"],["IE","Ireland"],["IL","Israel"],["IT","Italy"],["JM","Jamaica"],["JP","Japan"],["JO","Jordan"],["KZ","Kazakhstan"],["KE","Kenya"],["KI","Kiribati"],["XK","Kosovo"],["KW","Kuwait"],["KG","Kyrgyzstan"],["LA","Laos"],["LV","Latvia"],["LB","Lebanon"],["LS","Lesotho"],["LR","Liberia"],["LI","Liechtenstein"],["LT","Lithuania"],["LU","Luxembourg"],["MO","Macau (China)"],["MG","Madagascar"],["MW","Malawi"],["MY","Malaysia"],["MV","Maldives"],["ML","Mali"],["MT","Malta"],["MH","Marshall Islands"],["MQ","Martinique (France)"],["MU","Mauritius"],["YT","Mayotte (France)"],["MX","Mexico"],["FM","Micronesia"],["MD","Moldova"],["MC","Monaco"],["MN","Mongolia"],["ME","Montenegro"],["MS","Montserrat (UK)"],["MA","Morocco"],["MZ","Mozambique"],["MM","Myanmar"],["NA","Namibia"],["NR","Nauru"],["NP","Nepal"],["NL","Netherlands"],["NC","New Caledonia (France)"],["NZ","New Zealand"],["NI","Nicaragua"],["NE","Niger"],["NG","Nigeria"],["NU","Niue (New Zealand)"],["NF","Norfolk Island (Australia)"],["MK","North Macedonia"],["MP","Northern Mariana Islands (USA)"],["NO","Norway"],["OM","Oman"],["PK","Pakistan"],["PW","Palau"],["PS","Palestine"],["PA","Panama"],["PG","Papua New Guinea"],["PY","Paraguay"],["PE","Peru"],["PH","Philippines"],["PN","Pitcairn Islands (UK)"],["PL","Poland"],["PT","Portugal"],["PR","Puerto Rico (USA)"],["QA","Qatar"],["RE","Reunion (France)"],["RO","Romania"],["RU","Russia"],["RW","Rwanda"],["BL","Saint Barthelemy (France)"],["SH","Saint Helena, Ascension and Tristan da Cunha"],["KN","Saint Kitts and Nevis"],["LC","Saint Lucia"],["MF","Saint Martin (France)"],["PM","Saint Pierre and Miquelon (France)"],["VC","Saint Vincent and the Grenadines"],["WS","Samoa"],["SM","San Marino"],["SA","Saudi Arabia"],["SN","Senegal"],["RS","Serbia"],["SC","Seychelles"],["SL","Sierra Leone"],["SG","Singapore"],["SX","Sint Maarten (Netherlands)"],["SK","Slovakia"],["SI","Slovenia"],["SB","Solomon Islands"],["SO","Somalia"],["ZA","South Africa"],["GS","South Georgia Island (UK)"],["KR","South Korea"],["ES","Spain"],["LK","Sri Lanka"],["SR","Suriname"],["SJ","Svalbard and Jan Mayen (Norway)"],["SE","Sweden"],["CH","Switzerland"],["TW","Taiwan"],["TJ","Tajikistan"],["TZ","Tanzania"],["TH","Thailand"],["TL","Timor-Leste"],["TG","Togo"],["TK","Tokelau (New Zealand)"],["TO","Tonga"],["TT","Trinidad and Tobago"],["TN","Tunisia"],["TR","Turkey"],["TC","Turks and Caicos Islands (UK)"],["TV","Tuvalu"],["VI","US Virgin Islands (USA)"],["UG","Uganda"],["UA","Ukraine"],["AE","United Arab Emirates"],["GB","United Kingdom"],["US","United States of America"],["UY","Uruguay"],["UZ","Uzbekistan"],["VU","Vanuatu"],["VA","Vatican City (Holy See)"],["VE","Venezuela"],["VN","Vietnam"],["WK","Wake Island (USA)"],["WF","Wallis and Futuna (France)"],["YE","Yemen"],["ZM","Zambia"],["ZW","Zimbabwe"]];
+
+// activity categories — slugs captured from the OTA's own search API calls (2026-07-29);
+// the results page preselects+filters via ?categories=["<slug>"] (verified live; `preference` is ignored)
+// [slug, en, es, fr]
+var ACT_CATS=[
+ ['tours','Tours','Tours','Visites'],
+ ['sightseeing','Sightseeing','Paseos turísticos','Tourisme'],
+ ['adventure','Adventure','Aventura','Aventure'],
+ ['water-sports','Water Sports','Deportes acuáticos','Sports nautiques'],
+ ['culture','Culture & Heritage','Cultura y patrimonio','Culture et patrimoine'],
+ ['food-and-drink','Food & Drink','Comida y bebida','Gastronomie'],
+ ['nightlife','Nightlife & Entertainment','Vida nocturna','Vie nocturne'],
+ ['family','Family Friendly','Para toda la familia','En famille'],
+ ['wellness','Wellness & Spa','Bienestar y spa','Bien-être et spa'],
+ ['transport','Transport & Transfers','Transporte y traslados','Transports et transferts'],
+ ['classes-workshops','Classes & Workshops','Clases y talleres','Cours et ateliers'],
+ ['outdoor-activities','Outdoor Activities','Actividades al aire libre','Activités de plein air'],
+ ['shopping','Shopping','Compras','Shopping'],
+ ['air-tours','Air Tours','Paseos aéreos','Excursions aériennes'],
+ ['cruises','Cruises & Sailing','Cruceros y vela','Croisières et voile'],
+ ['shows-entertainment','Shows & Entertainment','Espectáculos','Spectacles'],
+ ['shore-excursions','Shore Excursions','Excursiones en puerto','Excursions à terre'],
+ ['walking-tours','Walking Tours','Recorridos a pie','Visites à pied'],
+ ['boat-tours','Boat Tours','Paseos en barco','Excursions en bateau'],
+ ['day-trips','Day Trips','Excursiones de un día','Excursions d\'une journée'],
+ ['diving','Diving','Buceo','Plongée'],
+ ['snorkeling','Snorkeling','Esnórquel','Snorkeling'],
+ ['museums','Museums','Museos','Musées'],
+ ['food-tours','Food Tours','Tours gastronómicos','Tours gastronomiques'],
+ ['wine-tasting','Wine Tasting','Cata de vinos','Dégustation de vin'],
+ ['hop-on-hop-off','Hop-on Hop-off','Bus turístico','Bus à arrêts multiples'],
+ ['hiking','Hiking & Trekking','Senderismo','Randonnée'],
+ ['safaris','Safaris & Wildlife','Safaris y fauna','Safaris et faune']
+];
+var ACT_LI={en:1,es:2,fr:3}[LANG];
 
 /* ================= PRODUCTS ================= */
 var ALL_TABS = [
@@ -561,7 +597,9 @@ function activitiesUrl(f){
   }
   var s=sel || {name:f.dest.value,id:"",lat:0,long:0};
   var start=f.date.value, end=start?isoDateFrom(start,1):'';
-  var p=new URLSearchParams(); p.append('correlationId',uuid());
+  var p=new URLSearchParams();
+  if(f.cat && f.cat.value) p.append('categories',JSON.stringify([f.cat.value]));  // OTA results page preselects+filters from this (verified 2026-07-29)
+  p.append('correlationId',uuid());
   if(start) p.append('startDate',start); if(end) p.append('endDate',end);
   p.append('isOTA','true');
   p.append('location',JSON.stringify({name:s.name,id:s.id||"",location:{lat:s.lat||0,long:s.long||0}}));
@@ -674,6 +712,8 @@ function activitiesPanel(){
   var wrap=el('<div><div class="qb-title">'+T.titleActivities+'</div>'
    +'<div class="qb-row hotels">'
    +'<div class="fld"><label>'+T.dest+'</label><input id="a-dest" autocomplete="off" placeholder="'+T.phWhere+'"><div class="ac" id="a-ac"></div></div>'
+   +'<div class="fld"><label>'+T.actType+'</label><select id="a-cat"><option value="">'+T.allW+'</option>'
+   +ACT_CATS.map(function(c){return '<option value="'+c[0]+'">'+c[ACT_LI]+'</option>';}).join('')+'</select></div>'
    +'<div class="fld"><label>'+T.date+'</label><input id="a-date" type="date"></div>'
    +'<div class="fld"><label>'+T.guests+'</label><input id="a-guests" type="number" min="1" value="2"></div>'
    +'<div class="fld qb-search-cell"><label>&nbsp;</label><button class="qb-btn" id="a-go">'+T.searchActivities+'</button></div>'
@@ -685,7 +725,7 @@ function activitiesPanel(){
   warm('activities');
   wrap.querySelector('#a-go').addEventListener('click',function(){
     if(!dest.value.trim()){dest.focus();return;}
-    go(activitiesUrl({dest:dest,date:wrap.querySelector('#a-date'),guests:wrap.querySelector('#a-guests')}));
+    go(activitiesUrl({dest:dest,date:wrap.querySelector('#a-date'),guests:wrap.querySelector('#a-guests'),cat:wrap.querySelector('#a-cat')}));
   });
 }
 function soonPanel(label){ qbBody.innerHTML='<div class="soon"><strong>'+label+'</strong> '+T.soon+'.</div>'; }
