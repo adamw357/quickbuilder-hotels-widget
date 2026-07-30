@@ -89,14 +89,6 @@
       <div id="prodList"></div>
       <div class="hint">Uncheck to hide a product. Arrows set the left-to-right tab order.</div>
 
-      <label for="tab">Opening tab</label>
-      <select id="tab">
-        <option value="hotels">Hotels</option>
-        <option value="flights">Flights</option>
-        <option value="resorts">Resorts</option>
-        <option value="cars">Cars</option>
-        <option value="activities">Activities</option>
-      </select>
 
       <label for="redirText">Redirect message</label>
       <input type="text" id="redirText" placeholder="Opening your booking site. Your results will open in a new tab.">
@@ -162,13 +154,7 @@ function renderProds(){
     host.appendChild(row);
   });
 }
-function syncProds(){
-  // opening-tab dropdown only offers visible products; snap to first visible if current got hidden
-  var vis=visibleKeys(), sel=$('tab'), cur=sel.value;
-  sel.innerHTML=vis.map(function(k){return '<option value="'+k+'">'+PROD_LABELS[k]+'</option>';}).join('');
-  sel.value = vis.indexOf(cur)>-1 ? cur : vis[0];
-  renderProds(); refresh();
-}
+function syncProds(){ renderProds(); refresh(); }  // the first visible product is what opens — no separate control
 
 function normUrl(u){
   u = (u||'').trim().replace(/\/+$/,'');
@@ -187,8 +173,6 @@ function buildUrl(){
   if(rt) params.push('redirectText=' + encodeURIComponent(rt));
   var vis = visibleKeys();
   if(vis.join(',') !== DEFAULT_TABS.join(',')) params.push('tabs=' + vis.join(','));
-  var tab = $('tab').value;
-  if(tab && tab !== vis[0]) params.push('tab=' + tab);
   if(!$('showPow').checked){ params.push('powered=0'); }
   else { var t=$('powText').value.trim(); if(t && t !== 'Powered by Xeni') params.push('poweredText=' + encodeURIComponent(t)); }
   return WIDGET_BASE + (params.length ? '?' + params.join('&') : '');
@@ -205,7 +189,7 @@ function refresh(){
 // sync color picker <-> hex
 $('color').addEventListener('input', function(){ $('colorHex').value=this.value; refresh(); });
 $('colorHex').addEventListener('input', function(){ var v=this.value.trim(); if(!/^#/.test(v)) v='#'+v; if(/^#[0-9a-fA-F]{6}$/.test(v)) $('color').value=v; refresh(); });
-['wl','tab','powText','redirText'].forEach(function(id){ $(id).addEventListener('input', refresh); });
+['wl','powText','redirText'].forEach(function(id){ $(id).addEventListener('input', refresh); });
 $('bg').addEventListener('change', refresh);
 $('lang').addEventListener('change', refresh);
 $('showPow').addEventListener('change', function(){ $('powText').disabled=!this.checked; $('powText').style.opacity=this.checked?1:.5; refresh(); });
@@ -228,7 +212,7 @@ function lsSet(v){ try{ localStorage.setItem(LS_KEY,v); }catch(e){} }
 function lsDel(){ try{ localStorage.removeItem(LS_KEY); }catch(e){} }
 function cfgState(){
   return JSON.stringify({ wl:$('wl').value, color:$('colorHex').value, bg:$('bg').value, lang:$('lang').value,
-    redirText:$('redirText').value, tab:$('tab').value, showPow:$('showPow').checked, powText:$('powText').value,
+    redirText:$('redirText').value, showPow:$('showPow').checked, powText:$('powText').value,
     prods:prods.map(function(p){ return {key:p.key,on:p.on}; }) });
 }
 var savedState=null;
@@ -246,7 +230,7 @@ $('saveBtn').addEventListener('click', function(){
 $('resetCfg').addEventListener('click', function(e){ e.preventDefault(); lsDel(); location.reload(); });
 
 // boot: restore saved config (if any), then render
-var pendingTab=null, restored=false;
+var restored=false;
 (function(){
   var raw=lsGet(); if(!raw) return;
   try{
@@ -264,11 +248,10 @@ var pendingTab=null, restored=false;
       DEFAULT_TABS.forEach(function(k){ if(byKey[k]) re.push(byKey[k]); });
       if(re.some(function(p){ return p.on; })) prods=re;
     }
-    pendingTab=c.tab; restored=true;
+    restored=true;
   }catch(e){}
 })();
 syncProds();
-if(pendingTab && visibleKeys().indexOf(pendingTab)>-1){ $('tab').value=pendingTab; refresh(); }
 if(restored){ $('restoreNote').style.display='block'; }
 savedState=cfgState();
 syncSave();
