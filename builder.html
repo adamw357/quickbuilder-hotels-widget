@@ -20,8 +20,15 @@
   input[type=text], select{ width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:9px; font-size:14px; color:var(--ink); }
   input:focus,select:focus{ outline:none; border-color:#004e7a; box-shadow:0 0 0 3px rgba(0,78,122,.15); }
   .hint{ font-size:12px; color:var(--muted); margin-top:5px; }
-  .row2{ display:flex; gap:10px; align-items:center; }
-  .row2 input[type=color]{ width:44px; height:40px; border:1px solid var(--line); border-radius:8px; padding:2px; background:#fff; cursor:pointer; }
+  .row2{ display:flex; gap:10px; align-items:center; position:relative; }
+  .swatch{ width:44px; height:40px; border:1px solid var(--line); border-radius:8px; cursor:pointer; padding:0; }
+  .cp-pop{ display:none; position:absolute; top:46px; left:0; z-index:40; background:#fff; border:1px solid #e5e7eb; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,.15); padding:14px; }
+  .cp-pop.open{ display:block; }
+  .cp-wheel-wrap{ position:relative; width:180px; height:180px; }
+  .cp-wheel{ cursor:crosshair; border-radius:50%; display:block; }
+  .cp-dot{ position:absolute; width:10px; height:10px; border:2px solid #fff; border-radius:50%; box-shadow:0 0 3px rgba(0,0,0,.6); pointer-events:none; }
+  .cp-val{ width:180px; margin-top:10px; accent-color:#004e7a; }
+  .cp-note{ font-size:11px; color:var(--muted); text-align:center; }
   .chk{ display:flex; align-items:center; gap:8px; font-weight:600; font-size:13px; margin-top:14px; cursor:pointer; }
   .chk input{ width:16px; height:16px; }
   .prod{ display:flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--line); border-radius:8px; margin-top:6px; background:#fff; font-size:13px; font-weight:600; }
@@ -64,11 +71,12 @@
       <div class="hint">The agency's Xeni booking site. Search results open here.</div>
 
       <label>Brand color</label>
-      <div class="row2">
-        <input type="color" id="color" value="#004e7a">
-        <input type="text" id="colorHex" value="#004e7a" style="max-width:120px">
-      </div>
+      <div class="row2" id="brandPick"></div>
       <div class="hint">Buttons, active tab, and highlights use this color. (Button text auto-adjusts for readability.)</div>
+
+      <label>Widget background</label>
+      <div class="row2" id="cardPick"></div>
+      <div class="hint">The widget box behind the search form. Dark colors flip the text to light automatically. Ignored when Background is Seamless.</div>
 
       <label for="lang">Widget language</label>
       <select id="lang">
@@ -165,8 +173,10 @@ function buildUrl(){
   var params = [];
   var wl = normUrl($('wl').value);
   if(wl) params.push('platform=' + encodeURIComponent(wl));
-  var color = $('colorHex').value.replace('#','');
+  var color = brandPicker.get().replace('#','');
   if(color && color.toLowerCase() !== '004e7a') params.push('primary=' + color);
+  var cbg = cardPicker.get().replace('#','');
+  if($('bg').value !== 'seamless' && cbg && cbg.toLowerCase() !== 'ffffff') params.push('cardBg=' + cbg);
   if($('bg').value === 'seamless') params.push('bg=seamless');
   if($('lang').value !== 'en') params.push('lang=' + $('lang').value);
   var rt = $('redirText').value.trim();
@@ -186,9 +196,63 @@ function refresh(){
   syncSave();
 }
 
-// sync color picker <-> hex
-$('color').addEventListener('input', function(){ $('colorHex').value=this.value; refresh(); });
-$('colorHex').addEventListener('input', function(){ var v=this.value.trim(); if(!/^#/.test(v)) v='#'+v; if(/^#[0-9a-fA-F]{6}$/.test(v)) $('color').value=v; refresh(); });
+/* ---- compact color picker: swatch + hex field + wheel popover (replaces the native OS palette dialog) ---- */
+function hsv2hex(h,s,v){ var f=function(n){ var k=(n+h/60)%6; var c=v-v*s*Math.max(0,Math.min(k,4-k,1)); return ('0'+Math.round(c*255).toString(16)).slice(-2); }; return '#'+f(5)+f(3)+f(1); }
+function hex2hsv(hex){ var h=hex.replace('#',''); var r=parseInt(h.substr(0,2),16)/255,g=parseInt(h.substr(2,2),16)/255,b=parseInt(h.substr(4,2),16)/255;
+  var mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn,hh=0;
+  if(d){ if(mx===r) hh=((g-b)/d)%6; else if(mx===g) hh=(b-r)/d+2; else hh=(r-g)/d+4; hh*=60; if(hh<0) hh+=360; }
+  return {h:hh, s:mx?d/mx:0, v:mx};
+}
+function colorPicker(host, initial){
+  host.innerHTML='<button type="button" class="swatch" title="Pick a color"></button>'
+    +'<input type="text" class="cp-hex" style="max-width:120px">'
+    +'<div class="cp-pop"><div class="cp-wheel-wrap"><canvas class="cp-wheel" width="180" height="180"></canvas><div class="cp-dot"></div></div>'
+    +'<input type="range" class="cp-val" min="0" max="100" value="100"><div class="cp-note">Brightness</div></div>';
+  var sw=host.querySelector('.swatch'), hexIn=host.querySelector('.cp-hex'), pop=host.querySelector('.cp-pop'),
+      cv=host.querySelector('.cp-wheel'), dot=host.querySelector('.cp-dot'), val=host.querySelector('.cp-val'),
+      ctx=cv.getContext('2d'), R=90, cur=hex2hsv(initial), hex=initial;
+  function draw(){
+    var img=ctx.createImageData(180,180), d=img.data, v=cur.v;
+    for(var y=0;y<180;y++) for(var x=0;x<180;x++){
+      var dx=x-R, dy=y-R, r=Math.sqrt(dx*dx+dy*dy), i=(y*180+x)*4;
+      if(r>R){ d[i+3]=0; continue; }
+      var c=hsv2hex((Math.atan2(dy,dx)*180/Math.PI+360)%360, r/R, v);
+      d[i]=parseInt(c.substr(1,2),16); d[i+1]=parseInt(c.substr(3,2),16); d[i+2]=parseInt(c.substr(5,2),16); d[i+3]=255;
+    }
+    ctx.putImageData(img,0,0);
+  }
+  function place(){ var a=cur.h*Math.PI/180, r=cur.s*R; dot.style.left=(R+Math.cos(a)*r-5)+'px'; dot.style.top=(R+Math.sin(a)*r-5)+'px'; }
+  function commit(newHex, opts){
+    opts=opts||{}; hex=newHex; sw.style.background=hex;
+    if(!opts.keepHexField) hexIn.value=hex;
+    if(!opts.silent) refresh();
+  }
+  function fromWheel(e){
+    var rect=cv.getBoundingClientRect(), x=(e.touches?e.touches[0].clientX:e.clientX)-rect.left, y=(e.touches?e.touches[0].clientY:e.clientY)-rect.top;
+    var dx=x-R, dy=y-R, r=Math.min(Math.sqrt(dx*dx+dy*dy),R);
+    cur.h=(Math.atan2(dy,dx)*180/Math.PI+360)%360; cur.s=r/R;
+    place(); commit(hsv2hex(cur.h,cur.s,cur.v));
+  }
+  var drag=false;
+  cv.addEventListener('mousedown',function(e){ drag=true; fromWheel(e); });
+  document.addEventListener('mousemove',function(e){ if(drag) fromWheel(e); });
+  document.addEventListener('mouseup',function(){ drag=false; });
+  cv.addEventListener('touchstart',function(e){ fromWheel(e); e.preventDefault(); },{passive:false});
+  cv.addEventListener('touchmove',function(e){ fromWheel(e); e.preventDefault(); },{passive:false});
+  val.addEventListener('input',function(){ cur.v=this.value/100; draw(); commit(hsv2hex(cur.h,cur.s,cur.v)); });
+  hexIn.addEventListener('input',function(){ var v=this.value.trim(); if(!/^#/.test(v)) v='#'+v;
+    if(/^#[0-9a-fA-F]{6}$/.test(v)){ cur=hex2hsv(v); val.value=Math.round(cur.v*100); draw(); place(); commit(v,{keepHexField:true}); } });
+  sw.addEventListener('click',function(e){ e.stopPropagation();
+    document.querySelectorAll('.cp-pop.open').forEach(function(p){ if(p!==pop) p.classList.remove('open'); });
+    pop.classList.toggle('open');
+  });
+  document.addEventListener('click',function(e){ if(!host.contains(e.target)) pop.classList.remove('open'); });
+  function set(v, silent){ if(/^#[0-9a-fA-F]{6}$/.test(v)){ cur=hex2hsv(v); val.value=Math.round(cur.v*100); draw(); place(); commit(v,{silent:!!silent}); } }
+  set(initial, true);
+  return { get:function(){ return hex; }, set:set };
+}
+var brandPicker = colorPicker($('brandPick'), '#004e7a');
+var cardPicker  = colorPicker($('cardPick'),  '#ffffff');
 ['wl','powText','redirText'].forEach(function(id){ $(id).addEventListener('input', refresh); });
 $('bg').addEventListener('change', refresh);
 $('lang').addEventListener('change', refresh);
@@ -211,7 +275,7 @@ function lsGet(){ try{ return localStorage.getItem(LS_KEY); }catch(e){ return nu
 function lsSet(v){ try{ localStorage.setItem(LS_KEY,v); }catch(e){} }
 function lsDel(){ try{ localStorage.removeItem(LS_KEY); }catch(e){} }
 function cfgState(){
-  return JSON.stringify({ wl:$('wl').value, color:$('colorHex').value, bg:$('bg').value, lang:$('lang').value,
+  return JSON.stringify({ wl:$('wl').value, color:brandPicker.get(), cardBg:cardPicker.get(), bg:$('bg').value, lang:$('lang').value,
     redirText:$('redirText').value, showPow:$('showPow').checked, powText:$('powText').value,
     prods:prods.map(function(p){ return {key:p.key,on:p.on}; }) });
 }
@@ -236,7 +300,8 @@ var restored=false;
   try{
     var c=JSON.parse(raw);
     $('wl').value=c.wl||'';
-    if(/^#[0-9a-fA-F]{6}$/.test(c.color||'')){ $('colorHex').value=c.color; $('color').value=c.color; }
+    if(/^#[0-9a-fA-F]{6}$/.test(c.color||'')) brandPicker.set(c.color, true);
+    if(/^#[0-9a-fA-F]{6}$/.test(c.cardBg||'')) cardPicker.set(c.cardBg, true);
     $('bg').value=c.bg||'card'; $('lang').value=c.lang||'en'; $('redirText').value=c.redirText||'';
     $('showPow').checked=('showPow' in c)?!!c.showPow:true;
     $('powText').value=('powText' in c)?c.powText:'Powered by Xeni';

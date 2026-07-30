@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Xeni Quick Builder</title>
 <style>
-  :root{ --primary:#004e7a; --btn-text:#fff; --ink:#111827; --line:#d1d5db; --muted:#6b7280; --soft:#f3f4f6; }
+  :root{ --primary:#004e7a; --btn-text:#fff; --ink:#111827; --line:#d1d5db; --muted:#6b7280; --soft:#f3f4f6; --card:#ffffff; --strip:#f3f4f6; }
   *{ box-sizing:border-box; }
   html,body{ margin:0; }
   body{ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:transparent; }
   .qb{ max-width:1040px; margin:0 auto; padding:14px; }
-  .qb-card{ background:#fff; border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 6px 24px rgba(0,0,0,.06); }  /* no overflow:hidden — it clips the autocomplete dropdown */
+  .qb-card{ background:var(--card); border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 6px 24px rgba(0,0,0,.06); }  /* no overflow:hidden — it clips the autocomplete dropdown */
   /* tabs */
-  .qb-tabs{ display:flex; gap:2px; background:var(--soft); padding:6px 6px 0; overflow-x:auto; border-radius:13px 13px 0 0; }
+  .qb-tabs{ display:flex; gap:2px; background:var(--strip); padding:6px 6px 0; overflow-x:auto; border-radius:13px 13px 0 0; }
   .qb-tab{ appearance:none; border:none; background:transparent; padding:11px 15px; font-size:14px; font-weight:600; color:var(--muted); cursor:pointer; border-radius:10px 10px 0 0; white-space:nowrap; display:inline-flex; align-items:center; gap:7px; transition:color .15s, background .15s; }
   .qb-tab:hover{ color:var(--ink); }
-  .qb-tab.active{ background:#fff; color:var(--primary); box-shadow:0 -2px 0 var(--primary) inset; }
+  .qb-tab.active{ background:var(--card); color:var(--primary); box-shadow:0 -2px 0 var(--primary) inset; }
   .qb-tab svg{ width:16px; height:16px; }
   .qb-body{ padding:18px; }
   .qb-title{ font-size:17px; font-weight:700; margin:0 0 14px; }
@@ -85,6 +85,16 @@
   .qb-veil.show{ opacity:1; pointer-events:auto; }
   .qb-veil .qb-veil-spin{ width:34px; height:34px; border:3px solid var(--line); border-top-color:var(--primary); border-radius:50%; animation:qbspin .8s linear infinite; }
   .qb-veil-msg{ font-size:15px; font-weight:600; color:var(--ink); max-width:420px; }
+  /* dark card background: flip on-card text to light; white surfaces (inputs, dropdowns, popovers, veil) keep dark text */
+  body.darkcard{ color:#f9fafb; }
+  body.darkcard .fld label{ color:#cbd5e1; }
+  body.darkcard .trip{ color:#f9fafb; }
+  body.darkcard .qb-tab{ color:#b6c2cf; }
+  body.darkcard .qb-tab:hover{ color:#fff; }
+  body.darkcard .qb-tab.active{ color:#fff; }
+  body.darkcard .qb-foot, body.darkcard .qb-foot a{ color:#9aa4b2; }
+  body.darkcard .soon{ color:#cbd5e1; }
+  body.darkcard .ac, body.darkcard .pop, body.darkcard .qb-veil{ color:var(--ink); }
   /* seamless: drop the card chrome so the widget blends into the host page */
   body.seamless .qb-card{ background:transparent; border:none; box-shadow:none; }
   body.seamless .qb-tabs{ background:transparent; padding-left:0; }
@@ -110,6 +120,7 @@ var QB = {
   poweredText: P.get('poweredText') || 'Powered by Xeni',
   bg:          P.get('bg')    || 'card',                 // card | seamless
   startTab:    P.get('tab') || '',              // empty = first visible tab
+  cardBg:      P.get('cardBg') || '',           // widget box color; dark values auto-flip on-card text to light
   // live autocomplete proxy (holds the shared Xeni credential server-side).
   // ?api=<base> overrides (Xeni swaps in their own copy at handoff); ?api=0 forces bundled-data-only mode.
   api:         (function(a){ return (a==='0'||a==='off') ? '' : (a || 'https://quickbuilder-proxy-production.up.railway.app').replace(/\/+$/,''); })(P.get('api'))
@@ -125,6 +136,19 @@ if(QB.primary){
   document.documentElement.style.setProperty('--btn-text', relLum(hex) > 0.55 ? '#111827' : '#ffffff');
 }
 if(QB.bg==='seamless') document.body.classList.add('seamless');
+// custom card background (ignored in seamless mode — the card is transparent there)
+function shade(hex,f){ var h=hex.replace('#',''),out='#';
+  for(var i=0;i<3;i++){ var v=parseInt(h.substr(i*2,2),16); v=Math.round(f>0 ? v+(255-v)*f : v*(1+f)); out+=('0'+v.toString(16)).slice(-2); }
+  return out;
+}
+if(QB.cardBg && QB.bg!=='seamless'){
+  var cbg = QB.cardBg[0]==='#' ? QB.cardBg : '#'+QB.cardBg;
+  if(/^#[0-9a-fA-F]{6}$/.test(cbg)){
+    document.documentElement.style.setProperty('--card', cbg);
+    document.documentElement.style.setProperty('--strip', shade(cbg, relLum(cbg)>0.5 ? -0.07 : 0.14));
+    if(relLum(cbg) < 0.5) document.body.classList.add('darkcard');
+  }
+}
 
 /* ================= LANGUAGE (?lang=en|es|fr; unknown falls back to en) ================= */
 var I18N = {
