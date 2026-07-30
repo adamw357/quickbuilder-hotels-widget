@@ -57,7 +57,8 @@
   .age-row input{ width:64px; padding:6px 8px; border:1px solid var(--line); border-radius:7px; font-size:13px; color:var(--ink); }
   .pop-opt{ display:flex; align-items:center; gap:8px; padding:6px 4px; font-size:13px; cursor:pointer; border-radius:6px; }
   .pop-opt:hover{ background:var(--soft); }
-  .pop-opt input{ accent-color:var(--primary); margin:0; }
+  .pop-opt input{ accent-color:var(--primary); margin:0; width:auto; flex:0 0 auto; padding:0; }  /* .fld input{width:100%} must not stretch the checkboxes (Firefox honors it) */
+  .pop-opt span{ flex:1 1 auto; text-align:left; }
   .pop-foot{ display:flex; justify-content:space-between; align-items:center; margin-top:4px; gap:10px; }
   .pop-add{ border:none; background:none; color:var(--primary); font-weight:700; font-size:13px; cursor:pointer; padding:6px 0; }
   .pop-done{ border:none; background:var(--primary); color:var(--btn-text); font-weight:700; font-size:13px; border-radius:8px; padding:8px 16px; cursor:pointer; }
