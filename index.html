@@ -346,6 +346,18 @@ function go(url){
   var w=window.open(url,'_blank');
   if(!w){ try{window.top.location.href=url;}catch(e){window.location.href=url;} }
 }
+// async variant: the tab must be opened inside the click gesture (popup blockers),
+// so open it blank now and steer it when the URL resolves; null aborts and closes it
+function goAsync(urlPromise){
+  var w=window.open('','_blank');
+  veil.classList.add('show');
+  urlPromise.then(function(url){
+    if(!url){ veil.classList.remove('show'); if(w) w.close(); return; }
+    setTimeout(function(){ veil.classList.remove('show'); }, 2600);
+    if(w){ try{ w.location.href=url; }catch(e){ window.location.href=url; } }
+    else { try{window.top.location.href=url;}catch(e){window.location.href=url;} }
+  });
+}
 // redirect veil (soft feedback while the results tab opens); ?redirectText= overrides the translated default
 var veil=el('<div class="qb-veil"><div class="qb-veil-spin"></div><div class="qb-veil-msg"></div></div>');
 veil.querySelector('.qb-veil-msg').textContent = P.get('redirectText') || T.redirect;
@@ -438,6 +450,38 @@ function wireAutocomplete(input, box, key){
     else if(e.key==='Escape'){box.classList.remove('open');}
   });
   document.addEventListener('click', function(e){ if(!box.parentNode.contains(e.target)) box.classList.remove('open'); });
+}
+
+/* resolve typed airport text against autosuggest at submit (exact code match wins,
+   else top suggestion), mirroring the OTA's behavior when the dropdown wasn't used */
+function resolveAirport(input){
+  if(input._sel) return Promise.resolve(input._sel);
+  var q=input.value.trim(); if(!q) return Promise.resolve(null);
+  function best(list){
+    if(!list||!list.length) return null;
+    var qq=q.toUpperCase();
+    for(var i=0;i<list.length;i++) if((list[i].code||'').toUpperCase()===qq) return list[i];
+    return list[0];
+  }
+  function bundled(){
+    return loadData('flights').then(function(){
+      var list=DATA['flights']||[], out=[], qq=q.toLowerCase();
+      for(var i=0;i<list.length;i++){ var d=list[i];
+        if((d.code||'').toLowerCase()===qq){ out.unshift(d); continue; }
+        if((d.code+' '+d.city+' '+d.name).toLowerCase().indexOf(qq)>-1) out.push(d);
+      }
+      return best(out);
+    });
+  }
+  var live = QB.api ? liveSearch('flights', q) : Promise.resolve(null);
+  return live.then(function(list){
+    var hit=best(list);
+    if(hit) return hit;
+    return bundled();
+  }).then(function(hit){
+    if(hit){ input._sel=hit; input.value=AC.flights.pick(hit); }
+    return hit;
+  });
 }
 
 /* ============ date-pair guards: end can never precede start; no past dates ============ */
@@ -857,7 +901,14 @@ function flightsPanel(){
   });});
   wrap.querySelector('#f-go').addEventListener('click',function(){
     if(!from.value.trim()||!to.value.trim()){(from.value.trim()?to:from).focus();return;}
-    go(flightsUrl({from:from,to:to,dep:wrap.querySelector('#f-dep'),ret:ret,trav:getTrav,cabin:wrap.querySelector('#f-cabin'),nonstop:wrap.querySelector('#f-ns'),body:wrap}));
+    goAsync(Promise.all([resolveAirport(from), resolveAirport(to)]).then(function(rs){
+      if(!rs[0]||!rs[1]){
+        var bad=!rs[0]?from:to, box=!rs[0]?wrap.querySelector('#f-fac'):wrap.querySelector('#f-tac');
+        box.innerHTML='<div class="ac-empty">'+T.noMatch+'</div>'; box.classList.add('open'); bad.focus();
+        return null;
+      }
+      return flightsUrl({from:from,to:to,dep:wrap.querySelector('#f-dep'),ret:ret,trav:getTrav,cabin:wrap.querySelector('#f-cabin'),nonstop:wrap.querySelector('#f-ns'),body:wrap});
+    }));
   });
 }
 function resortsPanel(){
@@ -910,6 +961,10 @@ function carsPanel(){
   // +15d not +14: the cars API rejects pickups under 14 days out ("pickup date must be at least 14 days after current time"), and +14 at 10:00 AM can land just inside that window
   wrap.querySelector('#c-pud').value=isoDate(15)+'T10:00'; wrap.querySelector('#c-dod').value=isoDate(18)+'T10:00';
   guardTimes(wrap.querySelector('#c-pud'), wrap.querySelector('#c-dod'));
+  var ageEl=wrap.querySelector('#c-age');  // Xeni requires drivers 18+; min/max only guard the spinner, not typing
+  ['change','blur'].forEach(function(ev){ ageEl.addEventListener(ev, function(){
+    var v=parseInt(ageEl.value); if(isNaN(v)) return; if(v<18) ageEl.value=18; else if(v>99) ageEl.value=99;
+  }); });
   warm('cars');
   wrap.querySelector('#c-go').addEventListener('click',function(){
     if(!pick.value.trim()){pick.focus();return;}
